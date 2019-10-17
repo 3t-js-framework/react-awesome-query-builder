@@ -50,7 +50,7 @@ export default class ValueFunction extends Component {
         case DATA_TYPE.BOOL:
           return false;
         case DATA_TYPE.DATE:
-          return null;
+          return undefined;
         default:
           return null;
       }
