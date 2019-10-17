@@ -39,13 +39,33 @@ export default class ValueFunction extends Component {
     customProps: PropTypes.object,
   };
 
+  initDataForParams = (functionSelected) => {
+    const { params } = functionSelected;
+    return params.map(item => {
+      switch (item) {
+        case DATA_TYPE.TEXT:
+          return '';
+        case DATA_TYPE.NUMBER:
+          return 0;
+        case DATA_TYPE.BOOL:
+          return false;
+        case DATA_TYPE.DATE:
+          return null;
+        default:
+          return null;
+      }
+    });
+  }
+
   /**
    * @key key function
    * Handle change select
    */
   handleFieldSelect = (key) => {
-    this.renderFunctionParams(this.props.config.functions[key]);
-    this.props.setValue({ parameters: [], functionSelected: key, valueSrc: [] });
+    const functionSelected = this.props.config.functions[key];
+
+    this.props.setValue({ parameters: this.initDataForParams(functionSelected), functionSelected: key, valueSrc: [] });
+    this.renderFunctionParams(functionSelected);
   }
 
   /**
@@ -148,6 +168,7 @@ export default class ValueFunction extends Component {
   renderValueSourceParam = (index, dataTypeOfParam) => {
     const { config, value, operator, field, } = this.props;
     const valueSource = value && value.valueSrc[index] || 'value';
+    const isHasValueParam = value && value.parameters[index];
 
     switch (valueSource) {
       case VALUE_SOURCE_FUNCTION.FIELD:
@@ -205,7 +226,7 @@ export default class ValueFunction extends Component {
         return (
           <Switch
             value={this.props.value && this.props.value.parameters[index] || false}
-            defaultChecked
+            defaultChecked={false}
             style={{ marginLeft: '8px' }}
             onChange={(value) => this.handleChange(value, index, dataType)}
           />
