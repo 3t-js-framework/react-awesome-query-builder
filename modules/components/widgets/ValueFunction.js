@@ -50,7 +50,7 @@ export default class ValueFunction extends Component {
         case DATA_TYPE.BOOL:
           return false;
         case DATA_TYPE.DATE:
-          return undefined;
+          return moment().toISOString();
         default:
           return null;
       }
@@ -63,9 +63,7 @@ export default class ValueFunction extends Component {
    */
   handleFieldSelect = (key) => {
     const functionSelected = this.props.config.functions[key];
-
     this.props.setValue({ parameters: this.initDataForParams(functionSelected), functionSelected: key, valueSrc: [] });
-    this.renderFunctionParams(functionSelected);
   }
 
   /**
@@ -168,7 +166,6 @@ export default class ValueFunction extends Component {
   renderValueSourceParam = (index, dataTypeOfParam) => {
     const { config, value, operator, field, } = this.props;
     const valueSource = value && value.valueSrc[index] || 'value';
-    const isHasValueParam = value && value.parameters[index];
 
     switch (valueSource) {
       case VALUE_SOURCE_FUNCTION.FIELD:
@@ -211,7 +208,9 @@ export default class ValueFunction extends Component {
             value={this.props.value && this.props.value.parameters[index] || ''}
             size={this.props.config.settings.renderSize || "small"}
             onChange={(value) => this.handleChange(value, index, dataType)}
-            style={{ marginLeft: '8px', width: '134px' }} />
+            style={{ marginLeft: '8px', width: '134px' }}
+            placeholder="Input value"
+            />
         );
       case DATA_TYPE.NUMBER:
         return (
@@ -220,12 +219,14 @@ export default class ValueFunction extends Component {
             value={this.props.value && this.props.value.parameters[index] || 0}
             size={this.props.config.settings.renderSize || "small"}
             onChange={(value) => this.handleChange(value, index, dataType)}
-            style={{ marginLeft: '8px' }} />
+            style={{ marginLeft: '8px' }} 
+            placeholder="Input value"
+            />
         );
       case DATA_TYPE.BOOL:
         return (
           <Switch
-            value={this.props.value && this.props.value.parameters[index] || false}
+            checked={this.props.value && this.props.value.parameters[index] || false}
             defaultChecked={false}
             style={{ marginLeft: '8px' }}
             onChange={(value) => this.handleChange(value, index, dataType)}
@@ -245,7 +246,9 @@ export default class ValueFunction extends Component {
             value={this.props.value && this.props.value.parameters[index] || ''}
             size={this.props.config.settings.renderSize || "small"}
             onChange={(value) => this.handleChange(value, index, dataType)}
-            style={{ marginLeft: '8px', width: '134px' }} />
+            style={{ marginLeft: '8px', width: '134px' }} 
+            placeholder="Input value"
+            />
         );
     }
   }

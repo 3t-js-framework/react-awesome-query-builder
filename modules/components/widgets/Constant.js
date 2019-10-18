@@ -35,9 +35,9 @@ export default class ConstantWidget extends Component {
     let size = this.props.config.settings.renderSize || "small";
     let placeholder = this.props.placeholder || "Select option";
     const fieldDefinition = getFieldConfig(this.props.field, this.props.config);
-    console.log("this.props.field: ", this.props);
     const { data } = this.props.config;
     let listConstant = [];
+
     if (data && data.constant && data.constant.length >= 0) {
       listConstant = data.constant;
     }
@@ -50,7 +50,6 @@ export default class ConstantWidget extends Component {
     });
     let placeholderWidth = calcTextWidth(placeholder, "14px");
     let customProps = this.props.customProps || {};
-    // console.log(this.state);
 
     return (
       <Select
