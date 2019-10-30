@@ -312,7 +312,7 @@ export default {
                 "equal"
             ],
             defaultOperator: 'is_not_empty',
-            listValues: [
+            listConstants: [
                 {
                     name: "#constant8#",
                     code: "0b1a76a0-42ea-4fea-8edb-66f3ffd1fc51",
@@ -336,7 +336,7 @@ export default {
                 "equal"
             ],
             defaultOperator: 'is_not_empty',
-            listValues: [
+            listConstants: [
                 {
                     name: "#constant8#",
                     code: "0b1a76a0-42ea-4fea-8edb-66f3ffd1fc51",
@@ -370,7 +370,7 @@ export default {
                 "is_empty",
                 "is_not_empty",
             ],
-            listValues: [
+            listConstants: [
                 {
                     name: "#constant5#",
                     code: "0b1a76a0-42ea-4fea-8edb-66f3ffd1fc51",
