@@ -14,6 +14,7 @@ import last from 'lodash/last';
 import keys from 'lodash/keys';
 import clone from 'clone';
 import moment from 'moment';
+import shallowCompare from 'react-addons-shallow-compare';
 
 import {
   getFieldConfig,
@@ -36,8 +37,10 @@ export default class ValueFunction extends Component {
     field: PropTypes.string.isRequired,
     value: PropTypes.object,
     operator: PropTypes.string,
-    customProps: PropTypes.object,
+    customProps: PropTypes.object
   };
+
+  shouldComponentUpdate = shallowCompare;
 
   initDataForParams = (functionSelected) => {
     const { params } = functionSelected;
@@ -63,7 +66,7 @@ export default class ValueFunction extends Component {
    */
   handleFieldSelect = (key) => {
     const functionSelected = this.props.config.functions[key];
-    this.props.setValue({ parameters: this.initDataForParams(functionSelected), functionSelected: key, valueSrc: [] });
+    this.props.setValue({ parameters: this.initDataForParams(functionSelected), functionSelected: functionSelected.functionName, valueSrc: [], key });
   }
 
   /**
@@ -101,7 +104,7 @@ export default class ValueFunction extends Component {
     let valueChange = value;
     const valueFunctionSelect = clone(this.props.value);
     if (dataType === DATA_TYPE.TEXT) { valueChange = value.target.value; }
-    if (dataType === DATA_TYPE.DATE) { valueChange = value.toISOString(); }
+    if (dataType === DATA_TYPE.DATE && valueChange) { valueChange = value.toISOString(); }
     valueFunctionSelect.parameters[index] = valueChange;
     this.props.setValue({ ...valueFunctionSelect });
   }
@@ -123,7 +126,7 @@ export default class ValueFunction extends Component {
    * Render popover
    */
   renderValueSources = (index) => {
-    const { config, field, operator, value, } = this.props;
+    const { config, field, operator, value } = this.props;
     const valueSourcesInfo = config.settings.valueSourcesInfo;
     const valueSourcesPopupTitle = config.settings.valueSourcesPopupTitle;
     const valueSources = getValueSourcesForFieldOp(config, field, operator);
@@ -133,8 +136,8 @@ export default class ValueFunction extends Component {
 
     let content = (
       <RadioGroup
-        value={valueSrc || "value"}
-        size={this.props.config.settings.renderSize || "small"}
+        value={valueSrc || 'value'}
+        size={this.props.config.settings.renderSize || 'small'}
         onChange={(value) => this.handleChangePopover(value, index)}
       >
         {valueSources.filter((valueSource) => valueSource !== 'function').map(srcKey => (
@@ -164,7 +167,7 @@ export default class ValueFunction extends Component {
    * Render control antd by valueSrc
    */
   renderValueSourceParam = (index, dataTypeOfParam) => {
-    const { config, value, operator, field, } = this.props;
+    const { config, value, operator, field } = this.props;
     const valueSource = value && value.valueSrc[index] || 'value';
 
     switch (valueSource) {
@@ -206,22 +209,22 @@ export default class ValueFunction extends Component {
         return (
           <Input
             value={this.props.value && this.props.value.parameters[index] || ''}
-            size={this.props.config.settings.renderSize || "small"}
+            size={this.props.config.settings.renderSize || 'small'}
             onChange={(value) => this.handleChange(value, index, dataType)}
             style={{ marginLeft: '8px', width: '134px' }}
             placeholder="Input value"
-            />
+          />
         );
       case DATA_TYPE.NUMBER:
         return (
           <InputNumber
             key={index}
             value={this.props.value && this.props.value.parameters[index] || 0}
-            size={this.props.config.settings.renderSize || "small"}
+            size={this.props.config.settings.renderSize || 'small'}
             onChange={(value) => this.handleChange(value, index, dataType)}
-            style={{ marginLeft: '8px' }} 
+            style={{ marginLeft: '8px' }}
             placeholder="Input value"
-            />
+          />
         );
       case DATA_TYPE.BOOL:
         return (
@@ -238,25 +241,25 @@ export default class ValueFunction extends Component {
             style={{ marginLeft: '8px' }}
             value={this.props.value && moment(this.props.value.parameters[index]) || undefined}
             onChange={(value) => this.handleChange(value, index, dataType)}
+            allowClear={true}
           />
         );
       default:
         return (
           <Input
             value={this.props.value && this.props.value.parameters[index] || ''}
-            size={this.props.config.settings.renderSize || "small"}
+            size={this.props.config.settings.renderSize || 'small'}
             onChange={(value) => this.handleChange(value, index, dataType)}
-            style={{ marginLeft: '8px', width: '134px' }} 
+            style={{ marginLeft: '8px', width: '134px' }}
             placeholder="Input value"
-            />
+          />
         );
     }
   }
 
-
   renderFunctionParams = (functionSelected) => {
     if (!functionSelected) { return; }
-    const { key, params, } = functionSelected;
+    const { key, params } = functionSelected;
 
     return params.map((dataTypeOfParam, index) => (
       <div className="widget--function" key={key + '--' + index}>
@@ -282,7 +285,7 @@ export default class ValueFunction extends Component {
       return functions[key].type === type ? functions[key] : undefined;
     }).filter(func => func);
 
-    if (!functionsOfField.length) { return [] };
+    if (!functionsOfField.length) { return []; }
     return functionsOfField;
   }
 
@@ -309,21 +312,21 @@ export default class ValueFunction extends Component {
    * Render select functions
    */
   renderAsSelect = () => {
-    const { value, config, field, operator, } = this.props;
+    const { value, config, field } = this.props;
     const placeholder = this.props.config.settings.functionPlaceholder;
     let fieldOptions = this.filterFunctions(config, field);
     const customProps = this.props.customProps || {};
     const buildOptionItems = this.buildOptionItems(fieldOptions);
-    const initParamsInput = this.props.value && this.getFunctionInit(value.functionSelected, config);
+    const initParamsInput = this.props.value && this.getFunctionInit(value.key, config);
 
     return (
       <div className="widget--valuesrc--function">
         <Select
-          value={value && value.functionSelected || undefined}
+          value={value && value.key || undefined}
           style={{ width: '200px' }}
           ref="function"
           placeholder={placeholder}
-          size={this.props.config.settings.renderSize || "small"}
+          size={this.props.config.settings.renderSize || 'small'}
           onChange={this.handleFieldSelect}
           filterOption={this.filterOption}
           {...customProps}
