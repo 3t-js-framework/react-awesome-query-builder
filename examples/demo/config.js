@@ -77,8 +77,233 @@ export default {
             params: ['number', 'number', 'date']
         }
     },
+    // fields: {
+    //     fullName: {
+    //         label: 'Họ và tên',
+    //         type: 'text',
+    //         operators: [
+    //             "is_empty",
+    //             "is_not_empty",
+    //             "equal"
+    //         ],
+    //         defaultOperator: 'is_not_empty'
+    //     },
+    //     age: {
+    //         label: 'Tuổi',
+    //         type: 'number',
+    //         fieldSettings: {
+    //             min: 1,
+    //             max: 100
+    //         },
+    //         operators: [
+    //             "equal",
+    //             "not_equal",
+    //             "less",
+    //             "less_or_equal",
+    //             "greater",
+    //             "greater_or_equal",
+    //             "between",
+    //             "not_between",
+    //             "is_empty",
+    //             "is_not_empty",
+    //         ],
+    //     },
+    //     members: {
+    //         label: 'Members',
+    //         type: '!struct',
+    //         subfields: {
+    //             subname: {
+    //                 //label: 'Subname', //'subname' should be used instead
+    //                 label2: 'MemberName', //only for menu's toggler
+    //                 type: 'text',
+    //                 tableName: 't1',
+    //                 operators: ['equal'],
+    //             },
+    //             prox1: {
+    //                 label: 'prox1',
+    //                 type: 'text',
+    //                 operators: ['proximity'],
+    //             },
+    //         }
+    //     },
+    //     prox2: {
+    //         label: 'prox2',
+    //         type: 'text',
+    //         operators: ['proximity'],
+    //         defaultOperator: 'not_equal', //will not be used
+    //     },
+    //     name2: {
+    //         label: 'Name 2',
+    //         type: 'text',
+    //         operators: ['equal', 'not_equal'],
+    //         defaultOperator: 'not_equal',
+    //         mainWidgetProps: {
+    //             formatValue: (val, fieldDef, wgtDef, isForDisplay) => (JSON.stringify(val)),
+    //             valueLabel: "Name2",
+    //             valuePlaceholder: "Enter name2",
+    //             validateValue: (val, fieldDef) => {
+    //                 return (val != 'test2');
+    //             },
+    //         },
+    //     },
+    //     num: {
+    //         label: 'Number',
+    //         type: 'number',
+    //         fieldSettings: {
+    //             min: -1,
+    //             max: 5
+    //         },
+    //         operators: [
+    //             "equal",
+    //             "not_equal",
+    //             "less",
+    //             "less_or_equal",
+    //             "greater",
+    //             "greater_or_equal",
+    //             "between",
+    //             "not_between",
+    //             "is_empty",
+    //             "is_not_empty",
+    //         ],
+    //     },
+    //     slider: {
+    //         label: 'Slider',
+    //         type: 'number',
+    //         preferWidgets: ['slider', 'rangeslider'],
+    //         operators: [
+    //             "equal",
+    //             "not_equal",
+    //             "less",
+    //             "less_or_equal",
+    //             "greater",
+    //             "greater_or_equal",
+    //             "range_between",
+    //             "range_not_between",
+    //             "is_empty",
+    //             "is_not_empty",
+    //         ],
+    //         valueSources: ['value', 'field'],
+    //         fieldSettings: {
+    //             min: 0,
+    //             max: 100,
+    //             step: 1,
+    //             marks: {
+    //                 0: <strong>0%</strong>,
+    //                 100: <strong>100%</strong>
+    //             },
+    //         },
+    //         //overrides
+    //         widgets: {
+    //             slider: {
+    //                 widgetProps: {
+    //                     valuePlaceholder: "Use input or slider",
+    //                 }
+    //             }
+    //         },
+    //     },
+    //     date: {
+    //         label: 'Date',
+    //         type: 'date',
+    //         operators: ['greater', 'less'],
+    //         defaultOperator: 'less',
+    //     },
+    //     time: {
+    //         label: 'Time',
+    //         type: 'time',
+    //         operators: ['greater_or_equal', 'less_or_equal', 'between'],
+    //         defaultOperator: 'between',
+    //         widgets: {
+    //             time: {
+    //                 opProps: {
+    //                     between: {
+    //                         valueLabels: [
+    //                             'Time from',
+    //                             'Time to'
+    //                         ],
+    //                     },
+    //                 },
+    //                 widgetProps: {
+    //                     timeFormat: 'h:mm:ss A',
+    //                     use12Hours: true,
+    //                 },
+    //             },
+    //         },
+    //     },
+    //     datetime: {
+    //         label: 'DateTime',
+    //         type: 'datetime',
+    //         valueSources: ['field']
+    //     },
+    //     datetime2: {
+    //         label: 'DateTime2',
+    //         type: 'datetime',
+    //         valueSources: ['value']
+    //     },
+    //     color: {
+    //         label: 'Color',
+    //         type: 'select',
+    //         operators: [
+    //             'select_equals',
+    //             'select_not_equals',
+    //             'select_any_in',
+    //             'select_not_any_in'
+    //         ],
+    //         listValues: {
+    //             yellow: 'Yellow',
+    //             green: 'Green',
+    //             orange: 'Orange'
+    //         },
+    //     },
+    //     color2: {
+    //         label: 'Color2',
+    //         type: 'select',
+    //         defaultOperator: 'select_not_any_in',
+    //         operators: [
+    //             'select_not_equals',
+    //             'select_not_any_in'
+    //         ],
+    //         listValues: {
+    //             yellow: 'Yellow',
+    //             green: 'Green',
+    //             orange: 'Orange',
+    //             purple: 'Purple'
+    //         },
+    //     },
+    //     color3: {
+    //         label: 'Color3',
+    //         type: 'select',
+    //         defaultOperator: 'select_not_equals',
+    //         operators: [
+    //             'select_not_equals',
+    //             'select_not_any_in'
+    //         ],
+    //         listValues: {
+    //             yellow: 'Yellow',
+    //             green: 'Green',
+    //             orange: 'Orange',
+    //             purple: 'Purple'
+    //         },
+    //     },
+    //     multicolor: {
+    //         label: 'Colors',
+    //         type: 'multiselect',
+    //         listValues: {
+    //             yellow: 'Yellow',
+    //             green: 'Green',
+    //             orange: 'Orange'
+    //         },
+    //     },
+    //     stock: {
+    //         label: 'In stock',
+    //         type: 'boolean',
+    //     },
+    //     expecting: {
+    //         label: 'Expecting',
+    //         type: 'boolean',
+    //     },
+    // },
     fields: {
-        fullName: {
+        '@fullName@': {
             label: 'Họ và tên',
             type: 'text',
             operators: [
@@ -86,9 +311,47 @@ export default {
                 "is_not_empty",
                 "equal"
             ],
-            defaultOperator: 'is_not_empty'
+            defaultOperator: 'is_not_empty',
+            listValues: [
+                {
+                    name: "#constant8#",
+                    code: "0b1a76a0-42ea-4fea-8edb-66f3ffd1fc51",
+                    dataType: "text",
+                    isList: true
+                },
+                {
+                    name: "#constant7#",
+                    code: "95c37422-8a91-4785-a4a6-ca9a3d51d556",
+                    dataType: "text",
+                    isList: true
+                }
+            ]
         },
-        age: {
+        '@fullName2@': {
+            label: 'Họ và tên2',
+            type: 'text',
+            operators: [
+                "is_empty",
+                "is_not_empty",
+                "equal"
+            ],
+            defaultOperator: 'is_not_empty',
+            listValues: [
+                {
+                    name: "#constant8#",
+                    code: "0b1a76a0-42ea-4fea-8edb-66f3ffd1fc51",
+                    dataType: "text",
+                    isList: true
+                },
+                {
+                    name: "#constant7#",
+                    code: "95c37422-8a91-4785-a4a6-ca9a3d51d556",
+                    dataType: "text",
+                    isList: true
+                }
+            ]
+        },
+        '@age': {
             label: 'Tuổi',
             type: 'number',
             fieldSettings: {
@@ -107,200 +370,21 @@ export default {
                 "is_empty",
                 "is_not_empty",
             ],
-        },
-        members: {
-            label: 'Members',
-            type: '!struct',
-            subfields: {
-                subname: {
-                    //label: 'Subname', //'subname' should be used instead
-                    label2: 'MemberName', //only for menu's toggler
-                    type: 'text',
-                    tableName: 't1',
-                    operators: ['equal'],
+            listValues: [
+                {
+                    name: "#constant5#",
+                    code: "0b1a76a0-42ea-4fea-8edb-66f3ffd1fc51",
+                    dataType: "number",
+                    isList: false
                 },
-                prox1: {
-                    label: 'prox1',
-                    type: 'text',
-                    operators: ['proximity'],
-                },
-            }
-        },
-        prox2: {
-            label: 'prox2',
-            type: 'text',
-            operators: ['proximity'],
-            defaultOperator: 'not_equal', //will not be used
-        },
-        name2: {
-            label: 'Name 2',
-            type: 'text',
-            operators: ['equal', 'not_equal'],
-            defaultOperator: 'not_equal',
-            mainWidgetProps: {
-                formatValue: (val, fieldDef, wgtDef, isForDisplay) => (JSON.stringify(val)),
-                valueLabel: "Name2",
-                valuePlaceholder: "Enter name2",
-                validateValue: (val, fieldDef) => {
-                    return (val != 'test2');
-                },
-            },
-        },
-        num: {
-            label: 'Number',
-            type: 'number',
-            fieldSettings: {
-                min: -1,
-                max: 5
-            },
-            operators: [
-                "equal",
-                "not_equal",
-                "less",
-                "less_or_equal",
-                "greater",
-                "greater_or_equal",
-                "between",
-                "not_between",
-                "is_empty",
-                "is_not_empty",
-            ],
-        },
-        slider: {
-            label: 'Slider',
-            type: 'number',
-            preferWidgets: ['slider', 'rangeslider'],
-            operators: [
-                "equal",
-                "not_equal",
-                "less",
-                "less_or_equal",
-                "greater",
-                "greater_or_equal",
-                "range_between",
-                "range_not_between",
-                "is_empty",
-                "is_not_empty",
-            ],
-            valueSources: ['value', 'field'],
-            fieldSettings: {
-                min: 0,
-                max: 100,
-                step: 1,
-                marks: {
-                    0: <strong>0%</strong>,
-                    100: <strong>100%</strong>
-                },
-            },
-            //overrides
-            widgets: {
-                slider: {
-                    widgetProps: {
-                        valuePlaceholder: "Use input or slider",
-                    }
+                {
+                    name: "#constant6#",
+                    code: "95c37422-8a91-4785-a4a6-ca9a3d51d556",
+                    dataType: "number",
+                    isList: false
                 }
-            },
-        },
-        date: {
-            label: 'Date',
-            type: 'date',
-            operators: ['greater', 'less'],
-            defaultOperator: 'less',
-        },
-        time: {
-            label: 'Time',
-            type: 'time',
-            operators: ['greater_or_equal', 'less_or_equal', 'between'],
-            defaultOperator: 'between',
-            widgets: {
-                time: {
-                    opProps: {
-                        between: {
-                            valueLabels: [
-                                'Time from',
-                                'Time to'
-                            ],
-                        },
-                    },
-                    widgetProps: {
-                        timeFormat: 'h:mm:ss A',
-                        use12Hours: true,
-                    },
-                },
-            },
-        },
-        datetime: {
-            label: 'DateTime',
-            type: 'datetime',
-            valueSources: ['field']
-        },
-        datetime2: {
-            label: 'DateTime2',
-            type: 'datetime',
-            valueSources: ['value']
-        },
-        color: {
-            label: 'Color',
-            type: 'select',
-            operators: [
-                'select_equals',
-                'select_not_equals',
-                'select_any_in',
-                'select_not_any_in'
-            ],
-            listValues: {
-                yellow: 'Yellow',
-                green: 'Green',
-                orange: 'Orange'
-            },
-        },
-        color2: {
-            label: 'Color2',
-            type: 'select',
-            defaultOperator: 'select_not_any_in',
-            operators: [
-                'select_not_equals',
-                'select_not_any_in'
-            ],
-            listValues: {
-                yellow: 'Yellow',
-                green: 'Green',
-                orange: 'Orange',
-                purple: 'Purple'
-            },
-        },
-        color3: {
-            label: 'Color3',
-            type: 'select',
-            defaultOperator: 'select_not_equals',
-            operators: [
-                'select_not_equals',
-                'select_not_any_in'
-            ],
-            listValues: {
-                yellow: 'Yellow',
-                green: 'Green',
-                orange: 'Orange',
-                purple: 'Purple'
-            },
-        },
-        multicolor: {
-            label: 'Colors',
-            type: 'multiselect',
-            listValues: {
-                yellow: 'Yellow',
-                green: 'Green',
-                orange: 'Orange'
-            },
-        },
-        stock: {
-            label: 'In stock',
-            type: 'boolean',
-        },
-        expecting: {
-            label: 'Expecting',
-            type: 'boolean',
-        },
+            ]
+        }
     },
     types: {
         text: {
@@ -871,7 +955,7 @@ export default {
             factory: (props) => <ConstantWidget {...props} />,
             formatValue: (val, fieldDef, wgtDef, isForDisplay) => {
                 // let valLabel = fieldDef.listValues[val];
-                return isForDisplay ? '"' + JSON.stringify(val) + '"' : JSON.stringify(val);
+                return isForDisplay ? '"' + JSON.stringify(val.name) + '"' : JSON.stringify(val);
             },
         },
         function: {

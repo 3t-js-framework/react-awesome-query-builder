@@ -35,19 +35,29 @@ export default class ConstantWidget extends Component {
     let size = this.props.config.settings.renderSize || "small";
     let placeholder = this.props.placeholder || "Select option";
     const fieldDefinition = getFieldConfig(this.props.field, this.props.config);
-    const { data } = this.props.config;
-    let listConstant = [];
+    // const { data } = this.props.config;
+    // console.log("addaa", fieldDefinition);
 
-    if (data && data.constant && data.constant.length >= 0) {
-      listConstant = data.constant;
-    }
-    const options = map(listConstant, value => {
+    // let listConstant = [];
+
+    const options = map(fieldDefinition.listValues, value => {
       return (
-        <Option key={value.key} value={value.value}>
+        <Option key={value.code} value={value.name}>
           {value.name}
         </Option>
       );
     });
+
+    // if (data && data.constant && data.constant.length >= 0) {
+    //   listConstant = data.constant;
+    // }
+    // const options = map(listConstant, value => {
+    //   return (
+    //     <Option key={value.key} value={value.name}>
+    //       {value.name}
+    //     </Option>
+    //   );
+    // });
     let placeholderWidth = calcTextWidth(placeholder, "14px");
     let customProps = this.props.customProps || {};
 
