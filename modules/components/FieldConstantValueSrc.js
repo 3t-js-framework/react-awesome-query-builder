@@ -3,15 +3,17 @@ import PropTypes from 'prop-types';
 import map from 'lodash/map';
 import { Select, } from 'antd';
 import { calcTextWidth } from '../utils/stuff';
+import { getFieldConfig } from '../utils/configUtils';
 const Option = Select.Option;
 
 
 export default class FieldConstantValueSrc extends Component {
     static propTypes = {
         config: PropTypes.object.isRequired,
+        field: PropTypes.string.isRequired,
         value: PropTypes.string,
         customProps: PropTypes.object,
-        handleChangeValueConstant: PropTypes.func.isRequired,
+        handleChangeValueConstant: PropTypes.func.isRequired
     };
 
 
@@ -22,21 +24,18 @@ export default class FieldConstantValueSrc extends Component {
     };
 
     render() {
-        let size = this.props.config.settings.renderSize || "small";
-        let placeholder = this.props.placeholder || "Select option";
-        const { data } = this.props.config;
-        let listConstant = [];
-        if (data && data.constant && data.constant.length >= 0) {
-            listConstant = data.constant;
-        }
-        const options = map(listConstant, value => {
+        let size = this.props.config.settings.renderSize || 'small';
+        let placeholder = this.props.placeholder || 'Select option';
+        const fieldDefinition = getFieldConfig(this.props.field, this.props.config);
+
+        const options = map(fieldDefinition.listValues, value => {
             return (
-                <Option key={value.key} value={value.value}>
+                <Option key={value.code} value={value.name}>
                     {value.name}
                 </Option>
             );
         });
-        let placeholderWidth = calcTextWidth(placeholder, "14px");
+        let placeholderWidth = calcTextWidth(placeholder, '14px');
         let customProps = this.props.customProps || {};
 
         return (

@@ -186,6 +186,7 @@ export default class ValueFunction extends Component {
       case VALUE_SOURCE_FUNCTION.CONSTANT:
         return (
           <FieldConstantValueSrc
+            field={field}
             config={config}
             value={this.props.value.parameters[index]}
             handleChangeValueConstant={(value) => this.handleChange(value, index, VALUE_SOURCE_FUNCTION.CONSTANT)}
