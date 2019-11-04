@@ -953,6 +953,7 @@ export default {
             type: "constant",
             valueSrc: 'constant',
             factory: (props) => <ConstantWidget {...props} />,
+            valuePlaceholder: "Select Constant to compare",
             formatValue: (val, fieldDef, wgtDef, isForDisplay) => {
                 // let valLabel = fieldDef.listValues[val];
                 return isForDisplay ? '"' + JSON.stringify(val.name) + '"' : JSON.stringify(val);

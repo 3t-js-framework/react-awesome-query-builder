@@ -34,14 +34,17 @@ export default class ConstantWidget extends Component {
 
     let size = this.props.config.settings.renderSize || "small";
     let placeholder = this.props.placeholder || "Select option";
+
     const fieldDefinition = getFieldConfig(this.props.field, this.props.config);
+    let listConstants = fieldDefinition.listConstants || [];
+    const { operator } = this.props;
+    if (operator === "select_any_in" || operator === "select_not_any_in") {
+      listConstants = listConstants.filter(x => x.isList === true);
+    } else {
+      listConstants = listConstants.filter(x => x.isList === false);
+    }
 
-    // const { data } = this.props.config;
-    // console.log("addaa", fieldDefinition);
-
-    // let listConstant = [];
-
-    const options = map(fieldDefinition.listConstants, value => {
+    const options = map(listConstants, value => {
       return (
         <Option key={value.code} value={value.name}>
           {value.name}
@@ -49,16 +52,6 @@ export default class ConstantWidget extends Component {
       );
     });
 
-    // if (data && data.constant && data.constant.length >= 0) {
-    //   listConstant = data.constant;
-    // }
-    // const options = map(listConstant, value => {
-    //   return (
-    //     <Option key={value.key} value={value.name}>
-    //       {value.name}
-    //     </Option>
-    //   );
-    // });
     let placeholderWidth = calcTextWidth(placeholder, "14px");
     let customProps = this.props.customProps || {};
 
