@@ -28,7 +28,7 @@ export default class FieldConstantValueSrc extends Component {
         let placeholder = this.props.placeholder || 'Select option';
         const fieldDefinition = getFieldConfig(this.props.field, this.props.config);
 
-        const options = map(fieldDefinition.listValues, value => {
+        const options = map(fieldDefinition.listConstants, value => {
             return (
                 <Option key={value.code} value={value.name}>
                     {value.name}

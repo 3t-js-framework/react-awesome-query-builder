@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import {
   Select,
@@ -12,7 +12,7 @@ import {
 } from 'antd';
 import last from 'lodash/last';
 import keys from 'lodash/keys';
-import clone from 'clone';
+import _cloneDeep from 'lodash/cloneDeep';
 import moment from 'moment';
 import shallowCompare from 'react-addons-shallow-compare';
 
@@ -30,12 +30,12 @@ const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
 
-export default class ValueFunction extends Component {
+class ValueFunction extends Component {
   static propTypes = {
     setValue: PropTypes.func.isRequired,
     config: PropTypes.object.isRequired,
     field: PropTypes.string.isRequired,
-    value: PropTypes.object,
+    value: PropTypes.any,
     operator: PropTypes.string,
     customProps: PropTypes.object
   };
@@ -66,7 +66,14 @@ export default class ValueFunction extends Component {
    */
   handleFieldSelect = (key) => {
     const functionSelected = this.props.config.functions[key];
-    this.props.setValue({ parameters: this.initDataForParams(functionSelected), functionSelected: functionSelected.functionName, valueSrc: [], key });
+    const value = {
+      parameters: this.initDataForParams(functionSelected),
+      functionSelected: functionSelected.functionName,
+      valueSrc: functionSelected.params.map(() => 'value'),
+      key
+    };
+
+    this.props.setValue({ ...value });
   }
 
   /**
@@ -102,7 +109,7 @@ export default class ValueFunction extends Component {
    */
   handleChange = (value, index, dataType) => {
     let valueChange = value;
-    const valueFunctionSelect = clone(this.props.value);
+    const valueFunctionSelect = _cloneDeep(this.props.value);
     if (dataType === DATA_TYPE.TEXT) { valueChange = value.target.value; }
     if (dataType === DATA_TYPE.DATE && valueChange) { valueChange = value.toISOString(); }
     valueFunctionSelect.parameters[index] = valueChange;
@@ -115,7 +122,7 @@ export default class ValueFunction extends Component {
    * Handle change popover value source
    */
   handleChangePopover = ({ target }, index) => {
-    const valueFunctionSelect = clone(this.props.value);
+    const valueFunctionSelect = _cloneDeep(this.props.value);
     valueFunctionSelect.valueSrc[index] = target.value;
     valueFunctionSelect.parameters[index] = '';
     this.props.setValue({ ...valueFunctionSelect });
@@ -136,13 +143,14 @@ export default class ValueFunction extends Component {
 
     let content = (
       <RadioGroup
+        key={valueSrc + '--' + index}
         value={valueSrc || 'value'}
         size={this.props.config.settings.renderSize || 'small'}
         onChange={(value) => this.handleChangePopover(value, index)}
       >
         {valueSources.filter((valueSource) => valueSource !== 'function').map(srcKey => (
           <RadioButton
-            key={srcKey}
+            key={srcKey + index}
             value={srcKey}
           >{valueSourcesInfo[srcKey].label}
           </RadioButton>
@@ -258,12 +266,12 @@ export default class ValueFunction extends Component {
     }
   }
 
-  renderFunctionParams = (functionSelected) => {
+  renderFunctionParams = (functionSelected, valueSrc) => {
     if (!functionSelected) { return; }
     const { key, params } = functionSelected;
 
     return params.map((dataTypeOfParam, index) => (
-      <div className="widget--function" key={key + '--' + index}>
+      <div className="widget--function" key={key + '--' + (valueSrc && valueSrc[index] || 'value') + '--' + index}>
         {this.renderValueSources(index)}
         {this.renderValueSourceParam(index, dataTypeOfParam)}
       </div>
@@ -302,11 +310,28 @@ export default class ValueFunction extends Component {
    * @functionKey key of function selected
    * @config info in file config
    */
-  getFunctionInit = (functionKey, config) => {
+  getFunctionInit = (value, config) => {
+    const { key, valueSrc } = value;
     const { functions } = config;
-    const result = functions[functionKey] ? functions[functionKey] : null;
-    const renderParams = this.renderFunctionParams(result);
+    const result = functions[key] ? functions[key] : null;
+    const renderParams = this.renderFunctionParams(result, valueSrc);
     return renderParams;
+  }
+
+  testChange = (value) => {
+    this.props.setValue(value);
+  }
+
+  renderFunctionParameters = (value, config) => {
+    const { key, valueSrc } = value;
+    const { functions } = config;
+    const result = functions[key] ? functions[key] : null;
+    return result.params.map((dataTypeOfParam, index) => (
+      <div className="widget--function" key={key + '--' + (valueSrc && valueSrc[index] || 'value') + '--' + index}>
+        {this.renderValueSources(index)}
+        {this.renderValueSourceParam(index, dataTypeOfParam)}
+      </div>
+    ));
   }
 
   /**
@@ -318,7 +343,7 @@ export default class ValueFunction extends Component {
     let fieldOptions = this.filterFunctions(config, field);
     const customProps = this.props.customProps || {};
     const buildOptionItems = this.buildOptionItems(fieldOptions);
-    const initParamsInput = this.props.value && this.getFunctionInit(value.key, config);
+    const initParamsInput = this.props.value && this.getFunctionInit(value, config);
 
     return (
       <div className="widget--valuesrc--function">
@@ -343,3 +368,5 @@ export default class ValueFunction extends Component {
     return this.renderAsSelect();
   }
 }
+
+export default ValueFunction;
