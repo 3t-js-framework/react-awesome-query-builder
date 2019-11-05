@@ -284,14 +284,17 @@ class ValueFunction extends Component {
    * @operator operator of field
    * Filter function by type
    */
-  filterFunctions = (config, leftFieldFullkey) => {
+  filterFunctions = (config, leftFieldFullkey, operator) => {
     const leftFieldConfig = getFieldConfig(leftFieldFullkey, config);
     const { functions } = config;
 
     // Get functions of field config
-    const { type, isList } = leftFieldConfig;
+    const { type } = leftFieldConfig;
     const functionsOfField = Object.keys(functions).map(key => {
-      return (functions[key].type === type && functions[key].isList === isList) ? functions[key] : undefined;
+      if (operator === 'select_any_in' || operator === 'select_not_any_in') {
+        return (functions[key].type === type && functions[key].isList === true) ? functions[key] : undefined;
+      }
+      return (functions[key].type === type && functions[key].isList === false) ? functions[key] : undefined;
     }).filter(func => func);
 
     if (!functionsOfField.length) { return []; }
@@ -338,9 +341,9 @@ class ValueFunction extends Component {
    * Render select functions
    */
   renderAsSelect = () => {
-    const { value, config, field } = this.props;
+    const { value, config, field, operator } = this.props;
     const placeholder = this.props.config.settings.functionPlaceholder;
-    let fieldOptions = this.filterFunctions(config, field);
+    let fieldOptions = this.filterFunctions(config, field, operator);
     const customProps = this.props.customProps || {};
     const buildOptionItems = this.buildOptionItems(fieldOptions);
     const initParamsInput = this.props.value && this.getFunctionInit(value, config);
