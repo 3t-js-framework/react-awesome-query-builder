@@ -110,7 +110,6 @@ export default class Query extends Component {
     operators: PropTypes.object.isRequired,
     widgets: PropTypes.object.isRequired,
     settings: PropTypes.object.isRequired,
-    data: PropTypes.object.isRequired,
     onChange: PropTypes.func,
     get_children: PropTypes.func,
     value: PropTypes.any //instanceOf(Immutable.Map)
@@ -125,8 +124,7 @@ export default class Query extends Component {
       operators: props.operators,
       widgets: props.widgets,
       settings: props.settings,
-      tree: props.value,
-      data: props.data
+      tree: props.value
     };
 
     const store = createTreeStore(config);
@@ -162,7 +160,6 @@ export default class Query extends Component {
       operators,
       widgets,
       settings,
-      data,
       get_children,
       onChange,
       value,
@@ -177,8 +174,7 @@ export default class Query extends Component {
       types,
       operators,
       widgets,
-      settings,
-      data
+      settings
     };
     config = extendConfig(config);
 

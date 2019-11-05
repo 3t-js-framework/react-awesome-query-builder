@@ -572,6 +572,17 @@ export default {
                 }
             },
         },
+        bool: {
+            widgets: {
+                bool: {
+                    operators: ['equal'],
+                    widgetProps: {},
+                },
+                field: {
+                    operators: ['equal', 'not_equal'],
+                },
+            },
+        },
         boolean: {
             widgets: {
                 boolean: {
@@ -891,7 +902,7 @@ export default {
                 return isForDisplay ? '"' + valLabel + '"' : JSON.stringify(val);
             },
         },
-        
+
         date: {
             type: "date",
             valueSrc: 'value',
@@ -928,6 +939,17 @@ export default {
         },
         boolean: {
             type: "boolean",
+            valueSrc: 'value',
+            factory: (props) => <BooleanWidget {...props} />,
+            labelYes: "Yes",
+            labelNo: "No ",
+            formatValue: (val, fieldDef, wgtDef, isForDisplay) => {
+                return isForDisplay ? (val ? "Yes" : "No") : JSON.stringify(!!val);
+            },
+            defaultValue: false,
+        },
+        bool: {
+            type: "bool",
             valueSrc: 'value',
             factory: (props) => <BooleanWidget {...props} />,
             labelYes: "Yes",

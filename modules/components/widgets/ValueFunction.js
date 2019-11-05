@@ -289,9 +289,9 @@ class ValueFunction extends Component {
     const { functions } = config;
 
     // Get functions of field config
-    const { type } = leftFieldConfig;
+    const { type, isList } = leftFieldConfig;
     const functionsOfField = Object.keys(functions).map(key => {
-      return functions[key].type === type ? functions[key] : undefined;
+      return (functions[key].type === type && functions[key].isList === isList) ? functions[key] : undefined;
     }).filter(func => func);
 
     if (!functionsOfField.length) { return []; }

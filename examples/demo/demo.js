@@ -147,10 +147,26 @@ const dummy = {
     },
     {
       groupName: "Function",
-      name: "ReplaceText",
-      code: "88d71c42-55a3-4bb5-a480-a38e04955a8a",
+      name: "ReplaceText1",
+      code: "88d71c42-55a3-4bb5-a480-a38e04955a8d",
       dataType: "text",
       parameterTypes: "text;bool;number;date",
+      isList: false
+    },
+    {
+      groupName: "Function",
+      name: "ReplaceText2",
+      code: "88d71c42-55a3-4bb5-a480-a38e04955a8a",
+      dataType: "text",
+      parameterTypes: "text;bool",
+      isList: false
+    },
+    {
+      groupName: "Function",
+      name: "IsExist",
+      code: "88d71c42-55a3-4bb5-a480-a38e04955a8c",
+      dataType: "bool",
+      parameterTypes: "text;bool",
       isList: false
     }
   ],
@@ -175,7 +191,7 @@ const dummy = {
       groupName: "Policy Input",
       name: "@Boolean - islist - false@",
       code: "59dffb51-10c2-4134-ba3b-31ed3dd89088",
-      dataType: "boolean",
+      dataType: "bool",
       parameterTypes: null,
       isList: false
     },
@@ -183,7 +199,7 @@ const dummy = {
       groupName: "Policy Input",
       name: "@Boolean - islist - true@",
       code: "59dffb51-10c2-4134-ba3b-31ed3dd89088",
-      dataType: "boolean",
+      dataType: "bool",
       parameterTypes: null,
       isList: true
     },
@@ -215,7 +231,7 @@ const dummy = {
       groupName: "Policy Input",
       name: "@Datetime-isList-false@",
       code: "27cduhj6-b05a-4540-b794-8502e728f5l9",
-      dataType: "datetime",
+      dataType: "date",
       parameterTypes: null,
       isList: false
     }
@@ -226,10 +242,7 @@ const convertDummy = convertCombination(dummy);
 
 const generatorConfigFunctionInput = dataCombination => {
   const functions = {};
-  const arrayFunctions = dataCombination.filter(
-    item => item.groupName === "Function"
-  );
-  arrayFunctions.forEach(item => {
+  dataCombination.forEach(item => {
     functions[item.code] = {
       key: item.code,
       functionName: item.name || "",
@@ -319,12 +332,9 @@ export default class DemoQueryBuilder extends Component {
       <div>
         <Query
           value={transit.fromJSON(initValue)}
-          {...configData}
-          data={data}
           get_children={this.getChildren}
-        >
-          {" "}
-        </Query>
+          {...configData}
+        />
       </div>
     );
   }

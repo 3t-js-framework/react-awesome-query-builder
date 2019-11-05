@@ -34,13 +34,13 @@ const getListOperators = (type, isList) => {
         result = [...result, ...operatorsForList];
       }
       break;
-    case "boolean":
+    case "bool":
       result = [...operatorsForEqual, ...operatorsForEmpty];
       if (isList) {
         result = [...result, ...operatorsForList];
       }
       break;
-    case "datetime":
+    case "date":
       result = [
         ...operatorsForEqual,
         ...defaultOperators,

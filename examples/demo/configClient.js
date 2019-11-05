@@ -32,8 +32,8 @@ export default {
       formatConj: (children, _conj, not, isForDisplay) => {
         return children.size > 1
           ? `${not ? "NOT " : ""}(${children.join(
-              ` ${isForDisplay ? "AND" : "&&"} `
-            )})`
+            ` ${isForDisplay ? "AND" : "&&"} `
+          )})`
           : (not ? "NOT (" : "") + children.first() + (not ? ")" : "");
       }
     },
@@ -44,8 +44,8 @@ export default {
       formatConj: (children, _conj, not, isForDisplay) => {
         return children.size > 1
           ? `${not ? "NOT " : ""}(${children.join(
-              ` ${isForDisplay ? "OR" : "||"} `
-            )})`
+            ` ${isForDisplay ? "OR" : "||"} `
+          )})`
           : (not ? "NOT (" : "") + children.first() + (not ? ")" : "");
       }
     }
@@ -251,6 +251,17 @@ export default {
     boolean: {
       widgets: {
         boolean: {
+          operators: ["equal"],
+          widgetProps: {}
+        },
+        field: {
+          operators: ["equal", "not_equal"]
+        }
+      }
+    },
+    bool: {
+      widgets: {
+        bool: {
           operators: ["equal"],
           widgetProps: {}
         },
@@ -569,7 +580,6 @@ export default {
         return isForDisplay ? `"${valLabel}"` : JSON.stringify(val);
       }
     },
-
     date: {
       type: "date",
       valueSrc: "value",
@@ -622,6 +632,17 @@ export default {
       },
       defaultValue: false
     },
+    bool: {
+      type: "bool",
+      valueSrc: 'value',
+      factory: (props) => <BooleanWidget {...props} />,
+      labelYes: "Yes",
+      labelNo: "No ",
+      formatValue: (val, fieldDef, wgtDef, isForDisplay) => {
+        return isForDisplay ? (val ? "Yes" : "No") : JSON.stringify(!!val);
+      },
+      defaultValue: false,
+    },
     field: {
       valueSrc: "field",
       factory: props => <ValueFieldWidget {...props} />,
@@ -653,7 +674,7 @@ export default {
         return <ValueFunctionWidget {...props} />;
       },
       formatValue: (val, fieldDef, wgtDef, isForDisplay) => {
-        debugger;
+        if (!val) return '';
         const { functionSelected, parameters } = val;
         const result = isForDisplay
           ? `${functionSelected}(${parameters.concat()})`
@@ -769,8 +790,5 @@ export default {
     canCompareFieldWithField: () => {
       return true;
     }
-  },
-  data: {
-    constant: []
   }
 };
