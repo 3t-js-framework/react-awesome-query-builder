@@ -147,15 +147,15 @@ const dummy = {
     },
     {
       groupName: "Function",
-      name: "ReplaceText1",
+      name: "ReplaceText1-true",
       code: "88d71c42-55a3-4bb5-a480-a38e04955a8d",
       dataType: "text",
       parameterTypes: "text;bool;number;date",
-      isList: false
+      isList: true
     },
     {
       groupName: "Function",
-      name: "ReplaceText2",
+      name: "ReplaceText2-false",
       code: "88d71c42-55a3-4bb5-a480-a38e04955a8a",
       dataType: "text",
       parameterTypes: "text;bool",
