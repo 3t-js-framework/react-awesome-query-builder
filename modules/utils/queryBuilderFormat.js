@@ -123,10 +123,18 @@ export const queryBuilderFormat = (item, config, rootQuery = null) => {
         valueType = valueType.toArray();
         let values = [];
         for (let i = 0 ; i < value.length ; i++) {
-            let val = {
-                type: valueType[i],
-                value: value[i],
-            };
+            let val = {};
+            if(valueSrc[i] == 'field'){
+                val = {
+                    type: valueSrc[i],
+                    value: value[i],
+                };
+            } else {
+                val = {
+                    type: valueType[i],
+                    value: value[i],
+                };
+            }
             values.push(val);
             if (valueSrc[i] == 'field') {
                 let secondField = value[i];
