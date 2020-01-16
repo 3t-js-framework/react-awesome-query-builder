@@ -70,6 +70,7 @@ class ValueFunction extends Component {
       parameters: this.initDataForParams(functionSelected),
       functionSelected: functionSelected.functionName,
       valueSrc: functionSelected.params.map(() => 'value'),
+      dataTypes: functionSelected.params,
       key
     };
 
