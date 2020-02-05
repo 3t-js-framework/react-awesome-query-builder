@@ -87,7 +87,7 @@ export const extendConfig = (config) => {
 };
 
 
-export const getFieldRawConfig = (field, config) => {
+export const getFieldRawConfig = (field, config, selectedInputSrcField) => {
     if (!field || field == ':empty:')
         return null;
     const fieldSeparator = config.settings.fieldSeparator;
@@ -110,10 +110,51 @@ export const getFieldRawConfig = (field, config) => {
     return fieldConfig;
 };
 
-export const getFieldConfig = (field, config) => {
+export const getFieldFunctionRawConfig = (field, config) => {
     if (!field || field == ':empty:')
         return null;
-    const fieldConfig = getFieldRawConfig(field, config);
+    const fieldSeparator = config.settings.fieldSeparator;
+    const parts = field.split(fieldSeparator);
+    let fields = config.functionInputs;
+    let fieldConfig = null;
+    for (let i = 0 ; i < parts.length ; i++) {
+        const part = parts[i];
+        const tmpFieldConfig = fields[part];
+        if (!tmpFieldConfig)
+            return null;
+        if (i == parts.length-1) {
+            fieldConfig = tmpFieldConfig;
+        } else {
+            fields = tmpFieldConfig.subfields;
+            if (!fields)
+                return null;
+        }
+    }
+    return fieldConfig;
+};
+
+export const getFunctionFieldConfig = (field, config) => {
+    if (!field || field == ':empty:')
+        return null;
+    const fieldConfig = getFieldFunctionRawConfig(field, config);
+    if (!fieldConfig)
+        return null; //throw new Error("Can't find field " + field + ", please check your config");
+
+    //merge, but don't merge operators (rewrite instead)
+    const typeConfig = config.types[fieldConfig.type] || {};
+    let ret = mergeWith({}, typeConfig, fieldConfig || {}, (objValue, srcValue, key, object, source, stack) => {
+        if (Array.isArray(objValue)) {
+            return srcValue;
+        }
+    });
+
+    return ret;
+};
+
+export const getFieldConfig = (field, config, selectedInputSrcField) => {
+    if (!field || field == ':empty:')
+        return null;
+    const fieldConfig = getFieldRawConfig(field, config, selectedInputSrcField);
     if (!fieldConfig)
         return null; //throw new Error("Can't find field " + field + ", please check your config");
 
@@ -155,9 +196,20 @@ export const getOperatorsForField = (config, field) => {
   return fieldOps;
 };
 
+export const getOperatorsForFunctionField = (config, field) => {
+    const fieldConfig = getFunctionFieldConfig(field, config);
+    const fieldOps = fieldConfig ? fieldConfig.operators : [];
+    return fieldOps;
+};
+
 export const getFirstOperator = (config, field) => {
   const fieldOps = getOperatorsForField(config, field);
   return fieldOps ? fieldOps[0] : null;
+};
+
+export const getFirstOperatorForFunction = (config, field) => {
+    const fieldOps = getOperatorsForFunctionField(config, field);
+    return fieldOps ? fieldOps[0] : null;
 };
 
 export const getFieldPath = (field, config) => {

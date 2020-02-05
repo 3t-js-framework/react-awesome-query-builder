@@ -239,7 +239,6 @@ const dummy = {
 };
 
 const convertDummy = convertCombination(dummy);
-
 const generatorConfigFunctionInput = dataCombination => {
   const functions = {};
   dataCombination.forEach(item => {
@@ -265,20 +264,18 @@ export default class DemoQueryBuilder extends Component {
       margin: "10px",
       padding: "10px"
     };
-    console.log(props.tree);
-
     return (
       <div style={{ padding: "10px" }}>
         <div className="query-builder">
           <Builder {...props} />
         </div>
         <br />
-        <div>
+        {/* <div>
           stringFormat:
           <pre style={jsonStyle}>
             {stringify(queryString(props.tree, props.config), undefined, 2)}
           </pre>
-        </div>
+        </div> */}
         <hr />
         <div>
           queryBuilderFormat:
@@ -321,11 +318,8 @@ export default class DemoQueryBuilder extends Component {
     const { constant } = this.state;
     const data = { constant };
     const { tree, ...config_props } = config;
-    console.log("config: ", config_props);
     const functions = generatorConfigFunctionInput(dummy.functions);
-
-    const configData = { ...config_props, ...convertDummy, functions };
-
+    const configData = { ...config_props, ...convertDummy, functions, functionInputs: convertDummy.functionInputs };
     console.log("config: ", configData);
     const fields = {};
     return (

@@ -141,3 +141,4 @@ export const moveItem = (config, fromPath, toPath, placement) => ({
   placement: placement,
   config: config,
 });
+

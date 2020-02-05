@@ -30,7 +30,7 @@ const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
 
-class ValueFunction extends Component {
+class InputFunction extends Component {
   static propTypes = {
     setValue: PropTypes.func.isRequired,
     config: PropTypes.object.isRequired,
@@ -177,9 +177,7 @@ class ValueFunction extends Component {
    */
   renderValueSourceParam = (index, dataTypeOfParam) => {
     const { config, value, operator, field } = this.props;
-    debugger;
-    const valueSource = value && value.valueSrc[index] || 'value';
-
+    const valueSource = value && value.valueSources[index] || 'value';
     switch (valueSource) {
       case VALUE_SOURCE_FUNCTION.FIELD:
         return (
@@ -189,7 +187,7 @@ class ValueFunction extends Component {
             config={config}
             operator={operator}
             dataTypeOfParam={dataTypeOfParam}
-            valueSelected={this.props.value.parameters[index]}
+            valueSelected={this.props.value.params[index]}
             handleChangeValue={(value) => this.handleChange(value, index, VALUE_SOURCE_FUNCTION.FIELD)}
           />
         );
@@ -198,7 +196,7 @@ class ValueFunction extends Component {
           <FieldConstantValueSrc
             field={field}
             config={config}
-            value={this.props.value.parameters[index]}
+            value={this.props.value.params[index]}
             handleChangeValueConstant={(value) => this.handleChange(value, index, VALUE_SOURCE_FUNCTION.CONSTANT)}
           />
         );
@@ -219,7 +217,7 @@ class ValueFunction extends Component {
       case DATA_TYPE.TEXT:
         return (
           <Input
-            value={this.props.value && this.props.value.parameters[index] || ''}
+            value={this.props.value && this.props.value.params[index] || ''}
             size={this.props.config.settings.renderSize || 'small'}
             onChange={(value) => this.handleChange(value, index, dataType)}
             style={{ marginLeft: '8px', width: '134px' }}
@@ -230,7 +228,7 @@ class ValueFunction extends Component {
         return (
           <InputNumber
             key={index}
-            value={this.props.value && this.props.value.parameters[index] || 0}
+            value={this.props.value && this.props.value.params[index] || 0}
             size={this.props.config.settings.renderSize || 'small'}
             onChange={(value) => this.handleChange(value, index, dataType)}
             style={{ marginLeft: '8px' }}
@@ -240,7 +238,7 @@ class ValueFunction extends Component {
       case DATA_TYPE.BOOL:
         return (
           <Switch
-            checked={this.props.value && this.props.value.parameters[index] || false}
+            checked={this.props.value && this.props.value.params[index] || false}
             defaultChecked={false}
             style={{ marginLeft: '8px' }}
             onChange={(value) => this.handleChange(value, index, dataType)}
@@ -250,7 +248,7 @@ class ValueFunction extends Component {
         return (
           <DatePicker
             style={{ marginLeft: '8px' }}
-            value={this.props.value && moment(this.props.value.parameters[index]) || undefined}
+            value={this.props.value && moment(this.props.value.params[index]) || undefined}
             onChange={(value) => this.handleChange(value, index, dataType)}
             allowClear={true}
           />
@@ -258,7 +256,7 @@ class ValueFunction extends Component {
       default:
         return (
           <Input
-            value={this.props.value && this.props.value.parameters[index] || ''}
+            value={this.props.value && this.props.value.params[index] || ''}
             size={this.props.config.settings.renderSize || 'small'}
             onChange={(value) => this.handleChange(value, index, dataType)}
             style={{ marginLeft: '8px', width: '134px' }}
@@ -273,7 +271,7 @@ class ValueFunction extends Component {
     const { key, params } = functionSelected;
 
     return params.map((dataTypeOfParam, index) => (
-      <div className="widget--function" key={key + '--' + (valueSrc && valueSrc[index] || 'value') + '--' + index}>
+      <div className="widget-input-function" key={key + '--' + (valueSrc && valueSrc[index] || 'value') + '--' + index}>
         {this.renderValueSources(index)}
         {this.renderValueSourceParam(index, dataTypeOfParam)}
       </div>
@@ -316,10 +314,10 @@ class ValueFunction extends Component {
    * @config info in file config
    */
   getFunctionInit = (value, config) => {
-    const { key, valueSrc } = value;
+    const { key, valueSources } = value;
     const { functions } = config;
     const result = functions[key] ? functions[key] : null;
-    const renderParams = this.renderFunctionParams(result, valueSrc);
+    const renderParams = this.renderFunctionParams(result, valueSources);
     return renderParams;
   }
 
@@ -345,14 +343,14 @@ class ValueFunction extends Component {
   renderAsSelect = () => {
     const { value, config, field, operator } = this.props;
     const placeholder = this.props.config.settings.functionPlaceholder;
-    let fieldOptions = this.filterFunctions(config, field, operator);
+    // let fieldOptions = this.filterFunctions(config, field, operator);
     const customProps = this.props.customProps || {};
-    const buildOptionItems = this.buildOptionItems(fieldOptions);
+    // const buildOptionItems = this.buildOptionItems(fieldOptions);
     const initParamsInput = this.props.value && this.getFunctionInit(value, config);
 
     return (
-      <div className="widget--valuesrc--function">
-        <Select
+      <Fragment>
+        {/* <Select
           value={value && value.key || undefined}
           style={{ width: '200px' }}
           ref="function"
@@ -363,9 +361,9 @@ class ValueFunction extends Component {
           {...customProps}
         >
           {buildOptionItems}
-        </Select>
+        </Select> */}
         {initParamsInput}
-      </div>
+      </Fragment>
     );
   }
 
@@ -374,4 +372,4 @@ class ValueFunction extends Component {
   }
 }
 
-export default ValueFunction;
+export default InputFunction;

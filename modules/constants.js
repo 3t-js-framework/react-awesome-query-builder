@@ -11,6 +11,7 @@ export const SET_OPERATOR = 'SET_OPERATOR';
 export const SET_VALUE = 'SET_VALUE';
 export const SET_VALUE_SRC = 'SET_VALUE_SRC';
 export const SET_OPERATOR_OPTION = 'SET_OPERATOR_OPTION';
+export const SET_INPUT_SRC_FIELD = 'SET_INPUT_SRC_FIELD';
 
 export const SET_TREE = 'SET_TREE';
 
@@ -40,4 +41,12 @@ export const VALUE_SOURCE_FUNCTION = {
     CONSTANT: 'constant',
     VALUE: 'value',
 }
+
+export const INPUT_SRC_FIELD = {
+    FUNCTION_INPUT: 'functionInput',
+    VALUE_DEFINITION: 'valueDefinition',
+    POLICY_INPUT: 'policyInput',
+};
+
+
 

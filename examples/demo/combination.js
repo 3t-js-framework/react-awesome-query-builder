@@ -1,6 +1,7 @@
 // import _forEach from 'lodash/forEach';
 
 const fields = {};
+const functionInputs = {};
 
 const getListConstants = (dataType = "", valueDefinitions = []) => {
   const result = valueDefinitions.filter(x => x.dataType === dataType);
@@ -80,9 +81,10 @@ function convertCombination(combination) {
     const listConstants = getListConstants(item.dataType, valueDefinitions);
     const operators = getListOperators(item.dataType, item.isList);
     console.log("operators: ", operators);
-
+    
     fields[item.name] = {
       label: item.name,
+      inputSrc: 'policyInput',
       type: item.dataType,
       isList: item.isList,
       listConstants,
@@ -90,9 +92,24 @@ function convertCombination(combination) {
     };
   });
 
-  const constants = convertValueDefinition(valueDefinitions);
+  functions.forEach(function(item) {
+    const listConstants = getListConstants(item.dataType, valueDefinitions);
+    const operators = getListOperators(item.dataType, item.isList);
+    fields[item.code] = {
+      label: item.name,
+      key: item.code,
+      inputSrc: 'functionInput',
+      functionName: item.name || "",
+      params: item.parameterTypes.split(";") || [],
+      type: item.dataType || "",
+      isList: item.isList || false,
+      listConstants,
+      operators
+    };
+  });
 
-  const result = { fields, constants, functions };
+  const constants = convertValueDefinition(valueDefinitions);
+  const result = { fields, constants, functions, functionInputs };
 
   return result;
 }

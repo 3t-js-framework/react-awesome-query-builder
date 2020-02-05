@@ -52,8 +52,7 @@ export const queryBuilderFormat = (item, config, rootQuery = null) => {
     const type = item.get('type');
     const properties = item.get('properties');
     const children = item.get('children1');
-    const id = item.get('id')
-
+    const id = item.get('id');
     var resultQuery = {};
     var isRoot = (rootQuery === null);
     if (isRoot) {
@@ -79,13 +78,13 @@ export const queryBuilderFormat = (item, config, rootQuery = null) => {
 
         return resultQuery;
     } else if (type === 'rule') {
-        const operator = properties.get('operator');
+            const operator = properties.get('operator');
         const options = properties.get('operatorOptions');
         let field = properties.get('field');
         let value = properties.get('value');
         let valueSrc = properties.get('valueSrc');
         let valueType = properties.get('valueType');
-
+        const selectedInputSrcField = properties.get('selectedInputSrcField');
         let hasUndefinedValues = false;
         value.map((currentValue, ind) => {
             if (currentValue === undefined) {
@@ -140,13 +139,13 @@ export const queryBuilderFormat = (item, config, rootQuery = null) => {
         let operatorOptions = options ? options.toJS() : null;
         if (operatorOptions && !Object.keys(operatorOptions).length)
             operatorOptions = null;
-        
         var ruleQuery = {
             id,
             field,
             type: fieldType,
             input: typeConfig.mainWidget,
-            operator,
+            selectedInputSrcField,
+            operator
         };
         if (operatorOptions)
             ruleQuery.operatorOptions = operatorOptions;

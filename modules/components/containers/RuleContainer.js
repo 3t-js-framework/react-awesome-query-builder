@@ -45,6 +45,11 @@ export default (Rule) => {
       this.props.actions.setField(this.props.path, field);
     }
 
+    setInputSrcField = (field) => {
+      this.props.actions.setInputSrcField(this.props.path, field);
+    }
+    
+
     setOperator = (operator) => {
       this.props.actions.setOperator(this.props.path, operator);
     }
@@ -92,6 +97,8 @@ export default (Rule) => {
 
     render() {
       const fieldConfig = getFieldConfig(this.props.field, this.props.config);
+      console.log("aaaaaaaaaaaaaaaaa", this.props);
+      
       let isGroup = fieldConfig && fieldConfig.type == '!struct';
 
       return (
@@ -108,7 +115,9 @@ export default (Rule) => {
               setOperator={this.dummyFn}
               setOperatorOption={this.dummyFn}
               removeSelf={this.dummyFn}
+              setInputSrcField={this.setInputSrcField}
               selectedField={this.props.field || null}
+              selectedInputSrcField={this.props.selectedInputSrcField || null}
               selectedOperator={this.props.operator || null}
               value={this.props.value || null}
               valueSrc={this.props.valueSrc || null}
@@ -125,8 +134,10 @@ export default (Rule) => {
               setField={this.setField}
               setOperator={this.setOperator}
               setOperatorOption={this.setOperatorOption}
+              setInputSrcField={this.setInputSrcField}
               setValue={this.setValue}
               setValueSrc={this.setValueSrc}
+              selectedInputSrcField={this.props.selectedInputSrcField || null}
               selectedField={this.props.field || null}
               selectedOperator={this.props.operator || null}
               value={this.props.value || null}

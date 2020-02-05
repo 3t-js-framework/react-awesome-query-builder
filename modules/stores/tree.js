@@ -1,13 +1,13 @@
 import Immutable from 'immutable';
 import {expandTreePath, expandTreeSubpath, getItemByPath, fixPathsInTree} from '../utils/treeUtils';
-import {defaultRuleProperties, defaultGroupProperties, defaultOperator, defaultOperatorOptions, defaultRoot} from '../utils/defaultUtils';
+import {defaultRuleProperties, defaultGroupProperties, defaultOperator, defaultOperatorForFunction, defaultOperatorOptions, defaultRoot} from '../utils/defaultUtils';
 import {getFirstOperator} from '../utils/configUtils';
 import * as constants from '../constants';
 import uuid from '../utils/uuid';
 import omit from 'lodash/omit';
-import {getFieldConfig, getOperatorConfig, getFieldWidgetConfig, getValueSourcesForFieldOp} from "../utils/configUtils";
+import {getFieldConfig, getFunctionFieldConfig, getOperatorConfig, getFieldWidgetConfig, getValueSourcesForFieldOp} from "../utils/configUtils";
 import {defaultValue, eqArrSet} from "../utils/stuff";
-import {getOperatorsForField, getWidgetForFieldOp} from "../utils/configUtils";
+import {getOperatorsForField, getOperatorsForFunctionField, getWidgetForFieldOp} from "../utils/configUtils";
 var stringify = require('json-stringify-safe');
 
 
@@ -360,15 +360,35 @@ const setField = (state, path, newField, config) => {
         const currentField = current.get('field');
         const currentOperator = current.get('operator');
         const currentOperatorOptions = current.get('operatorOptions');
+        const selectedInputSrcField = current.get('selectedInputSrcField');
+
+        // if(selectedInputSrcField === constants.INPUT_SRC_FIELD.FUNCTION_INPUT){
+        //     config = {...config, fields: config.functionInputs };
+        //     // config = Object.assign(config, {fields: config.functionInput})
+        // }
         //const currentValue = current.get('value');
         //const currentValueSrc = current.get('valueSrc', new Immutable.List());
         //const currentValueType = current.get('valueType', new Immutable.List());
 
         // If the newly selected field supports the same operator the rule currently
         // uses, keep it selected.
-        const newFieldConfig = getFieldConfig(newField, config);
+        // let newFieldConfig = {};
+        // let availOps = [];
+        // TODO: functionInput
+        // if(selectedInputSrcField === constants.INPUT_SRC_FIELD.FUNCTION_INPUT){
+        //     newFieldConfig = getFunctionFieldConfig(newField, config);
+        // }else{
+        //     newFieldConfig = getFieldConfig(newField, config);
+        // }
+        const newFieldConfig = getFieldConfig(newField, config, selectedInputSrcField);
         const lastOp = newFieldConfig && newFieldConfig.operators.indexOf(currentOperator) !== -1 ? currentOperator : null;
         let newOperator = null;
+        // TODO: functionInput
+        // if(selectedInputSrcField === constants.INPUT_SRC_FIELD.FUNCTION_INPUT){
+        //     availOps = getOperatorsForFunctionField(config, newField);
+        // }else{
+        //     availOps = getOperatorsForField(config, newField);
+        // }
         const availOps = getOperatorsForField(config, newField);
         if (availOps && availOps.length == 1)
             newOperator = availOps[0];
@@ -377,6 +397,12 @@ const setField = (state, path, newField, config) => {
                 if (strategy == 'keep')
                     newOperator = lastOp;
                 else if (strategy == 'default')
+                    // TODO: functionInput
+                    // if( selectedInputSrcField === constants.INPUT_SRC_FIELD.FUNCTION_INPUT){
+                    //     newOperator = defaultOperatorForFunction(config, newField, false);
+                    // }else{
+                    //     newOperator = defaultOperator(config, newField, false);
+                    // }
                     newOperator = defaultOperator(config, newField, false);
                 else if (strategy == 'first')
                     newOperator = getFirstOperator(config, newField);
@@ -384,7 +410,7 @@ const setField = (state, path, newField, config) => {
                     break;
             }
         }
-
+        
         let {canReuseValue, newValue, newValueSrc, newValueType} = _getNewValueForFieldOp (config, config, current, newField, newOperator, 'field');
         let newOperatorOptions = canReuseValue ? currentOperatorOptions : defaultOperatorOptions(config, newOperator, newField);
 
@@ -394,7 +420,22 @@ const setField = (state, path, newField, config) => {
             .set('operatorOptions', newOperatorOptions)
             .set('value', newValue)
             .set('valueSrc', newValueSrc)
-            .set('valueType', newValueType);
+            .set('valueType', newValueType)
+            .set('selectedInputSrcField', selectedInputSrcField || constants.INPUT_SRC_FIELD.POLICY_INPUT);
+    }))
+};
+
+/**
+ * @param {Immutable.Map} state
+ * @param {Immutable.List} path
+ * @param {string} name
+ * @param {*} value
+ */
+const setInputSrcField = (state, path, inputSrcField, config) => {
+    // debugger;
+    // return state.setIn(expandTreePath(path, 'properties', 'selectedInputSrcField', name), value);
+    return state.updateIn(expandTreePath(path, 'properties'), (map) => map.withMutations((current) => {
+        return current.set('selectedInputSrcField', inputSrcField);
     }))
 };
 
@@ -531,6 +572,9 @@ export default (config) => {
             case constants.SET_FIELD:
                 return Object.assign({}, state, {tree: setField(state.tree, action.path, action.field, action.config)});
 
+            case constants.SET_INPUT_SRC_FIELD:
+                return Object.assign({}, state, {tree: setInputSrcField(state.tree, action.path, action.field, action.config)});
+                
             case constants.SET_OPERATOR:
                 return Object.assign({}, state, {tree: setOperator(state.tree, action.path, action.operator, action.config)});
 
@@ -545,7 +589,6 @@ export default (config) => {
 
             case constants.MOVE_ITEM:
                 return Object.assign({}, state, {tree: moveItem(state.tree, action.fromPath, action.toPath, action.placement, action.config)});
-
 
             case constants.SET_DRAG_START:
                 return Object.assign({}, state, {dragStart: action.dragStart, dragging: action.dragging, mousePos: action.mousePos});

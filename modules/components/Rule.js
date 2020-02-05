@@ -7,17 +7,20 @@ import Field from './Field';
 import Operator from './Operator';
 import Widget from './Widget';
 import OperatorOptions from './OperatorOptions';
-import { Row, Col, Menu, Dropdown, Icon, Tooltip, Button, Modal } from 'antd';
+import { Row, Col, Menu, Dropdown, Icon, Tooltip, Button, Modal, Radio, Popover } from 'antd';
 const { confirm } = Modal;
 const SubMenu = Menu.SubMenu;
 const MenuItem = Menu.Item;
 const DropdownButton = Dropdown.Button;
+const RadioButton = Radio.Button;
+const RadioGroup = Radio.Group;
 import {getFieldConfig, getFieldPath, getFieldPathLabels, getOperatorConfig, getFieldWidgetConfig} from "../utils/configUtils";
 import size from 'lodash/size';
 var stringify = require('json-stringify-safe');
 const classNames = require('classnames');
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {Provider, Connector, connect} from 'react-redux';
+import {INPUT_SRC_FIELD} from '../constants';
 
 
 @RuleContainer
@@ -26,6 +29,7 @@ class Rule extends Component {
         isForDrag: PropTypes.bool,
         selectedField: PropTypes.string,
         selectedOperator: PropTypes.string,
+        selectedInputSrcField: PropTypes.string,
         operatorOptions: PropTypes.object,
         config: PropTypes.object.isRequired,
         onDragStart: PropTypes.func,
@@ -34,6 +38,7 @@ class Rule extends Component {
         valueSrc: PropTypes.any,
         //path: PropTypes.instanceOf(Immutable.List),
         //actions
+        setInputSrcField: PropTypes.func,
         setField: PropTypes.func,
         setOperator: PropTypes.func,
         setOperatorOption: PropTypes.func,
@@ -85,6 +90,50 @@ class Rule extends Component {
       } else {
         doRemove();
       }
+    }
+
+    onChangeSelectedInputSrcField = ({target}) => {
+        const {setInputSrcField, setField } = this.props;
+        const {value} = target;
+        setInputSrcField(value);
+    }
+
+    renderRuleType = () => {
+        let content = (
+            <RadioGroup
+                key='dataSrc'
+                value="policyInput"
+                size={this.props.config.settings.renderSize || "small"}
+                onChange={this.onChangeSelectedInputSrcField}
+            >
+                <RadioButton
+                    key={INPUT_SRC_FIELD.POLICY_INPUT}
+                    value={INPUT_SRC_FIELD.POLICY_INPUT}
+                >
+                    PolicyInput
+                </RadioButton>
+                <RadioButton
+                    key={INPUT_SRC_FIELD.FUNCTION_INPUT}
+                    value={INPUT_SRC_FIELD.FUNCTION_INPUT}
+                >
+                    Function
+                </RadioButton>
+                <RadioButton
+                    key={INPUT_SRC_FIELD.VALUE_DEFINITION}
+                    value={INPUT_SRC_FIELD.VALUE_DEFINITION}
+                >
+                    Value defination
+                </RadioButton>
+            </RadioGroup>
+        );
+
+        return (
+            <span>
+                <Popover content={content} title="Select rule type">
+                    <Icon type="ellipsis" />
+                </Popover>
+            </span>
+        );
     }
 
     isEmptyCurrentRule = () => {
@@ -149,13 +198,50 @@ class Rule extends Component {
                                 { this.props.config.settings.showLabels &&
                                     <label>{this.props.config.settings.fieldLabel || "Field"}</label>
                                 }
-                                <Field
+                                {/* <div key={"valuesrc-"+this.props.field+"-"+delta} className="widget--valuesrc">
+                                    {settings.showLabels ?
+                                        <label>&nbsp;</label>
+                                        : null}
+                                    {this.renderValueSorces(delta, valueSources, valueSrc)}
+                                </div> */}
+                                <Popover placement="bottom" title="Select data source" content={(
+                                    <RadioGroup
+                                        key='dataSrc'
+                                        value={this.props.selectedInputSrcField || INPUT_SRC_FIELD.POLICY_INPUT}
+                                        size={this.props.config.settings.renderSize || "small"}
+                                        onChange={this.onChangeSelectedInputSrcField}
+                                    >
+                                     <RadioButton
+                                            key={INPUT_SRC_FIELD.POLICY_INPUT}
+                                            value={INPUT_SRC_FIELD.POLICY_INPUT}
+                                        >
+                                            PolicyInput
+                                        </RadioButton>
+                                        <RadioButton
+                                            key={INPUT_SRC_FIELD.FUNCTION_INPUT}
+                                            value={INPUT_SRC_FIELD.FUNCTION_INPUT}
+                                        >
+                                            Function
+                                        </RadioButton>
+                                        <RadioButton
+                                            key={INPUT_SRC_FIELD.VALUE_DEFINITION}
+                                            value={INPUT_SRC_FIELD.VALUE_DEFINITION}
+                                        >
+                                            Value defination
+                                        </RadioButton>
+                                    </RadioGroup>
+                                    )}>
+                                    <Icon type="ellipsis" />
+                                </Popover>
+
+                               <Field
                                     key="field"
                                     config={this.props.config}
                                     selectedField={this.props.selectedField}
                                     setField={this.props.setField}
                                     renderAsDropdown={this.props.config.settings.renderFieldAndOpAsDropdown}
                                     customProps={this.props.config.settings.customFieldSelectProps}
+                                    selectedInputSrcField={this.props.selectedInputSrcField}
                                 />
                             </Col>
                         ) : null}

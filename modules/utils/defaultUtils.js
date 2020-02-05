@@ -2,11 +2,12 @@ import Immutable from 'immutable';
 import map from 'lodash/map';
 import range from 'lodash/range';
 import uuid from './uuid';
-import {getFieldConfig, getFirstField, getFirstOperator, getOperatorConfig} from './configUtils';
+import {getFieldConfig, getFunctionFieldConfig, getFirstField, getFirstOperator, getFirstOperatorForFunction, getOperatorConfig} from './configUtils';
 import {_getNewValueForFieldOp} from '../stores/tree'
 
 
 export const defaultField = (config, canGetFirst = true) => {
+  debugger;
   return typeof config.settings.defaultField === 'function' ?
     config.settings.defaultField() : (config.settings.defaultField || (canGetFirst ? getFirstField(config) : null));
 };
@@ -24,6 +25,19 @@ export const defaultOperator = (config, field, canGetFirst = true) => {
   return op;
 };
 
+export const defaultOperatorForFunction = (config, field, canGetFirst = true) => {
+  let fieldConfig = getFunctionFieldConfig(field, config);
+  let fieldOperators = fieldConfig && fieldConfig.operators || [];
+  let fieldDefaultOperator = fieldConfig && fieldConfig.defaultOperator;
+  if (!fieldOperators.includes(fieldDefaultOperator))
+    fieldDefaultOperator = null;
+  if (!fieldDefaultOperator && canGetFirst)
+    fieldDefaultOperator = getFirstOperatorForFunction(config, field)
+  let op = typeof config.settings.defaultOperator === 'function' ?
+    config.settings.defaultOperator(field, fieldConfig) : fieldDefaultOperator;
+  return op;
+};
+
 //used for complex operators like proximity
 export const defaultOperatorOptions = (config, operator, field) => {
   let operatorConfig = operator ? getOperatorConfig(config, operator, field) : null;
@@ -36,13 +50,15 @@ export const defaultOperatorOptions = (config, operator, field) => {
 };
 
 export const defaultRuleProperties = (config) => {
-  let field = null, operator = null;
+  let field = null, operator = null; let selectedInputSrcField = null;
   if (config.settings.setDefaultFieldAndOp) {
     field = defaultField(config);
     operator = defaultOperator(config, field);
+    selectedInputSrcField = defaultOperator(config, field);
   }
   let current = new Immutable.Map({
     field: field,
+    selectedInputSrcField: selectedInputSrcField,
     operator: operator,
     value: new Immutable.List(),
     valueSrc: new Immutable.List(),

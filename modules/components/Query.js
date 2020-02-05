@@ -155,6 +155,7 @@ export default class Query extends Component {
     const {
       conjunctions,
       functions,
+      functionInputs,
       fields,
       types,
       operators,
@@ -170,6 +171,7 @@ export default class Query extends Component {
     let config = {
       conjunctions,
       functions,
+      functionInputs,
       fields,
       types,
       operators,

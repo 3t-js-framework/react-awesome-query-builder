@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import shallowCompare from 'react-addons-shallow-compare';
 import {getFieldConfig, getFieldPath, getFieldPathLabels} from "../utils/configUtils";
@@ -12,12 +12,14 @@ import map from 'lodash/map';
 import last from 'lodash/last';
 import keys from 'lodash/keys';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-
+import {INPUT_SRC_FIELD} from '../constants';
+import InputFunctionWidget from './widgets/InputFunction';
 
 export default class Field extends Component {
   static propTypes = {
     config: PropTypes.object.isRequired,
     selectedField: PropTypes.string,
+    selectedInputSrcField: PropTypes.string,
     renderAsDropdown: PropTypes.bool,
     customProps: PropTypes.object,
     //actions
@@ -88,8 +90,9 @@ export default class Field extends Component {
       if (!fields)
           return null;
       let prefix = path ? path.join(fieldSeparator) + fieldSeparator : '';
-
+        
       return keys(fields).map(fieldKey => {
+          
           let field = fields[fieldKey];
           let label = this.getFieldDisplayLabel(field, fieldKey);
           if (field.type == "!struct") {
@@ -111,9 +114,11 @@ export default class Field extends Component {
       if (!fields)
           return null;
       let prefix = path ? path.join(fieldSeparator) + fieldSeparator : '';
-
+      const selectedInputSrcField = this.props.selectedInputSrcField || INPUT_SRC_FIELD.POLICY_INPUT;
       return keys(fields).map(fieldKey => {
           let field = fields[fieldKey];
+          if(selectedInputSrcField !== field.inputSrc) return null;
+
           let label = this.getFieldDisplayLabel(field, fieldKey);
           if (field.type == "!struct") {
               let subpath = (path ? path : []).concat(fieldKey);
@@ -157,9 +162,13 @@ export default class Field extends Component {
 
       return toggler;
   }
+  
 
   render() {
-    if (this.props.renderAsDropdown)
+    if(this.props.selectedInputSrcField === INPUT_SRC_FIELD.FUNCTION_INPUT) {
+        return this.renderAsSelect();
+    }
+    else if (this.props.renderAsDropdown)
         return this.renderAsDropdown();
     else
         return this.renderAsSelect();
@@ -169,7 +178,10 @@ export default class Field extends Component {
     let isFieldSelected = !!this.props.selectedField;
     let dropdownPlacement = this.props.config.settings.dropdownPlacement;
     let maxLabelsLength = this.props.config.settings.maxLabelsLength || 100;
+    //TODO: add 4 value src in prefix
     let fieldOptions = this.props.config.fields;
+    let functionInputOptions = this.props.config.functionInputs;
+
     let selectedFieldPartsLabels = getFieldPathLabels(this.props.selectedField, this.props.config);
     let selectedFieldFullLabel = selectedFieldPartsLabels ? selectedFieldPartsLabels.join(this.props.config.settings.fieldSeparatorDisplay) : null;
     let placeholder = !isFieldSelected ? this.props.config.settings.fieldPlaceholder : null;
@@ -178,26 +190,48 @@ export default class Field extends Component {
     selectText = truncateString(selectText, maxLabelsLength);
     let selectWidth = calcTextWidth(selectText, '14px');
     //let tooltip = this.curFieldOpts().label2 || selectedFieldFullLabel || this.curFieldOpts().label;
+    const selectedInputSrcField = this.props.selectedInputSrcField;
     let fieldSelectItems = this.buildSelectItems(fieldOptions);
+    // if (selectedInputSrcField === INPUT_SRC_FIELD.POLICY_INPUT ) {
+    //     fieldSelectItems = this.buildSelectItems(fieldOptions);
+    // } else if (selectedInputSrcField === INPUT_SRC_FIELD.FUNCTION_INPUT) {
+    //     fieldSelectItems = this.buildSelectItems(functionInputOptions);
+    // } else if (selectedInputSrcField === INPUT_SRC_FIELD.VALUE_DEFINITION) {
+    //     fieldSelectItems = this.buildSelectItems(fieldOptions);
+    // } else {
+    //     fieldSelectItems = this.buildSelectItems(fieldOptions);
+    // }
+    
     let customProps = this.props.customProps || {};
+    const { config, operator, field } = this.props;
 
+    const fieldSelected = fieldOptions[this.props.selectedField];
     let fieldSelect = (
-        <Select
-            dropdownAlign={dropdownPlacement ? BUILT_IN_PLACEMENTS[dropdownPlacement] : undefined}
-            dropdownMatchSelectWidth={false}
-            style={{ width: isFieldSelected && !customProps.showSearch ? null : selectWidth + 48 }}
-            ref="field"
-            placeholder={placeholder}
-            size={this.props.config.settings.renderSize || "small"}
-            onChange={this.handleFieldSelect}
-            value={this.props.selectedField || undefined}
-            filterOption={this.filterOption}
-            {...customProps}
-        >{fieldSelectItems}</Select>
+        <Fragment>
+             <Select
+                dropdownAlign={dropdownPlacement ? BUILT_IN_PLACEMENTS[dropdownPlacement] : undefined}
+                dropdownMatchSelectWidth={false}
+                style={{ width: isFieldSelected && !customProps.showSearch ? null : selectWidth + 48 }}
+                ref="field"
+                placeholder={placeholder}
+                size={this.props.config.settings.renderSize || "small"}
+                onChange={this.handleFieldSelect}
+                value={this.props.selectedField || undefined}
+                filterOption={this.filterOption}
+                {...customProps}
+            >{fieldSelectItems}</Select>
+            {selectedInputSrcField === INPUT_SRC_FIELD.FUNCTION_INPUT && fieldSelected &&
+                <InputFunctionWidget field={this.props.selectedField} value={fieldSelected} />
+            }
+        </Fragment>
+       
+
     );
 
     return fieldSelect;
   }
+
+ 
 
   renderAsDropdown() {
     let fieldOptions = this.props.config.fields;

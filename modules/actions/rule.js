@@ -67,3 +67,16 @@ export const setOperatorOption = (config, path, name, value) => ({
   value: value,
   config: config
 });
+
+/**
+ * @param {object} config
+ * @param {Immutable.List} path
+ * @param {string} field
+ */
+export const setInputSrcField = (config, path, field) => ({
+  type: constants.SET_INPUT_SRC_FIELD,
+  path: path,
+  field: field,
+  config: config
+});
+
