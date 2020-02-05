@@ -28,6 +28,7 @@ class Rule extends Component {
     static propTypes = {
         isForDrag: PropTypes.bool,
         selectedField: PropTypes.string,
+        functionSrc: PropTypes.object,
         selectedOperator: PropTypes.string,
         selectedInputSrcField: PropTypes.string,
         operatorOptions: PropTypes.object,
@@ -42,6 +43,7 @@ class Rule extends Component {
         setField: PropTypes.func,
         setOperator: PropTypes.func,
         setOperatorOption: PropTypes.func,
+        setFunctionSrc: PropTypes.func,
         removeSelf: PropTypes.func,
         setValue: PropTypes.func,
         setValueSrc: PropTypes.func,
@@ -239,6 +241,8 @@ class Rule extends Component {
                                     config={this.props.config}
                                     selectedField={this.props.selectedField}
                                     setField={this.props.setField}
+                                    setFunctionSrc={this.props.setFunctionSrc}
+                                    functionSrc={this.props.functionSrc}
                                     renderAsDropdown={this.props.config.settings.renderFieldAndOpAsDropdown}
                                     customProps={this.props.config.settings.customFieldSelectProps}
                                     selectedInputSrcField={this.props.selectedInputSrcField}

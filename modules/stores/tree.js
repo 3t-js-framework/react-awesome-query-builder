@@ -439,6 +439,16 @@ const setInputSrcField = (state, path, inputSrcField, config) => {
     }))
 };
 
+const setFunctionSrc = (state, path, source, config) => {
+    const {functionSrc} = source;
+    // return state.setIn(expandTreePath(path, 'properties', 'selectedInputSrcField', name), value);
+    return state.updateIn(expandTreePath(path, 'properties'), (map) => map.withMutations((current) => {
+        return current.set('functionSrc', functionSrc);
+    }))
+};
+
+
+
 /**
  * @param {Immutable.Map} state
  * @param {Immutable.List} path
@@ -571,6 +581,10 @@ export default (config) => {
 
             case constants.SET_FIELD:
                 return Object.assign({}, state, {tree: setField(state.tree, action.path, action.field, action.config)});
+
+                
+            case constants.SET_FUNCTION_SRC:
+                return Object.assign({}, state, {tree: setFunctionSrc(state.tree, action.path, action.functionSrc, action.config)});
 
             case constants.SET_INPUT_SRC_FIELD:
                 return Object.assign({}, state, {tree: setInputSrcField(state.tree, action.path, action.field, action.config)});

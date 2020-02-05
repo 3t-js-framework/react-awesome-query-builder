@@ -80,3 +80,15 @@ export const setInputSrcField = (config, path, field) => ({
   config: config
 });
 
+/**
+ * @param {object} config
+ * @param {Immutable.List} path
+ * @param {object} functionSrc
+ */
+export const setFunctionSrc = (config, path, functionSrc) => ({
+  type: constants.SET_FUNCTION_SRC,
+  path: path,
+  functionSrc: functionSrc,
+  config: config
+});
+

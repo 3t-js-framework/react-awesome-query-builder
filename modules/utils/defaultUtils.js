@@ -50,7 +50,7 @@ export const defaultOperatorOptions = (config, operator, field) => {
 };
 
 export const defaultRuleProperties = (config) => {
-  let field = null, operator = null; let selectedInputSrcField = null;
+  let field = null, operator = null; let selectedInputSrcField = null; let functionSrc = null;
   if (config.settings.setDefaultFieldAndOp) {
     field = defaultField(config);
     operator = defaultOperator(config, field);
@@ -59,6 +59,7 @@ export const defaultRuleProperties = (config) => {
   let current = new Immutable.Map({
     field: field,
     selectedInputSrcField: selectedInputSrcField,
+    functionSrc: functionSrc,
     operator: operator,
     value: new Immutable.List(),
     valueSrc: new Immutable.List(),

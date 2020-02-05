@@ -134,6 +134,7 @@ class ValueFunction extends Component {
    * Render popover
    */
   renderValueSources = (index) => {
+    debugger;
     const { config, field, operator, value } = this.props;
     const valueSourcesInfo = config.settings.valueSourcesInfo;
     const valueSourcesPopupTitle = config.settings.valueSourcesPopupTitle;

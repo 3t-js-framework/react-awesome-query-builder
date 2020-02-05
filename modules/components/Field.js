@@ -4,6 +4,7 @@ import shallowCompare from 'react-addons-shallow-compare';
 import {getFieldConfig, getFieldPath, getFieldPathLabels} from "../utils/configUtils";
 import {calcTextWidth, truncateString, BUILT_IN_PLACEMENTS} from "../utils/stuff";
 import { Menu, Dropdown, Icon, Tooltip, Button, Select } from 'antd';
+import moment from 'moment';
 const { Option, OptGroup } = Select;
 const SubMenu = Menu.SubMenu;
 const MenuItem = Menu.Item;
@@ -12,7 +13,7 @@ import map from 'lodash/map';
 import last from 'lodash/last';
 import keys from 'lodash/keys';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import {INPUT_SRC_FIELD} from '../constants';
+import {INPUT_SRC_FIELD, DATA_TYPE} from '../constants';
 import InputFunctionWidget from './widgets/InputFunction';
 
 export default class Field extends Component {
@@ -52,9 +53,40 @@ export default class Field extends Component {
     this.props.setField(key);
   }
 
-  handleFieldSelect = (key) => {
-    this.props.setField(key);
+  initDataForParams = (functionSelected) => {
+    const { params } = functionSelected;
+    return params.map(item => {
+      switch (item) {
+        case DATA_TYPE.TEXT:
+          return '';
+        case DATA_TYPE.NUMBER:
+          return 0;
+        case DATA_TYPE.BOOL:
+          return false;
+        case DATA_TYPE.DATE:
+          return moment().toISOString();
+        default:
+          return null;
+      }
+    });
   }
+
+    handleFieldSelect = (key) => {
+        const selectedInputSrcField = this.props.selectedInputSrcField || INPUT_SRC_FIELD.POLICY_INPUT;
+        if(this.props.selectedInputSrcField === INPUT_SRC_FIELD.FUNCTION_INPUT){
+            const functionSelected = this.props.config.functions[key];
+            const functionSrc = {
+                parameters: this.initDataForParams(functionSelected),
+                functionSelected: functionSelected.functionName,
+                valueSrc: functionSelected.params.map(() => 'value'),
+                dataTypes: functionSelected.params,
+                key
+            };
+        
+            this.props.setFunctionSrc({ functionSrc });
+        }
+        this.props.setField(key);
+    }
 
   filterOption = (input, option) => {
     const { value, groupLabel, children } = option.props;
@@ -203,7 +235,7 @@ export default class Field extends Component {
     // }
     
     let customProps = this.props.customProps || {};
-    const { config, operator, field } = this.props;
+    const { config, value, operator, field } = this.props;
 
     const fieldSelected = fieldOptions[this.props.selectedField];
     let fieldSelect = (
@@ -221,7 +253,7 @@ export default class Field extends Component {
                 {...customProps}
             >{fieldSelectItems}</Select>
             {selectedInputSrcField === INPUT_SRC_FIELD.FUNCTION_INPUT && fieldSelected &&
-                <InputFunctionWidget field={this.props.selectedField} value={fieldSelected} />
+                <InputFunctionWidget field={this.props.selectedField} value={fieldSelected} {...this.props}/>
             }
         </Fragment>
        

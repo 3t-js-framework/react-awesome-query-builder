@@ -48,7 +48,10 @@ export default (Rule) => {
     setInputSrcField = (field) => {
       this.props.actions.setInputSrcField(this.props.path, field);
     }
-    
+
+    setFunctionSrc = (functionSrc) => {
+      this.props.actions.setFunctionSrc(this.props.path, functionSrc);
+    }
 
     setOperator = (operator) => {
       this.props.actions.setOperator(this.props.path, operator);
@@ -116,8 +119,10 @@ export default (Rule) => {
               setOperatorOption={this.dummyFn}
               removeSelf={this.dummyFn}
               setInputSrcField={this.setInputSrcField}
+              setFunctionSrc={this.setFunctionSrc}
               selectedField={this.props.field || null}
               selectedInputSrcField={this.props.selectedInputSrcField || null}
+              functionSrc={this.props.functionSrc || null}
               selectedOperator={this.props.operator || null}
               value={this.props.value || null}
               valueSrc={this.props.valueSrc || null}
@@ -135,9 +140,11 @@ export default (Rule) => {
               setOperator={this.setOperator}
               setOperatorOption={this.setOperatorOption}
               setInputSrcField={this.setInputSrcField}
+              setFunctionSrc={this.setFunctionSrc}
               setValue={this.setValue}
               setValueSrc={this.setValueSrc}
               selectedInputSrcField={this.props.selectedInputSrcField || null}
+              functionSrc={this.props.functionSrc || null}
               selectedField={this.props.field || null}
               selectedOperator={this.props.operator || null}
               value={this.props.value || null}

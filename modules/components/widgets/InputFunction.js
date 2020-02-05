@@ -66,7 +66,7 @@ class InputFunction extends Component {
    */
   handleFieldSelect = (key) => {
     const functionSelected = this.props.config.functions[key];
-    const value = {
+    const functionSrc = {
       parameters: this.initDataForParams(functionSelected),
       functionSelected: functionSelected.functionName,
       valueSrc: functionSelected.params.map(() => 'value'),
@@ -74,7 +74,7 @@ class InputFunction extends Component {
       key
     };
 
-    this.props.setValue({ ...value });
+    this.props.setFunctionSrc({ functionSrc });
   }
 
   /**
@@ -110,11 +110,11 @@ class InputFunction extends Component {
    */
   handleChange = (value, index, dataType) => {
     let valueChange = value;
-    const valueFunctionSelect = _cloneDeep(this.props.value);
+    const valueFunctionSelect = _cloneDeep(this.props.functionSrc);
     if (dataType === DATA_TYPE.TEXT) { valueChange = value.target.value; }
     if (dataType === DATA_TYPE.DATE && valueChange) { valueChange = value.toISOString(); }
     valueFunctionSelect.parameters[index] = valueChange;
-    this.props.setValue({ ...valueFunctionSelect });
+    this.props.setFunctionSrc({ functionSrc: valueFunctionSelect });
   }
 
   /**
@@ -123,10 +123,10 @@ class InputFunction extends Component {
    * Handle change popover value source
    */
   handleChangePopover = ({ target }, index) => {
-    const valueFunctionSelect = _cloneDeep(this.props.value);
+    const valueFunctionSelect = _cloneDeep(this.props.functionSrc);
     valueFunctionSelect.valueSrc[index] = target.value;
     valueFunctionSelect.parameters[index] = '';
-    this.props.setValue({ ...valueFunctionSelect });
+    this.props.setFunctionSrc({ functionSrc: valueFunctionSelect });
   }
 
   /**
@@ -134,13 +134,13 @@ class InputFunction extends Component {
    * Render popover
    */
   renderValueSources = (index) => {
-    const { config, field, operator, value } = this.props;
+    const { config, field, operator, value, functionSrc } = this.props;
     const valueSourcesInfo = config.settings.valueSourcesInfo;
     const valueSourcesPopupTitle = config.settings.valueSourcesPopupTitle;
-    const valueSources = getValueSourcesForFieldOp(config, field, operator);
-
-    let valueSrc = (value && value.valueSrc && value.valueSrc[index]) || null;
-    if (!valueSources) { return null; }
+    // const valueSources = getValueSourcesForFieldOp(config, field, operator);
+    const valueSourcesPopover = value.valueSources;
+    let valueSrc = (functionSrc && functionSrc.valueSrc && functionSrc.valueSrc[index]) || null;
+    if (!valueSourcesPopover) { return null; }
 
     let content = (
       <RadioGroup
@@ -149,7 +149,7 @@ class InputFunction extends Component {
         size={this.props.config.settings.renderSize || 'small'}
         onChange={(value) => this.handleChangePopover(value, index)}
       >
-        {valueSources.filter((valueSource) => valueSource !== 'function').map(srcKey => (
+        {valueSourcesPopover.filter((valueSource) => valueSource !== 'function').map(srcKey => (
           <RadioButton
             key={srcKey + index}
             value={srcKey}
@@ -176,8 +176,8 @@ class InputFunction extends Component {
    * Render control antd by valueSrc
    */
   renderValueSourceParam = (index, dataTypeOfParam) => {
-    const { config, value, operator, field } = this.props;
-    const valueSource = value && value.valueSources[index] || 'value';
+    const { config, value, operator, field, functionSrc } = this.props;
+    const valueSource = functionSrc && functionSrc.valueSrc[index] || 'value';
     switch (valueSource) {
       case VALUE_SOURCE_FUNCTION.FIELD:
         return (
@@ -187,7 +187,7 @@ class InputFunction extends Component {
             config={config}
             operator={operator}
             dataTypeOfParam={dataTypeOfParam}
-            valueSelected={this.props.value.params[index]}
+            valueSelected={this.props.functionSrc.parameters[index]}
             handleChangeValue={(value) => this.handleChange(value, index, VALUE_SOURCE_FUNCTION.FIELD)}
           />
         );
@@ -196,7 +196,7 @@ class InputFunction extends Component {
           <FieldConstantValueSrc
             field={field}
             config={config}
-            value={this.props.value.params[index]}
+            value={this.props.functionSrc.parameters[index]}
             handleChangeValueConstant={(value) => this.handleChange(value, index, VALUE_SOURCE_FUNCTION.CONSTANT)}
           />
         );
@@ -217,7 +217,7 @@ class InputFunction extends Component {
       case DATA_TYPE.TEXT:
         return (
           <Input
-            value={this.props.value && this.props.value.params[index] || ''}
+            value={this.props.functionSrc && this.props.functionSrc.parameters[index] || ''}
             size={this.props.config.settings.renderSize || 'small'}
             onChange={(value) => this.handleChange(value, index, dataType)}
             style={{ marginLeft: '8px', width: '134px' }}
@@ -228,7 +228,7 @@ class InputFunction extends Component {
         return (
           <InputNumber
             key={index}
-            value={this.props.value && this.props.value.params[index] || 0}
+            value={this.props.functionSrc && this.props.functionSrc.parameters[index] || 0}
             size={this.props.config.settings.renderSize || 'small'}
             onChange={(value) => this.handleChange(value, index, dataType)}
             style={{ marginLeft: '8px' }}
@@ -238,7 +238,7 @@ class InputFunction extends Component {
       case DATA_TYPE.BOOL:
         return (
           <Switch
-            checked={this.props.value && this.props.value.params[index] || false}
+            checked={this.props.functionSrc && this.props.functionSrc.parameters[index] || false}
             defaultChecked={false}
             style={{ marginLeft: '8px' }}
             onChange={(value) => this.handleChange(value, index, dataType)}
@@ -248,7 +248,7 @@ class InputFunction extends Component {
         return (
           <DatePicker
             style={{ marginLeft: '8px' }}
-            value={this.props.value && moment(this.props.value.params[index]) || undefined}
+            value={this.props.functionSrc && moment(this.props.functionSrc.parameters[index]) || undefined}
             onChange={(value) => this.handleChange(value, index, dataType)}
             allowClear={true}
           />
@@ -318,6 +318,7 @@ class InputFunction extends Component {
     const { functions } = config;
     const result = functions[key] ? functions[key] : null;
     const renderParams = this.renderFunctionParams(result, valueSources);
+    // this.handleFieldSelect(key);
     return renderParams;
   }
 
@@ -342,7 +343,7 @@ class InputFunction extends Component {
    */
   renderAsSelect = () => {
     const { value, config, field, operator } = this.props;
-    const placeholder = this.props.config.settings.functionPlaceholder;
+    // const placeholder = this.props.config.settings.functionPlaceholder;
     // let fieldOptions = this.filterFunctions(config, field, operator);
     const customProps = this.props.customProps || {};
     // const buildOptionItems = this.buildOptionItems(fieldOptions);

@@ -85,6 +85,7 @@ export const queryBuilderFormat = (item, config, rootQuery = null) => {
         let valueSrc = properties.get('valueSrc');
         let valueType = properties.get('valueType');
         const selectedInputSrcField = properties.get('selectedInputSrcField');
+        const functionSrc = properties.get('functionSrc');
         let hasUndefinedValues = false;
         value.map((currentValue, ind) => {
             if (currentValue === undefined) {
@@ -145,6 +146,7 @@ export const queryBuilderFormat = (item, config, rootQuery = null) => {
             type: fieldType,
             input: typeConfig.mainWidget,
             selectedInputSrcField,
+            functionSrc,
             operator
         };
         if (operatorOptions)
