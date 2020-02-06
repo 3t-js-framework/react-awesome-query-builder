@@ -206,7 +206,7 @@ class Rule extends Component {
                                         : null}
                                     {this.renderValueSorces(delta, valueSources, valueSrc)}
                                 </div> */}
-                                <Popover className="padding-right-8" placement="left" title="Select data source" content={(
+                                {!this.props.selectedInputSrcField && <Popover className="padding-right-8" placement="left" title="Select data source" content={(
                                     <RadioGroup
                                         key='dataSrc'
                                         value={this.props.selectedInputSrcField || INPUT_SRC_FIELD.POLICY_INPUT}
@@ -234,7 +234,8 @@ class Rule extends Component {
                                     </RadioGroup>
                                     )}>
                                     <Icon type="ellipsis" />
-                                </Popover>
+                                </Popover>}
+                                
 
                                <Field
                                     key="field"

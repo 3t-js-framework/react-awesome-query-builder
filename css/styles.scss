@@ -265,6 +265,9 @@ div.tooltip-inner {
   font-weight: bold;
 }
 
+.rule--field{
+  margin-bottom: 8px;
+}
 /******************************************************************************/
 /** CONJUNCTION ***************************************************************/
 /******************************************************************************/
@@ -343,6 +346,9 @@ div.tooltip-inner {
   margin-left: 0 !important;
 }
 .widget-input-function > input {
+  margin-left: 0 !important;
+}
+.widget-input-function > span {
   margin-left: 0 !important;
 }
 .padding-right-8{
