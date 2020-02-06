@@ -19,6 +19,7 @@ import shallowCompare from 'react-addons-shallow-compare';
 import {
   getFieldConfig,
   getValueSourcesForFieldOp,
+  parseLabelPopover
 } from '../../utils/configUtils';
 import { truncateString, } from '../../utils/stuff';
 import FieldFunctionValueSrc from '../FieldFunctionValueSrc';
@@ -134,7 +135,6 @@ class ValueFunction extends Component {
    * Render popover
    */
   renderValueSources = (index) => {
-    debugger;
     const { config, field, operator, value } = this.props;
     const valueSourcesInfo = config.settings.valueSourcesInfo;
     const valueSourcesPopupTitle = config.settings.valueSourcesPopupTitle;
@@ -154,7 +154,7 @@ class ValueFunction extends Component {
           <RadioButton
             key={srcKey + index}
             value={srcKey}
-          >{valueSourcesInfo[srcKey].label}
+          >{parseLabelPopover(valueSourcesInfo[srcKey].label)}
           </RadioButton>
         ))}
       </RadioGroup>

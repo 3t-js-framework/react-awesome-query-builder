@@ -5,6 +5,7 @@ import pickBy from 'lodash/pickBy';
 import merge from 'lodash/merge';
 import mergeWith from 'lodash/mergeWith';
 import cloneDeep from 'lodash/cloneDeep';
+import {LABEL_VALUE_SRC_POPOVER} from '../constants';
 
 export const extendConfig = (config) => {
     //operators, defaultOperator - merge
@@ -345,3 +346,25 @@ export const getWidgetForFieldOp = (config, field, operator, valueSrc = null) =>
         widget = widgets[0];
     return widget;
 };
+
+export const parseLabelPopover = (label = '') => {
+    let result = "";
+    switch (label.toLowerCase()) {
+        case LABEL_VALUE_SRC_POPOVER.FIELD:
+            result = "Policy input";
+            break;
+        case LABEL_VALUE_SRC_POPOVER.VALUE:
+            result = "Free text";
+            break;
+        case LABEL_VALUE_SRC_POPOVER.CONSTANT:
+            result = "Value defination";
+            break;
+        case LABEL_VALUE_SRC_POPOVER.FUNCTION:
+            result = "Function input";
+            break;
+        default:
+            result = "Free text";
+            break;
+    }
+    return result
+}

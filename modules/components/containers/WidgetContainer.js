@@ -6,7 +6,7 @@ import range from 'lodash/range';
 import map from 'lodash/map';
 import {
     getFieldConfig, getValueLabel, getOperatorConfig, getValueSourcesForFieldOp,
-    getWidgetForFieldOp, getFieldWidgetConfig, getWidgetsForFieldOp
+    getWidgetForFieldOp, getFieldWidgetConfig, getWidgetsForFieldOp, parseLabelPopover
 } from "../../utils/configUtils";
 import {defaultValue} from "../../utils/stuff";
 import { Icon, Popover, Button, Radio } from 'antd';
@@ -144,7 +144,7 @@ export default (Widget) => {
                             key={srcKey}
                             value={srcKey}
                         //checked={item.checked}
-                        >{valueSourcesInfo[srcKey].label}</RadioButton>
+                        >{parseLabelPopover(valueSourcesInfo[srcKey].label)}</RadioButton>
                     ))}
                 </RadioGroup>
             );

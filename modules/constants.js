@@ -49,5 +49,11 @@ export const INPUT_SRC_FIELD = {
     POLICY_INPUT: 'policyInput',
 };
 
+export const LABEL_VALUE_SRC_POPOVER = {
+    FIELD: 'field',
+    CONSTANT: 'constant',
+    VALUE: 'value',
+    FUNCTION: 'function'
+};
 
 
