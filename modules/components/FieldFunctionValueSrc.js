@@ -10,6 +10,7 @@ import {
     getWidgetForFieldOp,
 } from '../utils/configUtils';
 import { truncateString, } from '../utils/stuff';
+import {INPUT_SRC_FIELD} from '../constants';
 
 
 const { Option, OptGroup } = Select;
@@ -27,7 +28,7 @@ const FieldFunctionValueSrc = (props) => {
         if (!fields)
             return null;
         let prefix = path ? path.join(fieldSeparator) + fieldSeparator : '';
-
+        debugger;
         return keys(fields).map(fieldKey => {
             let field = fields[fieldKey];
             let label = field.label || last(fieldKey.split(fieldSeparator));
@@ -71,7 +72,9 @@ const FieldFunctionValueSrc = (props) => {
                 let subpath = (path ? path : []).concat(rightFieldKey);
                 let rightFieldFullkey = subpath.join(fieldSeparator);
                 let rightFieldConfig = getFieldConfig(rightFieldFullkey, config);
-                if (rightFieldConfig.type == "!struct") {
+                if(rightFieldConfig.inputSrc === INPUT_SRC_FIELD.FUNCTION_INPUT) {
+                    delete list[rightFieldKey];
+                } else if (rightFieldConfig.type == "!struct") {
                     _filter(subfields, subpath);
                 } else {
                     let canUse = rightFieldConfig.type == dataTypeOfParam && rightFieldFullkey != leftFieldFullkey;

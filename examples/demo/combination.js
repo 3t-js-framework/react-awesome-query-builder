@@ -93,7 +93,7 @@ function convertCombination(combination) {
   });
 
   functions.forEach(function(item) {
-    const listConstants = getListConstants(item.dataType, valueDefinitions);
+    const listConstants = valueDefinitions; // set all constants for functionInput
     const operators = getListOperators(item.dataType, item.isList);
     fields[item.code] = {
       label: item.name,

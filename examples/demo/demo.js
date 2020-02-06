@@ -98,15 +98,15 @@ const dummy = {
     {
       groupName: "Value Definition",
       name: "#number-false-3#",
-      code: "constant2",
+      code: "constant3",
       dataType: "number",
       parameterTypes: null,
       isList: false
     },
     {
       groupName: "Value Definition",
-      name: "#number-true-3#",
-      code: "constant2",
+      name: "#number-true-4#",
+      code: "constant6",
       dataType: "number",
       parameterTypes: null,
       isList: true
@@ -114,7 +114,7 @@ const dummy = {
     {
       groupName: "Value Definition",
       name: "#boolean-false",
-      code: "constant3",
+      code: "constant7",
       dataType: "boolean",
       parameterTypes: null,
       isList: false

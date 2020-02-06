@@ -178,6 +178,7 @@ class InputFunction extends Component {
   renderValueSourceParam = (index, dataTypeOfParam) => {
     const { config, value, operator, field, functionSrc } = this.props;
     const valueSource = functionSrc && functionSrc.valueSrc[index] || 'value';
+    const paramDataType = functionSrc && functionSrc.dataTypes[index] || 'text';
     switch (valueSource) {
       case VALUE_SOURCE_FUNCTION.FIELD:
         return (
@@ -195,6 +196,7 @@ class InputFunction extends Component {
         return (
           <FieldConstantValueSrc
             field={field}
+            paramDataType={paramDataType}
             config={config}
             value={this.props.functionSrc.parameters[index]}
             handleChangeValueConstant={(value) => this.handleChange(value, index, VALUE_SOURCE_FUNCTION.CONSTANT)}

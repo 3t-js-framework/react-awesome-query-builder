@@ -328,8 +328,25 @@ div.tooltip-inner {
 }
 
 .widget-input-function{
-  display: inline-block;
+  // display: inline-block;
+  // padding-left: 8px;
+  display: inline-flex;
+  vertical-align: middle;
   padding-left: 8px;
+  margin-top: -2px;
+}
+.widget-input-function > i {
+  align-self: center;
+  padding-right: 8px;
+}
+.widget-input-function > button {
+  margin-left: 0 !important;
+}
+.widget-input-function > input {
+  margin-left: 0 !important;
+}
+.padding-right-8{
+  padding-right: 8px;
 }
 
 /******************************************************************************/

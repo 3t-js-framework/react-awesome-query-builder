@@ -4,6 +4,7 @@ import map from 'lodash/map';
 import { Select, } from 'antd';
 import { calcTextWidth } from '../utils/stuff';
 import { getFieldConfig } from '../utils/configUtils';
+import {INPUT_SRC_FIELD} from '../constants'
 const Option = Select.Option;
 
 
@@ -12,6 +13,7 @@ export default class FieldConstantValueSrc extends Component {
         config: PropTypes.object.isRequired,
         field: PropTypes.string.isRequired,
         value: PropTypes.string,
+        paramDataType: PropTypes.string,
         customProps: PropTypes.object,
         handleChangeValueConstant: PropTypes.func.isRequired
     };
@@ -27,8 +29,12 @@ export default class FieldConstantValueSrc extends Component {
         let size = this.props.config.settings.renderSize || 'small';
         let placeholder = this.props.placeholder || 'Select option';
         const fieldDefinition = getFieldConfig(this.props.field, this.props.config);
-
-        const options = map(fieldDefinition.listConstants, value => {
+        const {paramDataType} = this.props;
+        let listConstatns = fieldDefinition.listConstants;
+        if(fieldDefinition.inputSrc === INPUT_SRC_FIELD.FUNCTION_INPUT && paramDataType) {
+            listConstatns = fieldDefinition.listConstants.filter(x => x.dataType === paramDataType);
+        }
+        const options = map(listConstatns, value => {
             return (
                 <Option key={value.code} value={value.name}>
                     {value.name}
