@@ -88,7 +88,6 @@ class ValueFunction extends Component {
     const prefix = path ? path.join(functionSeparator) + functionSeparator : '';
 
     if (!functions) { return null; }
-    debugger;
     return keys(functions).map(functionKey => {
       const functionSelect = functions[functionKey];
       let label = functionSelect.functionName || last(functionKey.split(functionSeparator));

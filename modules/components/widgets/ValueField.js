@@ -65,7 +65,6 @@ export default class ValueField extends Component {
         let subpath = (path ? path : []).concat(rightFieldKey);
         let rightFieldFullkey = subpath.join(fieldSeparator);
         let rightFieldConfig = getFieldConfig(rightFieldFullkey, config);
-        // debugger;
         if(rightFieldConfig.inputSrc === INPUT_SRC_FIELD.FUNCTION_INPUT || rightFieldConfig.inputSrc === INPUT_SRC_FIELD.VALUE_DEFINITION) {
           delete list[rightFieldKey];
         } 

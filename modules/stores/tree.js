@@ -432,7 +432,6 @@ const setField = (state, path, newField, config) => {
  * @param {*} value
  */
 const setInputSrcField = (state, path, inputSrcField, config) => {
-    // debugger;
     // return state.setIn(expandTreePath(path, 'properties', 'selectedInputSrcField', name), value);
     return state.updateIn(expandTreePath(path, 'properties'), (map) => map.withMutations((current) => {
         return current.set('selectedInputSrcField', inputSrcField);

@@ -7,7 +7,6 @@ import {_getNewValueForFieldOp} from '../stores/tree'
 
 
 export const defaultField = (config, canGetFirst = true) => {
-  debugger;
   return typeof config.settings.defaultField === 'function' ?
     config.settings.defaultField() : (config.settings.defaultField || (canGetFirst ? getFirstField(config) : null));
 };

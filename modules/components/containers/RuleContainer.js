@@ -100,8 +100,6 @@ export default (Rule) => {
 
     render() {
       const fieldConfig = getFieldConfig(this.props.field, this.props.config);
-      console.log("aaaaaaaaaaaaaaaaa", this.props);
-      
       let isGroup = fieldConfig && fieldConfig.type == '!struct';
 
       return (
