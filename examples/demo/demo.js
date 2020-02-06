@@ -15,7 +15,7 @@ const transit = require("transit-immutable-js");
 import { fromJS } from "immutable";
 
 // https://github.com/ukrbublik/react-awesome-query-builder/issues/69
-var seriazlieAsImmutable = true;
+var seriazlieAsImmutable = false;
 
 var serializeTree, loadTree, initValue;
 if (!seriazlieAsImmutable) {
@@ -23,20 +23,98 @@ if (!seriazlieAsImmutable) {
     return JSON.stringify(tree.toJS());
   };
   loadTree = function(serTree) {
+    debugger;
     let tree = JSON.parse(serTree);
     return fromJS(tree, function(key, value) {
       let outValue;
-      if (key == "value" && value.get(0) && value.get(0).toJS !== undefined)
+      if (key == "value" && value.get(0) && value.get(0).toJS !== undefined) {
         outValue = Immutable.List.of(value.get(0).toJS());
-      else
+      }
+      else if (key == "functionSrc" && value) {
+        outValue = value.toJS();
+      }
+      else {
         outValue = Immutable.Iterable.isIndexed(value)
           ? value.toList()
           : value.toOrderedMap();
+      }
       return outValue;
     });
   };
   initValue =
-    '{"type":"group","id":"9a99988a-0123-4456-b89a-b1607f326fd8","children1":{"a98ab9b9-cdef-4012-b456-71607f326fd9":{"type":"rule","id":"a98ab9b9-cdef-4012-b456-71607f326fd9","properties":{"field":"multicolor","operator":"multiselect_equals","value":[["yellow","green"]],"valueSrc":["value"],"operatorOptions":null,"valueType":["multiselect"]},"path":["9a99988a-0123-4456-b89a-b1607f326fd8","a98ab9b9-cdef-4012-b456-71607f326fd9"]}},"properties":{"conjunction":"AND","not":false},"path":["9a99988a-0123-4456-b89a-b1607f326fd8"]}';
+    `{
+      "type": "group",
+      "id": "9a99988a-0123-4456-b89a-b1607f326fd8",
+      "children1": {
+        "aaa8a9a9-0123-4456-b89a-b1701aaa8ec4": {
+          "type": "rule",
+          "id": "aaa8a9a9-0123-4456-b89a-b1701aaa8ec4",
+          "properties": {
+            "field": "88d71c42-55a3-4bb5-a480-a38e04955a8d",
+            "selectedInputSrcField": "functionInput",
+            "functionSrc": {
+              "parameters": [
+                "@Text-isList-false@",
+                true,
+                "#number-false-2#",
+                "2020-02-06T14:14:50.796Z"
+              ],
+              "functionSelected": "ReplaceText1-true",
+              "valueSrc": [
+                "field",
+                "value",
+                "constant",
+                "value"
+              ],
+              "dataTypes": [
+                "text",
+                "bool",
+                "number",
+                "date"
+              ],
+              "key": "88d71c42-55a3-4bb5-a480-a38e04955a8d"
+            },
+            "operator": "equal",
+            "value": [
+              {
+                "parameters": [
+                  "1",
+                  "#number-true#"
+                ],
+                "functionSelected": "ReplaceText2-false",
+                "valueSrc": [
+                  "value",
+                  "constant"
+                ],
+                "dataTypes": [
+                  "text",
+                  "bool"
+                ],
+                "key": "88d71c42-55a3-4bb5-a480-a38e04955a8a"
+              }
+            ],
+            "valueSrc": [
+              "function"
+            ],
+            "operatorOptions": null,
+            "valueType": [
+              "funtion"
+            ]
+          },
+          "path": [
+            "9a99988a-0123-4456-b89a-b1607f326fd8",
+            "aaa8a9a9-0123-4456-b89a-b1701aaa8ec4"
+          ]
+        }
+      },
+      "properties": {
+        "conjunction": "AND",
+        "not": false
+      },
+      "path": [
+        "9a99988a-0123-4456-b89a-b1607f326fd8"
+      ]
+    }`;
 } else {
   serializeTree = transit.toJSON;
   loadTree = transit.fromJSON;
@@ -44,6 +122,70 @@ if (!seriazlieAsImmutable) {
     '["~#iM",["type","group","id","9a99988a-0123-4456-b89a-b1607f326fd8","children1",["^0",["9b99998b-0123-4456-b89a-b17014d8d65e",["^0",["type","rule","id","9b99998b-0123-4456-b89a-b17014d8d65e","properties",["^0",["field","88d71c42-55a3-4bb5-a480-a38e04955a8d","selectedInputSrcField","functionInput","functionSrc",["^ ","parameters",["#text-false2#",true,"#number-true-2#","2020-02-06T04:51:18.724Z"],"functionSelected","ReplaceText1-true","valueSrc",["constant","value","constant","value"],"dataTypes",["text","bool","number","date"],"key","88d71c42-55a3-4bb5-a480-a38e04955a8d"],"operator","equal","value",["~#iL",[["^ ","^1",["1",false],"^2","ReplaceText2-false","^3",["value","value"],"^4",["text","bool"],"key","88d71c42-55a3-4bb5-a480-a38e04955a8a"]]],"valueSrc",["^5",["function"]],"operatorOptions",null,"valueType",["^5",["funtion"]]]],"path",["^5",["9a99988a-0123-4456-b89a-b1607f326fd8","9b99998b-0123-4456-b89a-b17014d8d65e"]]]]]],"properties",["~#iOM",["conjunction","AND","not",false]],"path",["^5",["9a99988a-0123-4456-b89a-b1607f326fd8"]]]]';
   // '["~#iM",["type","group","id","9a99988a-0123-4456-b89a-b1607f326fd8","children1",["~#iOM",["a98ab9b9-cdef-4012-b456-71607f326fd9",["^0",["type","rule","id","a98ab9b9-cdef-4012-b456-71607f326fd9","properties",["^0",["field","age","operator","equal","value",["~#iL",[["^ ","parameters",["",0,false],"functionSelected","min","valueSrc",[]]]],"valueSrc",["^2",["function"]],"operatorOptions",null,"valueType",["^2",["funtion"]]]],"path",["^2",["9a99988a-0123-4456-b89a-b1607f326fd8","a98ab9b9-cdef-4012-b456-71607f326fd9"]]]],"999ba9aa-0123-4456-b89a-b16ddcd31e6c",["^0",["type","rule","id","999ba9aa-0123-4456-b89a-b16ddcd31e6c","properties",["^0",["field","fullName","operator","equal","value",["^2",["a"]],"valueSrc",["^2",["constant"]],"operatorOptions",null,"valueType",["^2",["constant"]]]],"path",["^2",["9a99988a-0123-4456-b89a-b1607f326fd8","999ba9aa-0123-4456-b89a-b16ddcd31e6c"]]]],"8a99a9b9-cdef-4012-b456-716ddcd3519b",["^0",["type","rule","id","8a99a9b9-cdef-4012-b456-716ddcd3519b","properties",["^0",["field","age","operator","equal","value",["^2",[["^ ","^3",[1,1,"2019-10-18T03:05:09.172Z"],"^4","average","^5",[]]]],"valueSrc",["^2",["function"]],"operatorOptions",null,"valueType",["^2",["funtion"]]]],"path",["^2",["9a99988a-0123-4456-b89a-b1607f326fd8","8a99a9b9-cdef-4012-b456-716ddcd3519b"]]]],"99a8abb9-89ab-4cde-b012-316ddcd3ba93",["^0",["type","rule","id","99a8abb9-89ab-4cde-b012-316ddcd3ba93","properties",["^0",["field","age","operator","equal","value",["^2",[["^ ","^3",[1,1],"^4","sum","^5",[]]]],"valueSrc",["^2",["function"]],"operatorOptions",null,"valueType",["^2",["funtion"]]]],"path",["^2",["9a99988a-0123-4456-b89a-b1607f326fd8","99a8abb9-89ab-4cde-b012-316ddcd3ba93"]]]]]],"properties",["^0",["conjunction","AND","not",false]],"path",["^2",["9a99988a-0123-4456-b89a-b1607f326fd8"]]]]';
 }
+
+// loadTree = serTree => {
+//   const tree = JSON.parse(serTree);
+//   return fromJS(tree, (key, value) => {
+//     let outValue;
+//     if (key === 'value' && value.get(0) && value.get(0).toJS !== undefined)
+//       outValue = List.of(value.get(0).toJS());
+//     else outValue = Iterable.isIndexed(value) ? value.toList() : value.toOrderedMap();
+//     return outValue;
+//   });
+// };
+
+const du = `{
+  "type": "group",
+  "id": "9a99988a-0123-4456-b89a-b1607f326fd8",
+  "children1": {
+    "8bb9aab8-0123-4456-b89a-b1701aa9e220": {
+      "type": "rule",
+      "id": "8bb9aab8-0123-4456-b89a-b1701aa9e220",
+      "properties": {
+        "field": "@Text-islist-true@",
+        "selectedInputSrcField": "policyInput",
+        "functionSrc": null,
+        "operator": "not_equal",
+        "value": [
+          {
+            "parameters": [
+              "1",
+              false
+            ],
+            "functionSelected": "ReplaceText2-false",
+            "valueSrc": [
+              "value",
+              "value"
+            ],
+            "dataTypes": [
+              "text",
+              "bool"
+            ],
+            "key": "88d71c42-55a3-4bb5-a480-a38e04955a8a"
+          }
+        ],
+        "valueSrc": [
+          "function"
+        ],
+        "operatorOptions": null,
+        "valueType": [
+          "funtion"
+        ]
+      },
+      "path": [
+        "9a99988a-0123-4456-b89a-b1607f326fd8",
+        "8bb9aab8-0123-4456-b89a-b1701aa9e220"
+      ]
+    }
+  },
+  "properties": {
+    "conjunction": "AND",
+    "not": false
+  },
+  "path": [
+    "9a99988a-0123-4456-b89a-b1607f326fd8"
+  ]
+}`;
 
 const dummy = {
   valueDefinitions: [
@@ -330,10 +472,12 @@ export default class DemoQueryBuilder extends Component {
     const configData = { ...config_props, ...convertDummy, functions, functionInputs: convertDummy.functionInputs };
     console.log("config: ", configData);
     const fields = {};
+    // const loadInit = loadTree(du);
+    const loadInit = loadTree(initValue);
     return (
       <div>
         <Query
-          value={transit.fromJSON(initValue)}
+          value={loadInit}
           get_children={this.getChildren}
           {...configData}
         />
