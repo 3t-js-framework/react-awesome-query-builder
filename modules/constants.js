@@ -45,7 +45,7 @@ export const VALUE_SOURCE_FUNCTION = {
 
 export const INPUT_SRC_FIELD = {
     FUNCTION_INPUT: 'functionInput',
-    VALUE_DEFINITION: 'valueDefinition',
+    VALUE_DEFINITION: 'valueDefination',
     POLICY_INPUT: 'policyInput',
 };
 

@@ -14,6 +14,7 @@ import map from 'lodash/map';
 import last from 'lodash/last';
 import keys from 'lodash/keys';
 import clone from 'clone';
+import {INPUT_SRC_FIELD} from '../../constants';
 
 //tip: this.props.value - right value, this.props.field - left value
 
@@ -64,6 +65,10 @@ export default class ValueField extends Component {
         let subpath = (path ? path : []).concat(rightFieldKey);
         let rightFieldFullkey = subpath.join(fieldSeparator);
         let rightFieldConfig = getFieldConfig(rightFieldFullkey, config);
+        // debugger;
+        if(rightFieldConfig.inputSrc === INPUT_SRC_FIELD.FUNCTION_INPUT || rightFieldConfig.inputSrc === INPUT_SRC_FIELD.VALUE_DEFINITION) {
+          delete list[rightFieldKey];
+        } 
         if (rightFieldConfig.type == "!struct") {
           _filter(subfields, subpath);
         } else {

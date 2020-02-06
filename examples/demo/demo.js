@@ -147,6 +147,14 @@ const dummy = {
     },
     {
       groupName: "Function",
+      name: "Minus2",
+      code: "6bfc5366-8f3e-4512-80f0-bde00b7d1a23",
+      dataType: "number",
+      parameterTypes: "number",
+      isList: false
+    },
+    {
+      groupName: "Function",
       name: "ReplaceText1-true",
       code: "88d71c42-55a3-4bb5-a480-a38e04955a8d",
       dataType: "text",

@@ -108,6 +108,19 @@ function convertCombination(combination) {
     };
   });
 
+  valueDefinitions.forEach(function(item) {
+    const listConstants = getListConstants(item.dataType, valueDefinitions); // set all constants for functionInput
+    const operators = getListOperators(item.dataType, item.isList);
+    fields[item.name] = {
+      label: item.name,
+      inputSrc: 'valueDefination',
+      type: item.dataType || "",
+      isList: item.isList || false,
+      listConstants,
+      operators
+    };
+  });
+
   const constants = convertValueDefinition(valueDefinitions);
   const result = { fields, constants, functions, functionInputs };
 

@@ -88,7 +88,7 @@ class ValueFunction extends Component {
     const prefix = path ? path.join(functionSeparator) + functionSeparator : '';
 
     if (!functions) { return null; }
-
+    debugger;
     return keys(functions).map(functionKey => {
       const functionSelect = functions[functionKey];
       let label = functionSelect.functionName || last(functionKey.split(functionSeparator));
@@ -178,9 +178,8 @@ class ValueFunction extends Component {
    */
   renderValueSourceParam = (index, dataTypeOfParam) => {
     const { config, value, operator, field } = this.props;
-    debugger;
     const valueSource = value && value.valueSrc[index] || 'value';
-
+    
     switch (valueSource) {
       case VALUE_SOURCE_FUNCTION.FIELD:
         return (
@@ -290,7 +289,6 @@ class ValueFunction extends Component {
   filterFunctions = (config, leftFieldFullkey, operator) => {
     const leftFieldConfig = getFieldConfig(leftFieldFullkey, config);
     const { functions } = config;
-
     // Get functions of field config
     const { type } = leftFieldConfig;
     const functionsOfField = Object.keys(functions).map(key => {
