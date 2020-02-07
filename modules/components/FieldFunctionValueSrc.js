@@ -28,7 +28,6 @@ const FieldFunctionValueSrc = (props) => {
         if (!fields)
             return null;
         let prefix = path ? path.join(fieldSeparator) + fieldSeparator : '';
-        debugger;
         return keys(fields).map(fieldKey => {
             let field = fields[fieldKey];
             let label = field.label || last(fieldKey.split(fieldSeparator));

@@ -1042,8 +1042,8 @@ export default {
         functionLabel: "Function",
         functionPlaceholder: "Select function",
         deleteLabel: null,
-        addGroupLabel: "Add group",
-        addRuleLabel: "Add rule",
+        addGroupLabel: "Add Group",
+        addRuleLabel: "Add Rule",
         readonlyMode: false,
         notLabel: "Not",
         removeRuleConfirmOptions: {

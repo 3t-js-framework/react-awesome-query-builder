@@ -181,8 +181,8 @@ class Rule extends Component {
                 <div className="rule--header">
                     {!this.props.config.settings.readonlyMode &&
                         <Button
-                            type="danger"
-                            icon="delete"
+                            type="default"
+                            icon="close"
                             onClick={this.removeSelf}
                             size={this.props.config.settings.renderSize || "small"}
                         >
@@ -193,7 +193,7 @@ class Rule extends Component {
                 {/*<div className="rule--body">*/}
                     {/*<Row>*/}
                         { this.props.config.settings.canReorder && this.props.treeNodesCnt > 2 &&
-                            <span className={"qb-drag-handler"} onMouseDown={this.handleDraggerMouseDown} ><Icon type="bars" /> </span>
+                            <span className={"qb-drag-handler"} onMouseDown={this.handleDraggerMouseDown} ><Icon type="drag" /> </span>
                         }
                         {true ? (
                             <Col key={"fields"} className="rule--field">

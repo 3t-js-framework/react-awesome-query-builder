@@ -23,7 +23,6 @@ if (!seriazlieAsImmutable) {
     return JSON.stringify(tree.toJS());
   };
   loadTree = function(serTree) {
-    debugger;
     let tree = JSON.parse(serTree);
     return fromJS(tree, function(key, value) {
       let outValue;

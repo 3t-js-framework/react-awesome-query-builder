@@ -152,7 +152,7 @@ class Group extends Component {
           size={this.props.config.settings.renderSize || "small"}
         >{!this.props.config.settings.readonlyMode &&
           <Button
-            icon="plus"
+            icon="plus-square"
             className="action action--ADD-RULE"
             onClick={this.props.addRule}
           >{this.props.config.settings.addRuleLabel || "Add rule"}</Button>
@@ -160,14 +160,14 @@ class Group extends Component {
           {!this.props.config.settings.readonlyMode && this.props.allowFurtherNesting ? (
             <Button
               className="action action--ADD-GROUP"
-              icon="plus-circle-o"
+              icon="plus-square"
               onClick={this.props.addGroup}
             >{this.props.config.settings.addGroupLabel || "Add group"}</Button>
           ) : null}
           {!this.props.config.settings.readonlyMode && !this.props.isRoot ? (
             <Button
-              type="danger"
-              icon="delete"
+              type="default"
+              icon="close"
               className="action action--ADD-DELETE"
               onClick={this.removeSelf}
             >{this.props.config.settings.delGroupLabel !== undefined ? this.props.config.settings.delGroupLabel : "Delete"}</Button>
@@ -241,7 +241,7 @@ class Group extends Component {
           </ButtonGroup>
         }
         {this.props.config.settings.canReorder && this.props.treeNodesCnt > 2 && !this.props.isRoot &&
-          <span className={"qb-drag-handler"} onMouseDown={this.handleDraggerMouseDown} > <Icon type="bars" /> </span>
+          <span className={"qb-drag-handler"} onMouseDown={this.handleDraggerMouseDown} > <Icon type="drag" /> </span>
         }
       </div>
     );

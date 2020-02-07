@@ -1,5 +1,6 @@
 .group--children,
 .group--conjunctions {
+  border: 1px solid;
   margin: 0px !important;
 }
 
@@ -23,7 +24,9 @@
 
 .group--conjunctions {
   margin-left: 4px !important;
+  border: 1px solid;
 }
+
 
 .group-or-rule-container {
   margin-bottom: 5px;
