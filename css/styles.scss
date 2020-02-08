@@ -417,3 +417,21 @@ background-color: #d9534f;
 border-color: #d43f3a;
 }
 */
+
+.radio-button-inner-center {
+  display: block;
+  width: 200px;
+  margin: 12px 0px;
+  :global {
+    .ant-radio-inner::after{
+      top: 4px;
+      left: 4px;
+    }
+    .ant-radio-wrapper{
+      display: block;
+    }
+    label{
+      margin-bottom: 8px;
+    }
+  }
+}

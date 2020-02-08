@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import shallowCompare from 'react-addons-shallow-compare';
@@ -206,32 +206,49 @@ class Rule extends Component {
                                         : null}
                                     {this.renderValueSorces(delta, valueSources, valueSrc)}
                                 </div> */}
-                                {!this.props.selectedInputSrcField && <Popover className="padding-right-8" placement="left" title="Select data source" content={(
-                                    <RadioGroup
-                                        key='dataSrc'
-                                        value={this.props.selectedInputSrcField || INPUT_SRC_FIELD.POLICY_INPUT}
-                                        size={this.props.config.settings.renderSize || "small"}
-                                        onChange={this.onChangeSelectedInputSrcField}
-                                    >
-                                        <RadioButton
-                                            key={INPUT_SRC_FIELD.POLICY_INPUT}
-                                            value={INPUT_SRC_FIELD.POLICY_INPUT}
+                                {!this.props.selectedInputSrcField &&
+                                <Popover className="padding-right-8" placement="left" content={(
+                                    <Fragment>
+                                        <RadioGroup
+                                            key='dataSrc'
+                                            value={this.props.selectedInputSrcField || INPUT_SRC_FIELD.POLICY_INPUT}
+                                            size={this.props.config.settings.renderSize || "small"}
+                                            onChange={this.onChangeSelectedInputSrcField}
+                                            className='radio-button-inner-center'
                                         >
-                                            Policy input
-                                        </RadioButton>
-                                        <RadioButton
-                                            key={INPUT_SRC_FIELD.FUNCTION_INPUT}
-                                            value={INPUT_SRC_FIELD.FUNCTION_INPUT}
-                                        >
-                                            Function input
-                                        </RadioButton>
-                                        <RadioButton
-                                            key={INPUT_SRC_FIELD.VALUE_DEFINITION}
-                                            value={INPUT_SRC_FIELD.VALUE_DEFINITION}
-                                        >
-                                            Value defination
-                                        </RadioButton>
-                                    </RadioGroup>
+                                            <Radio
+                                                key={INPUT_SRC_FIELD.POLICY_INPUT}
+                                                value={INPUT_SRC_FIELD.POLICY_INPUT}
+                                            >
+                                                Policy input
+                                            </Radio>
+                                            <Radio
+                                                key={INPUT_SRC_FIELD.FUNCTION_INPUT}
+                                                value={INPUT_SRC_FIELD.FUNCTION_INPUT}
+                                            >
+                                                Function input
+                                            </Radio>
+                                            <Radio
+                                                key={INPUT_SRC_FIELD.VALUE_DEFINITION}
+                                                value={INPUT_SRC_FIELD.VALUE_DEFINITION}
+                                            >
+                                                Value defination
+                                            </Radio>
+                                        </RadioGroup>
+                                        <Row type="flex" justify="center">
+                                            <Col span={12} align="center">
+                                                <Button type="default" size="small">
+                                                    Cancel
+                                                </Button>
+                                            </Col>
+                                            <Col span={12} align="center">
+                                                <Button type="primary" size="small">
+                                                    Confirm
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Fragment>
+                          
                                     )}>
                                     <Icon type="ellipsis" />
                                 </Popover>}
