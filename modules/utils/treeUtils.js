@@ -159,3 +159,39 @@ export const getTotalNodesCountInTree = (tree) => {
 
     return cnt;
 };
+
+export const checkHaveIsGroup = (ruleNodes = {}, fields) => {
+    let haveGroupPolicy = false;
+    let fieldIsGroup = '';
+    const arrNodes = Object.values(ruleNodes);
+    const _processCheckGroup = (rules) => {
+        // Object.keys(rules).forEach(name => {
+        //     const item = rules[name]; 
+        //     if(item.children1){
+        //         _processCheckGroup(item.children1);
+        //     }else if(item.properties && item.properties.field) {
+        //         const itemField = fields[item.properties.field];
+        //         if(itemField.isGroupPolicy){
+        //             haveGroupPolicy = true;
+        //         }
+        //     }
+        // })
+        const arrLenght = rules.length;
+        for (let index = 0; index < arrLenght; index++) {
+            const ruleItem = rules[index];
+            const {children1, properties} = ruleItem;
+            if(children1) {
+                _processCheckGroup(children1);
+            }else if (properties && properties.field) {
+                const field = fields[properties.field];
+                if(field.isGroupPolicy) {
+                    haveGroupPolicy = true;
+                    fieldIsGroup = properties.field;
+                    break;
+                }
+            }
+        }
+    }
+    _processCheckGroup(arrNodes);
+    return {haveGroupPolicy, fieldIsGroup};
+}

@@ -101,7 +101,8 @@ export default {
           }
         },
         field: {
-          operators: ["equal", "not_equal"]
+          operators: ["equal", "not_equal", "select_not_any_in",
+          "select_any_in"]
         }
       }
     },

@@ -155,6 +155,7 @@ export default class Query extends Component {
     const {
       conjunctions,
       functions,
+      constants,
       functionInputs,
       fields,
       types,
@@ -176,6 +177,7 @@ export default class Query extends Component {
       types,
       operators,
       widgets,
+      constants,
       settings
     };
     config = extendConfig(config);

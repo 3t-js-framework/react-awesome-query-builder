@@ -7,6 +7,7 @@ import { calcTextWidth } from "../../utils/stuff";
 import { Select, Spin } from "antd";
 const Option = Select.Option;
 import shallowCompare from "react-addons-shallow-compare";
+import {INPUT_SRC_FIELD} from '../../constants'
 
 export default class ConstantWidget extends Component {
   static propTypes = {
@@ -38,6 +39,9 @@ export default class ConstantWidget extends Component {
     const fieldDefinition = getFieldConfig(this.props.field, this.props.config);
     let listConstants = fieldDefinition.listConstants || [];
     const { operator } = this.props;
+    if(fieldDefinition.inputSrc === INPUT_SRC_FIELD.FUNCTION_INPUT) {
+      listConstants = listConstants.filter(x => x.dataType === fieldDefinition.type);
+    }
     if (operator === "select_any_in" || operator === "select_not_any_in") {
       listConstants = listConstants.filter(x => x.isList === true);
     } else {

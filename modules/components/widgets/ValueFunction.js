@@ -178,7 +178,7 @@ class ValueFunction extends Component {
   renderValueSourceParam = (index, dataTypeOfParam) => {
     const { config, value, operator, field } = this.props;
     const valueSource = value && value.valueSrc[index] || 'value';
-    
+    const paramDataType =  value && value.dataTypes[index] || 'text';
     switch (valueSource) {
       case VALUE_SOURCE_FUNCTION.FIELD:
         return (
@@ -196,6 +196,7 @@ class ValueFunction extends Component {
         return (
           <FieldConstantValueSrc
             field={field}
+            paramDataType={paramDataType}
             config={config}
             value={this.props.value.parameters[index]}
             handleChangeValueConstant={(value) => this.handleChange(value, index, VALUE_SOURCE_FUNCTION.CONSTANT)}

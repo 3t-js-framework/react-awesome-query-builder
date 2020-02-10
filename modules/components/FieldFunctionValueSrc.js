@@ -71,12 +71,12 @@ const FieldFunctionValueSrc = (props) => {
                 let subpath = (path ? path : []).concat(rightFieldKey);
                 let rightFieldFullkey = subpath.join(fieldSeparator);
                 let rightFieldConfig = getFieldConfig(rightFieldFullkey, config);
-                if(rightFieldConfig.inputSrc === INPUT_SRC_FIELD.FUNCTION_INPUT) {
+                if(rightFieldConfig.inputSrc === INPUT_SRC_FIELD.FUNCTION_INPUT || rightFieldConfig.inputSrc === INPUT_SRC_FIELD.VALUE_DEFINITION) {
                     delete list[rightFieldKey];
                 } else if (rightFieldConfig.type == "!struct") {
                     _filter(subfields, subpath);
                 } else {
-                    let canUse = rightFieldConfig.type == dataTypeOfParam && rightFieldFullkey != leftFieldFullkey;
+                    let canUse = rightFieldConfig.type === dataTypeOfParam;
                     let fn = config.settings.canCompareFieldWithField;
                     if (fn)
                         canUse = canUse && fn(leftFieldFullkey, leftFieldConfig, rightFieldFullkey, rightFieldConfig);

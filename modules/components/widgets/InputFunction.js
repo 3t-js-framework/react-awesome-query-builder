@@ -197,7 +197,7 @@ class InputFunction extends Component {
         return (
           <FieldConstantValueSrc
             field={field}
-            paramDataType={paramDataType}
+            paramDataType={paramDataType} 
             config={config}
             value={this.props.functionSrc.parameters[index]}
             handleChangeValueConstant={(value) => this.handleChange(value, index, VALUE_SOURCE_FUNCTION.CONSTANT)}

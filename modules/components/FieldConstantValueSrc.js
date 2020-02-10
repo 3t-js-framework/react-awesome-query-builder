@@ -33,6 +33,8 @@ export default class FieldConstantValueSrc extends Component {
         let listConstatns = fieldDefinition.listConstants;
         if(fieldDefinition.inputSrc === INPUT_SRC_FIELD.FUNCTION_INPUT && paramDataType) {
             listConstatns = fieldDefinition.listConstants.filter(x => x.dataType === paramDataType);
+        }else {
+            listConstatns = this.props.config.constants.filter(x => x.dataType === paramDataType);
         }
         const options = map(listConstatns, value => {
             return (

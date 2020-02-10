@@ -45,51 +45,30 @@ if (!seriazlieAsImmutable) {
       "type": "group",
       "id": "9a99988a-0123-4456-b89a-b1607f326fd8",
       "children1": {
-        "aaa8a9a9-0123-4456-b89a-b1701aaa8ec4": {
+        "a9a899a9-89ab-4cde-b012-31702e7372c8": {
           "type": "rule",
-          "id": "aaa8a9a9-0123-4456-b89a-b1701aaa8ec4",
+          "id": "a9a899a9-89ab-4cde-b012-31702e7372c8",
           "properties": {
-            "field": "88d71c42-55a3-4bb5-a480-a38e04955a8d",
-            "selectedInputSrcField": "functionInput",
-            "functionSrc": {
-              "parameters": [
-                "@Text-isList-false@",
-                true,
-                "#number-false-2#",
-                "2020-02-06T14:14:50.796Z"
-              ],
-              "functionSelected": "ReplaceText1-true",
-              "valueSrc": [
-                "field",
-                "value",
-                "constant",
-                "value"
-              ],
-              "dataTypes": [
-                "text",
-                "bool",
-                "number",
-                "date"
-              ],
-              "key": "88d71c42-55a3-4bb5-a480-a38e04955a8d"
-            },
+            "field": "@Boolean - islist - false@",
+            "selectedInputSrcField": "policyInput",
+            "functionSrc": null,
             "operator": "equal",
             "value": [
               {
                 "parameters": [
-                  "1",
-                  "#number-true#"
+                  "",
+                  true
                 ],
-                "functionSelected": "ReplaceText2-false",
+                "functionSelected": "IsExist",
                 "valueSrc": [
-                  "value",
-                  "constant"
+                  "field",
+                  "value"
                 ],
                 "dataTypes": [
                   "text",
                   "bool"
                 ],
-                "key": "88d71c42-55a3-4bb5-a480-a38e04955a8a"
+                "key": "88d71c42-55a3-4bb5-a480-a38e04955a8c"
               }
             ],
             "valueSrc": [
@@ -102,7 +81,7 @@ if (!seriazlieAsImmutable) {
           },
           "path": [
             "9a99988a-0123-4456-b89a-b1607f326fd8",
-            "aaa8a9a9-0123-4456-b89a-b1701aaa8ec4"
+            "a9a899a9-89ab-4cde-b012-31702e7372c8"
           ]
         }
       },
@@ -256,7 +235,7 @@ const dummy = {
       groupName: "Value Definition",
       name: "#boolean-false",
       code: "constant7",
-      dataType: "boolean",
+      dataType: "bool",
       parameterTypes: null,
       isList: false
     },
@@ -330,7 +309,7 @@ const dummy = {
     },
     {
       groupName: "Policy Input",
-      name: "@Text-isList-false@",
+      name: "@Text-isList-false-isList@",
       code: "27cd2b46-b05a-4540-b794-0332e728f529",
       dataType: "text",
       parameterTypes: null,
@@ -346,7 +325,7 @@ const dummy = {
     },
     {
       groupName: "Policy Input",
-      name: "@Boolean - islist - true@",
+      name: "@Boolean - islist - true-isGroup@",
       code: "59dffb51-10c2-4134-ba3b-31ed3dd89088",
       dataType: "bool",
       parameterTypes: null,
@@ -362,7 +341,7 @@ const dummy = {
     },
     {
       groupName: "Policy Input",
-      name: "@Number-isList-false@",
+      name: "@Number-isList-false-isGroup@",
       code: "27cduhj6-b05a-4540-b794-8502e728f529",
       dataType: "number",
       parameterTypes: null,
