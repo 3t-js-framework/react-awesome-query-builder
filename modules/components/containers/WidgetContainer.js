@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import shallowCompare from 'react-addons-shallow-compare';
@@ -9,7 +9,8 @@ import {
     getWidgetForFieldOp, getFieldWidgetConfig, getWidgetsForFieldOp, parseLabelPopover
 } from "../../utils/configUtils";
 import {defaultValue} from "../../utils/stuff";
-import { Icon, Popover, Button, Radio } from 'antd';
+import { Icon, Popover, Button, Radio, Row, Col } from 'antd';
+import PopoverValueSrc from '../PopoverValueSrc';
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
@@ -31,6 +32,11 @@ export default (Widget) => {
 
             this._setValueHandlers = {};
             this._setValueSrcHandlers = {};
+        }
+
+        state = {
+            valueSrcSelected: 'value',
+            visible: false
         }
 
         _getSetValueHandler = (isSpecialRange, delta, widgetType) => {
@@ -67,8 +73,19 @@ export default (Widget) => {
 
         _onChangeValueSrc = (delta, e) => {
             let srcKey = e.target.value;
-            this.props.setValueSrc(delta, srcKey);
+            const {valueSrcSelected} = this.state;
+            this.props.setValueSrc(delta, valueSrcSelected);
+            this.onVisibleChange(false);
         }
+
+        _onChangeTempValueSrc = ({target}) => {
+            const {value} = target;
+            this.setState({valueSrcSelected: value});
+        }
+
+        onVisibleChange = visible => {
+            this.setState({ visible });
+        };
 
         shouldComponentUpdate = shallowCompare;
 
@@ -123,6 +140,7 @@ export default (Widget) => {
         }
 
         renderValueSorces = (delta, valueSources, valueSrc) => {
+            const {visible} = this.state;
             const fieldDefinition = getFieldConfig(this.props.field, this.props.config);
             const valueSourcesInfo = this.props.config.settings.valueSourcesInfo;
             const valueSourcesPopupTitle = this.props.config.settings.valueSourcesPopupTitle;
@@ -131,29 +149,53 @@ export default (Widget) => {
 
             if (!valueSources || Object.keys(valueSources).length == 1)
                 return null;
-
+            const popoverContent = valueSources.map(srcKey => ({key: srcKey, value: srcKey, label: parseLabelPopover(valueSourcesInfo[srcKey].label) }));
             let content = (
-                <RadioGroup
-                    key={'valuesrc-'+delta}
-                    value={valueSrc || "value"}
-                    size={this.props.config.settings.renderSize || "small"}
-                    onChange={this._getSetValueSrcHandler(delta)}
-                >
-                    {valueSources.map(srcKey => (
-                        <RadioButton
-                            key={srcKey}
-                            value={srcKey}
-                        //checked={item.checked}
-                        >{parseLabelPopover(valueSourcesInfo[srcKey].label)}</RadioButton>
-                    ))}
-                </RadioGroup>
+                <Fragment>
+                    <RadioGroup
+                        key={'valuesrc-'+delta}
+                        defaultValue={valueSrc || "value"}
+                        size={this.props.config.settings.renderSize || "small"}
+                        onChange={this._onChangeTempValueSrc}
+                        className="radio-button-inner-center"
+                    >
+                        {valueSources.map(srcKey => (
+                            <Radio
+                                key={srcKey}
+                                value={srcKey}
+                            >{parseLabelPopover(valueSourcesInfo[srcKey].label)}</Radio>
+                        ))}
+                    </RadioGroup>
+                    <Row type="flex" justify="center">
+                        <Col span={12} align="center">
+                            <Button type="default" size="small" onClick={() => this.onVisibleChange(false)}>
+                                Cancel
+                            </Button>
+                        </Col>
+                        <Col span={12} align="center">
+                            <Button
+                                type="primary"
+                                size="small"
+                                onClick={this._getSetValueSrcHandler(delta)}
+                            >
+                                Confirm
+                            </Button>
+                        </Col>
+                    </Row>
+               </Fragment>
             );
 
             return (
                 <span>
-                    <Popover content={content} title={valueSourcesPopupTitle}>
+                    <Popover content={visible && content} onVisibleChange={this.onVisibleChange} visible={visible}>
                         <Icon type="ellipsis" />
                     </Popover>
+                    {/* <PopoverValueSrc
+                        selectedSrcField={valueSrc || "value"}
+                        onChangeSelectedInputSrcField={this._getSetValueSrcHandler(delta)}
+                        popoverContent={popoverContent}
+                        isWidget
+                    /> */}
                 </span>
             );
         }

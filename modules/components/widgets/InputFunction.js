@@ -24,6 +24,7 @@ import {
 import { truncateString, } from '../../utils/stuff';
 import FieldFunctionValueSrc from '../FieldFunctionValueSrc';
 import FieldConstantValueSrc from '../FieldConstantValueSrc';
+import PopoverValueSrc from '../PopoverValueSrc';
 import { DATA_TYPE, VALUE_SOURCE_FUNCTION, } from '../../constants';
 
 const { Option, } = Select;
@@ -142,32 +143,39 @@ class InputFunction extends Component {
     const valueSourcesPopover = value.valueSources;
     let valueSrc = (functionSrc && functionSrc.valueSrc && functionSrc.valueSrc[index]) || null;
     if (!valueSourcesPopover) { return null; }
-
-    let content = (
-      <RadioGroup
-        key={valueSrc + '--' + index}
-        value={valueSrc || 'value'}
-        size={this.props.config.settings.renderSize || 'small'}
-        onChange={(value) => this.handleChangePopover(value, index)}
-      >
-        {valueSourcesPopover.filter((valueSource) => valueSource !== 'function').map(srcKey => (
-          <RadioButton
-            key={srcKey + index}
-            value={srcKey}
-          >{parseLabelPopover(valueSourcesInfo[srcKey].label)}
-          </RadioButton>
-        ))}
-      </RadioGroup>
-    );
+    const popoverContent = valueSourcesPopover.filter((valueSource) => valueSource !== 'function').map(srcKey => ({key: `${srcKey + index}`, value: srcKey, label: parseLabelPopover(valueSourcesInfo[srcKey].label) }));
+    // let content = (
+    //   <RadioGroup
+    //     key={valueSrc + '--' + index}
+    //     value={valueSrc || 'value'}
+    //     size={this.props.config.settings.renderSize || 'small'}
+    //     onChange={(value) => this.handleChangePopover(value, index)}
+    //   >
+    //     {valueSourcesPopover.filter((valueSource) => valueSource !== 'function').map(srcKey => (
+    //       <RadioButton
+    //         key={srcKey + index}
+    //         value={srcKey}
+    //       >{parseLabelPopover(valueSourcesInfo[srcKey].label)}
+    //       </RadioButton>
+    //     ))}
+    //   </RadioGroup>
+    // );
 
     return (
-      <Popover
+      // <Popover
+      //   className="popover-function"
+      //   title={valueSourcesPopupTitle}
+      //   content={content}
+      // >
+      //   <Icon type="ellipsis" />
+      // </Popover>
+      <PopoverValueSrc
         className="popover-function"
-        title={valueSourcesPopupTitle}
-        content={content}
-      >
-        <Icon type="ellipsis" />
-      </Popover>
+        selectedSrcField={valueSrc}
+        onChangeSelectedInputSrcField={this.handleChangePopover}
+        popoverContent={popoverContent}
+        popoverIndex={index}
+      />
     );
   }
 

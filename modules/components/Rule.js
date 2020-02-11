@@ -20,6 +20,7 @@ var stringify = require('json-stringify-safe');
 const classNames = require('classnames');
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {Provider, Connector, connect} from 'react-redux';
+import PopoverValueSrc from './PopoverValueSrc';
 import {INPUT_SRC_FIELD} from '../constants';
 
 
@@ -100,44 +101,6 @@ class Rule extends Component {
         setInputSrcField(value);
     }
 
-    renderRuleType = () => {
-        let content = (
-            <RadioGroup
-                key='dataSrc'
-                value="policyInput"
-                size={this.props.config.settings.renderSize || "small"}
-                onChange={this.onChangeSelectedInputSrcField}
-            >
-                <RadioButton
-                    key={INPUT_SRC_FIELD.POLICY_INPUT}
-                    value={INPUT_SRC_FIELD.POLICY_INPUT}
-                >
-                    PolicyInput
-                </RadioButton>
-                <RadioButton
-                    key={INPUT_SRC_FIELD.FUNCTION_INPUT}
-                    value={INPUT_SRC_FIELD.FUNCTION_INPUT}
-                >
-                    Function
-                </RadioButton>
-                <RadioButton
-                    key={INPUT_SRC_FIELD.VALUE_DEFINITION}
-                    value={INPUT_SRC_FIELD.VALUE_DEFINITION}
-                >
-                    Value defination
-                </RadioButton>
-            </RadioGroup>
-        );
-
-        return (
-            <span>
-                <Popover content={content} title="Select rule type">
-                    <Icon type="ellipsis" />
-                </Popover>
-            </span>
-        );
-    }
-
     isEmptyCurrentRule = () => {
         return !(
             this.props.selectedField !== null &&
@@ -158,7 +121,23 @@ class Rule extends Component {
         const selectedOperatorConfig = getOperatorConfig(this.props.config, this.props.selectedOperator, this.props.selectedField);
         const selectedOperatorHasOptions = selectedOperatorConfig && selectedOperatorConfig.options != null;
         const selectedFieldWidgetConfig = getFieldWidgetConfig(this.props.config, this.props.selectedField, this.props.selectedOperator) || {};
-
+        const popoverInputSrcContent = [
+            {
+                key: INPUT_SRC_FIELD.POLICY_INPUT,
+                value: INPUT_SRC_FIELD.POLICY_INPUT,
+                label: 'Policy Input'
+            },
+            {
+                key: INPUT_SRC_FIELD.FUNCTION_INPUT,
+                value: INPUT_SRC_FIELD.FUNCTION_INPUT,
+                label: 'Function input'
+            },
+            {
+                key: INPUT_SRC_FIELD.VALUE_DEFINITION,
+                value: INPUT_SRC_FIELD.VALUE_DEFINITION,
+                label: 'Value defination'
+            }
+        ];
         let styles = {};
         if (renderType == 'dragging') {
             styles = {
@@ -169,158 +148,161 @@ class Rule extends Component {
         }
 
         return (
-            <div
-                className={classNames("rule", "group-or-rule",
-                    renderType == 'placeholder' ? 'qb-placeholder' : null,
-                    renderType == 'dragging' ? 'qb-draggable' : null,
+          <div
+            className={classNames(
+              "rule",
+              "group-or-rule",
+              renderType == "placeholder" ? "qb-placeholder" : null,
+              renderType == "dragging" ? "qb-draggable" : null
+            )}
+            style={styles}
+            ref="rule"
+            data-id={this.props.id}
+          >
+            <div className="rule--header">
+              {!this.props.config.settings.readonlyMode && (
+                <Button
+                  type="default"
+                  icon="close"
+                  onClick={this.removeSelf}
+                  size={this.props.config.settings.renderSize || "small"}
+                >
+                  {this.props.config.settings.deleteLabel !== undefined
+                    ? this.props.config.settings.deleteLabel
+                    : "Delete"}
+                </Button>
+              )}
+            </div>
+            {/*<div className="rule--body">*/}
+            {/*<Row>*/}
+            {this.props.config.settings.canReorder &&
+              this.props.treeNodesCnt > 2 && (
+                <span
+                  className={"qb-drag-handler"}
+                  onMouseDown={this.handleDraggerMouseDown}
+                >
+                  <Icon type="drag" />{" "}
+                </span>
+              )}
+            {true ? (
+              <Col key={"fields"} className="rule--field">
+                {this.props.config.settings.showLabels && (
+                  <label>
+                    {this.props.config.settings.fieldLabel || "Field"}
+                  </label>
                 )}
-                style={styles}
-                ref="rule"
-                data-id={this.props.id}
-            >
-                <div className="rule--header">
-                    {!this.props.config.settings.readonlyMode &&
-                        <Button
-                            type="default"
-                            icon="close"
-                            onClick={this.removeSelf}
-                            size={this.props.config.settings.renderSize || "small"}
-                        >
-                            {this.props.config.settings.deleteLabel !== undefined ? this.props.config.settings.deleteLabel : "Delete"}
-                        </Button>
-                    }
-                </div>
-                {/*<div className="rule--body">*/}
-                    {/*<Row>*/}
-                        { this.props.config.settings.canReorder && this.props.treeNodesCnt > 2 &&
-                            <span className={"qb-drag-handler"} onMouseDown={this.handleDraggerMouseDown} ><Icon type="drag" /> </span>
-                        }
-                        {true ? (
-                            <Col key={"fields"} className="rule--field">
-                                { this.props.config.settings.showLabels &&
-                                    <label>{this.props.config.settings.fieldLabel || "Field"}</label>
-                                }
-                                {/* <div key={"valuesrc-"+this.props.field+"-"+delta} className="widget--valuesrc">
+                {/* <div key={"valuesrc-"+this.props.field+"-"+delta} className="widget--valuesrc">
                                     {settings.showLabels ?
                                         <label>&nbsp;</label>
                                         : null}
                                     {this.renderValueSorces(delta, valueSources, valueSrc)}
                                 </div> */}
-                                {!this.props.selectedInputSrcField &&
-                                <Popover className="padding-right-8" placement="left" content={(
-                                    <Fragment>
-                                        <RadioGroup
-                                            key='dataSrc'
-                                            value={this.props.selectedInputSrcField || INPUT_SRC_FIELD.POLICY_INPUT}
-                                            size={this.props.config.settings.renderSize || "small"}
-                                            onChange={this.onChangeSelectedInputSrcField}
-                                            className='radio-button-inner-center'
-                                        >
-                                            <Radio
-                                                key={INPUT_SRC_FIELD.POLICY_INPUT}
-                                                value={INPUT_SRC_FIELD.POLICY_INPUT}
-                                            >
-                                                Policy input
-                                            </Radio>
-                                            <Radio
-                                                key={INPUT_SRC_FIELD.FUNCTION_INPUT}
-                                                value={INPUT_SRC_FIELD.FUNCTION_INPUT}
-                                            >
-                                                Function input
-                                            </Radio>
-                                            <Radio
-                                                key={INPUT_SRC_FIELD.VALUE_DEFINITION}
-                                                value={INPUT_SRC_FIELD.VALUE_DEFINITION}
-                                            >
-                                                Value defination
-                                            </Radio>
-                                        </RadioGroup>
-                                        <Row type="flex" justify="center">
-                                            <Col span={12} align="center">
-                                                <Button type="default" size="small">
-                                                    Cancel
-                                                </Button>
-                                            </Col>
-                                            <Col span={12} align="center">
-                                                <Button type="primary" size="small">
-                                                    Confirm
-                                                </Button>
-                                            </Col>
-                                        </Row>
-                                    </Fragment>
-                          
-                                    )}>
-                                    <Icon type="ellipsis" />
-                                </Popover>}
-                                
 
-                               <Field
-                                    key="field"
-                                    config={this.props.config}
-                                    selectedField={this.props.selectedField}
-                                    setField={this.props.setField}
-                                    setFunctionSrc={this.props.setFunctionSrc}
-                                    functionSrc={this.props.functionSrc}
-                                    renderAsDropdown={this.props.config.settings.renderFieldAndOpAsDropdown}
-                                    customProps={this.props.config.settings.customFieldSelectProps}
-                                    selectedInputSrcField={this.props.selectedInputSrcField}
-                                />
-                            </Col>
-                        ) : null}
-                        {this.props.selectedField && !selectedFieldWidgetConfig.hideOperator && (
-                            <Col key={"operators-for-"+(selectedFieldPartsLabels || []).join("_")} className="rule--operator">
-                                { this.props.config.settings.showLabels &&
-                                    <label>{this.props.config.settings.operatorLabel || "Operator"}</label>
-                                }
-                                <Operator
-                                    key="operator"
-                                    config={this.props.config}
-                                    selectedField={this.props.selectedField}
-                                    selectedOperator={this.props.selectedOperator}
-                                    setOperator={this.props.setOperator}
-                                    renderAsDropdown={this.props.config.settings.renderFieldAndOpAsDropdown}
-                                />
-                            </Col>
-                        )}
-                        {this.props.selectedField && selectedFieldWidgetConfig.hideOperator && selectedFieldWidgetConfig.operatorInlineLabel && (
-                            <Col key={"operators-for-"+(selectedFieldPartsLabels || []).join("_")} className="rule--operator">
-                                <div className="rule--operator">
-                                    {this.props.config.settings.showLabels ?
-                                        <label>&nbsp;</label>
-                                    : null}
-                                    <span>{selectedFieldWidgetConfig.operatorInlineLabel}</span>
-                                </div>
-                            </Col>
-                        )}
-                        {isFieldAndOpSelected &&
-                            <Col key={"widget-for-"+this.props.selectedOperator} className="rule--value">
-                                <Widget
-                                  key="values"
-                                  field={this.props.selectedField}
-                                  operator={this.props.selectedOperator}
-                                  value={this.props.value}
-                                  valueSrc={this.props.valueSrc}
-                                  config={this.props.config}
-                                  setValue={this.props.setValue}
-                                  setValueSrc={this.props.setValueSrc}
-                                />
-                            </Col>
-                        }
-                        {isFieldAndOpSelected && selectedOperatorHasOptions &&
-                            <Col key={"op-options-for-"+this.props.selectedOperator} className="rule--operator-options">
-                                <OperatorOptions
-                                  key="operatorOptions"
-                                  selectedField={this.props.selectedField}
-                                  selectedOperator={this.props.selectedOperator}
-                                  operatorOptions={this.props.operatorOptions}
-                                  setOperatorOption={this.props.setOperatorOption}
-                                  config={this.props.config}
-                                />
-                            </Col>
-                        }
-                    {/*</Row>*/}
-                {/*</div>*/}
-            </div>
+                {!this.props.selectedInputSrcField && (
+                  <PopoverValueSrc
+                    className="padding-right-8"
+                    placement="left"
+                    selectedSrcField={this.props.selectedInputSrcField}
+                    onChangeSelectedInputSrcField={this.onChangeSelectedInputSrcField}
+                    popoverContent={popoverInputSrcContent}/>
+                )}
+
+                <Field
+                  key="field"
+                  config={this.props.config}
+                  selectedField={this.props.selectedField}
+                  setField={this.props.setField}
+                  setFunctionSrc={this.props.setFunctionSrc}
+                  functionSrc={this.props.functionSrc}
+                  renderAsDropdown={
+                    this.props.config.settings.renderFieldAndOpAsDropdown
+                  }
+                  customProps={
+                    this.props.config.settings.customFieldSelectProps
+                  }
+                  selectedInputSrcField={this.props.selectedInputSrcField}
+                />
+              </Col>
+            ) : null}
+            {this.props.selectedField &&
+              !selectedFieldWidgetConfig.hideOperator && (
+                <Col
+                  key={
+                    "operators-for-" +
+                    (selectedFieldPartsLabels || []).join("_")
+                  }
+                  className="rule--operator"
+                >
+                  {this.props.config.settings.showLabels && (
+                    <label>
+                      {this.props.config.settings.operatorLabel || "Operator"}
+                    </label>
+                  )}
+                  <Operator
+                    key="operator"
+                    config={this.props.config}
+                    selectedField={this.props.selectedField}
+                    selectedOperator={this.props.selectedOperator}
+                    setOperator={this.props.setOperator}
+                    renderAsDropdown={
+                      this.props.config.settings.renderFieldAndOpAsDropdown
+                    }
+                  />
+                </Col>
+              )}
+            {this.props.selectedField &&
+              selectedFieldWidgetConfig.hideOperator &&
+              selectedFieldWidgetConfig.operatorInlineLabel && (
+                <Col
+                  key={
+                    "operators-for-" +
+                    (selectedFieldPartsLabels || []).join("_")
+                  }
+                  className="rule--operator"
+                >
+                  <div className="rule--operator">
+                    {this.props.config.settings.showLabels ? (
+                      <label>&nbsp;</label>
+                    ) : null}
+                    <span>{selectedFieldWidgetConfig.operatorInlineLabel}</span>
+                  </div>
+                </Col>
+              )}
+            {isFieldAndOpSelected && (
+              <Col
+                key={"widget-for-" + this.props.selectedOperator}
+                className="rule--value"
+              >
+                <Widget
+                  key="values"
+                  field={this.props.selectedField}
+                  operator={this.props.selectedOperator}
+                  value={this.props.value}
+                  valueSrc={this.props.valueSrc}
+                  config={this.props.config}
+                  setValue={this.props.setValue}
+                  setValueSrc={this.props.setValueSrc}
+                />
+              </Col>
+            )}
+            {isFieldAndOpSelected && selectedOperatorHasOptions && (
+              <Col
+                key={"op-options-for-" + this.props.selectedOperator}
+                className="rule--operator-options"
+              >
+                <OperatorOptions
+                  key="operatorOptions"
+                  selectedField={this.props.selectedField}
+                  selectedOperator={this.props.selectedOperator}
+                  operatorOptions={this.props.operatorOptions}
+                  setOperatorOption={this.props.setOperatorOption}
+                  config={this.props.config}
+                />
+              </Col>
+            )}
+            {/*</Row>*/}
+            {/*</div>*/}
+          </div>
         );
     }
 
