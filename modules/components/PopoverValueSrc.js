@@ -42,7 +42,6 @@ export default class PopoverValueSrc extends Component {
   render() {
     const { visible } = this.state;
     const { popoverContent = [], className, placement = "top" } = this.props;
-    console.log("popoverContent: ", popoverContent);
 
     return (
       <Popover

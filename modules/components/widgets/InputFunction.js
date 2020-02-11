@@ -34,7 +34,7 @@ const RadioGroup = Radio.Group;
 
 class InputFunction extends Component {
   static propTypes = {
-    setValue: PropTypes.func.isRequired,
+    setValue: PropTypes.func,
     config: PropTypes.object.isRequired,
     field: PropTypes.string.isRequired,
     value: PropTypes.any,
