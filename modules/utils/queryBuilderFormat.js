@@ -9,6 +9,8 @@ import {
 } from './configUtils';
 import omit from 'lodash/omit';
 import pick from 'lodash/pick';
+import {INPUT_SRC_FIELD} from '../constants';
+import { func } from 'prop-types';
 
 /*
  Build tree to http://querybuilder.js.org/ like format
@@ -58,6 +60,7 @@ export const queryBuilderFormat = (item, config, rootQuery = null) => {
     if (isRoot) {
         rootQuery = resultQuery;
         rootQuery.usedFields = [];
+        rootQuery.usedFieldConfigs = [];
     }
 
     if (type === 'group' && children && children.size) {
@@ -106,7 +109,6 @@ export const queryBuilderFormat = (item, config, rootQuery = null) => {
         const widget = getWidgetForFieldOp(config, field, operator);
         const fieldWidgetDefinition = omit(getFieldWidgetConfig(config, field, operator, widget), ['factory']);
         const typeConfig = config.types[fieldDefinition.type] || {};
-
         //format field
         if (fieldDefinition.tableName) {
           const regex = new RegExp(field.split(config.settings.fieldSeparator)[0])
@@ -118,6 +120,19 @@ export const queryBuilderFormat = (item, config, rootQuery = null) => {
 
         if (rootQuery.usedFields.indexOf(field) == -1)
             rootQuery.usedFields.push(field);
+        if (selectedInputSrcField === INPUT_SRC_FIELD.POLICY_INPUT){
+            rootQuery.usedFieldConfigs.push(field);
+            rootQuery.usedFieldConfigs = [...new Set(rootQuery.usedFieldConfigs)];
+        }else if( selectedInputSrcField === INPUT_SRC_FIELD.FUNCTION_INPUT){
+            const valueFunc = functionSrc.valueSrc;
+            const parmFunc = functionSrc.parameters;
+            for(let j = 0; j < valueFunc.length; j++){
+                if(valueFunc[j] === 'field' && !!parmFunc[j]){
+                    rootQuery.usedFieldConfigs.push(parmFunc[j])
+                    // rootQuery.usedFieldConfigs = [...new Set(rootQuery.usedFieldConfigs)];
+                }
+            }
+        }
         value = value.toArray();
         valueSrc = valueSrc.toArray();
         valueType = valueType.toArray();
@@ -135,8 +150,20 @@ export const queryBuilderFormat = (item, config, rootQuery = null) => {
                 let secondField = value[i];
                 if (rootQuery.usedFields.indexOf(secondField) == -1)
                     rootQuery.usedFields.push(secondField);
+                rootQuery.usedFieldConfigs.push(secondField)
+            } else if (valueSrc[i] === 'function') {
+                const functionField = value[i];
+                const functionValueSrc = functionField.valueSrc;
+                const functionParameters = functionField.parameters;
+                for(let j = 0; j < functionValueSrc.length; j++){
+                    if(functionValueSrc[j] === 'field' && !!functionParameters[j]){
+                        rootQuery.usedFieldConfigs.push(functionParameters[j])
+                        // rootQuery.usedFieldConfigs = [...new Set(rootQuery.usedFieldConfigs)];
+                    }
+                }
             }
         }
+        rootQuery.usedFieldConfigs = [...new Set(rootQuery.usedFieldConfigs)];
         let operatorOptions = options ? options.toJS() : null;
         if (operatorOptions && !Object.keys(operatorOptions).length)
             operatorOptions = null;
