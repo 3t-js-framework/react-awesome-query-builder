@@ -151,7 +151,7 @@ export const queryBuilderFormat = (item, config, rootQuery = null) => {
                 if (rootQuery.usedFields.indexOf(secondField) == -1)
                     rootQuery.usedFields.push(secondField);
                 rootQuery.usedFieldConfigs.push(secondField)
-            } else if (valueSrc[i] === 'function') {
+            } else if (valueSrc[i] === 'function' && value[i]) {
                 const functionField = value[i];
                 const functionValueSrc = functionField.valueSrc;
                 const functionParameters = functionField.parameters;
