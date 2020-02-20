@@ -21,7 +21,7 @@ const getListOperators = (type, isList) => {
 
   let result = [];
 
-  switch (type) {
+  switch (String(type).toLowerCase()) {
     case "text":
       result = [...operatorsForEqual, ...operatorsForList];
       break;
@@ -66,6 +66,14 @@ function convertValueDefinition(valueDefinitions) {
   return result;
 }
 
+function convertDataType(dataType) {
+  let result = String(dataType).toLowerCase();
+  if(!['text','bool','number','date'].includes(result)){
+    result = 'text';
+  };
+  return result
+}
+
 function convertCombination(combination) {
   if (!combination) return;
 
@@ -78,14 +86,14 @@ function convertCombination(combination) {
   // get policy input
 
   policyInputs.forEach(function(item) {
-    const listConstants = getListConstants(item.dataType, valueDefinitions);
-    const operators = getListOperators(item.dataType, item.isList);
-    console.log("operators: ", operators);
+    const dataType = convertDataType(item.dataType);
+    const listConstants = getListConstants(dataType, valueDefinitions);
+    const operators = getListOperators(dataType, item.isList);
     
     fields[item.name] = {
       label: item.name,
       inputSrc: 'policyInput',
-      type: item.dataType,
+      type: dataType,
       isList: item.isList,
       listConstants,
       operators
@@ -93,15 +101,16 @@ function convertCombination(combination) {
   });
 
   functions.forEach(function(item) {
+    const dataType = convertDataType(item.dataType);
     const listConstants = valueDefinitions; // set all constants for functionInput
-    const operators = getListOperators(item.dataType, item.isList);
+    const operators = getListOperators(dataType, item.isList);
     fields[item.code] = {
       label: item.name,
       key: item.code,
       inputSrc: 'functionInput',
       functionName: item.name || "",
       params: item.parameterTypes.split(";") || [],
-      type: item.dataType || "",
+      type: dataType || "",
       isList: item.isList || false,
       listConstants,
       operators
@@ -109,12 +118,13 @@ function convertCombination(combination) {
   });
 
   valueDefinitions.forEach(function(item) {
-    const listConstants = getListConstants(item.dataType, valueDefinitions); // set all constants for functionInput
-    const operators = getListOperators(item.dataType, item.isList);
+    const dataType = convertDataType(item.dataType);
+    const listConstants = getListConstants(dataType, valueDefinitions); // set all constants for functionInput
+    const operators = getListOperators(dataType, item.isList);
     fields[item.name] = {
       label: item.name,
       inputSrc: 'valueDefination',
-      type: item.dataType || "",
+      type: dataType || "",
       isList: item.isList || false,
       listConstants,
       operators
