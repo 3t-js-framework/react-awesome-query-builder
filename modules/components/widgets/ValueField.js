@@ -58,7 +58,10 @@ export default class ValueField extends Component {
     } else {
       expectedType = leftFieldConfig.type;
     }
-
+    
+    operator === "select_any_in" || operator === "select_not_any_in"
+    const isFieldForList = (operator === "select_any_in"  || operator === "select_not_any_in");
+   
     function _filter(list, path) {
       for (let rightFieldKey in list) {
         let subfields = list[rightFieldKey].subfields;
@@ -67,7 +70,11 @@ export default class ValueField extends Component {
         let rightFieldConfig = getFieldConfig(rightFieldFullkey, config);
         if(rightFieldConfig.inputSrc === INPUT_SRC_FIELD.FUNCTION_INPUT || rightFieldConfig.inputSrc === INPUT_SRC_FIELD.VALUE_DEFINITION) {
           delete list[rightFieldKey];
-        } 
+        }else if(isFieldForList && !rightFieldConfig.isList){
+          delete list[rightFieldKey];
+        }else if(!isFieldForList && rightFieldConfig.isList){
+          delete list[rightFieldKey];
+        }
         if (rightFieldConfig.type == "!struct") {
           _filter(subfields, subpath);
         } else {
@@ -179,7 +186,6 @@ export default class ValueField extends Component {
     let placeholderWidth = calcTextWidth(placeholder, '14px');
     let fieldSelectItems = this.buildSelectItems(fieldOptions);
     let customProps = this.props.customProps || {};
-    
     let fieldSelect = (
           <Select
               dropdownAlign={dropdownPlacement ? BUILT_IN_PLACEMENTS[dropdownPlacement] : undefined}

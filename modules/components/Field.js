@@ -150,7 +150,7 @@ export default class Field extends Component {
       return keys(fields).map(fieldKey => {
           let field = fields[fieldKey];
           if(selectedInputSrcField !== field.inputSrc) return null;
-
+          if(field.isList === true) return null;
           let label = this.getFieldDisplayLabel(field, fieldKey);
           if (field.type == "!struct") {
               let subpath = (path ? path : []).concat(fieldKey);

@@ -23,33 +23,40 @@ const getListOperators = (type, isList) => {
 
   switch (String(type).toLowerCase()) {
     case "text":
-      result = [...operatorsForEqual, ...operatorsForList];
+      result = [
+        ...defaultOperators, 
+        ...operatorsForEqual, 
+        ...operatorsForList, 
+        ...operatorsForEmpty
+      ];
       break;
     case "number":
       result = [
         ...operatorsForEqual,
         ...defaultOperators,
+        ...operatorsForList,
         ...operatorsForEmpty
       ];
-      if (isList) {
-        result = [...result, ...operatorsForList];
-      }
+      // if (isList) {
+      //   result = [...result, ...operatorsForList];
+      // }
       break;
     case "bool":
       result = [...operatorsForEqual, ...operatorsForEmpty];
-      if (isList) {
-        result = [...result, ...operatorsForList];
-      }
+      // if (isList) {
+      //   result = [...result, ...operatorsForList];
+      // }
       break;
     case "date":
       result = [
         ...operatorsForEqual,
         ...defaultOperators,
+        ...operatorsForList,
         ...operatorsForEmpty
       ];
-      if (isList) {
-        result = [...result, ...operatorsForList];
-      }
+      // if (isList) {
+      //   result = [...result, ...operatorsForList];
+      // }
       break;
     default:
       break;
