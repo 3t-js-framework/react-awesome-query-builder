@@ -14,6 +14,7 @@ import Immutable from 'immutable';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { Provider, Connector, connect } from 'react-redux';
 import Item from './Item';
+import DragAndDropIcon from '../assets/DragAndDropIcon';
 
 
 export const groupActionsPositionList = {
@@ -241,7 +242,7 @@ class Group extends Component {
           </ButtonGroup>
         }
         {this.props.config.settings.canReorder && this.props.treeNodesCnt > 2 && !this.props.isRoot &&
-          <span className={"qb-drag-handler"} onMouseDown={this.handleDraggerMouseDown} > <Icon type="drag" /> </span>
+          <span className={"qb-drag-handler"} onMouseDown={this.handleDraggerMouseDown} > <Icon component={DragAndDropIcon} /> </span>
         }
       </div>
     );
