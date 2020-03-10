@@ -22,6 +22,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {Provider, Connector, connect} from 'react-redux';
 import PopoverValueSrc from './PopoverValueSrc';
 import {INPUT_SRC_FIELD} from '../constants';
+import DragAndDropIcon from '../assets/DragAndDropIcon';
 
 
 @RuleContainer
@@ -181,7 +182,7 @@ class Rule extends Component {
                   className={"qb-drag-handler"}
                   onMouseDown={this.handleDraggerMouseDown}
                 >
-                  <Icon type="drag" />{" "}
+                  <Icon component={DragAndDropIcon} />{" "}
                 </span>
               )}
             {true ? (
