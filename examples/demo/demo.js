@@ -13,6 +13,7 @@ import "../../css/denormalize.scss";
 const Immutable = require("immutable");
 const transit = require("transit-immutable-js");
 import { fromJS } from "immutable";
+import validationQuery from './validation'
 
 // https://github.com/ukrbublik/react-awesome-query-builder/issues/69
 var seriazlieAsImmutable = false;
@@ -42,57 +43,207 @@ if (!seriazlieAsImmutable) {
   };
   initValue =
     `{
-      "type": "group",
-      "id": "9a99988a-0123-4456-b89a-b1607f326fd8",
-      "children1": {
-        "a9a899a9-89ab-4cde-b012-31702e7372c8": {
-          "type": "rule",
-          "id": "a9a899a9-89ab-4cde-b012-31702e7372c8",
-          "properties": {
-            "field": "@Boolean - islist - false@",
-            "selectedInputSrcField": "policyInput",
-            "functionSrc": null,
-            "operator": "equal",
-            "value": [
-              {
-                "parameters": [
-                  "",
-                  true
-                ],
-                "functionSelected": "IsExist",
-                "valueSrc": [
-                  "field",
-                  "value"
-                ],
-                "dataTypes": [
-                  "text",
-                  "bool"
-                ],
-                "key": "88d71c42-55a3-4bb5-a480-a38e04955a8c"
-              }
+      "type":"group",
+      "id":"9a99988a-0123-4456-b89a-b1607f326fd8",
+      "children1":{
+         "8aa8b898-0123-4456-b89a-b1701ed68a40":{
+            "type":"group",
+            "id":"8aa8b898-0123-4456-b89a-b1701ed68a40",
+            "properties":{
+               "conjunction":"AND"
+            },
+            "path":[
+               "9a99988a-0123-4456-b89a-b1607f326fd8",
+               "8aa8b898-0123-4456-b89a-b1701ed68a40"
             ],
-            "valueSrc": [
-              "function"
+            "children1":{
+               "9988bab8-cdef-4012-b456-71701ed68a41":{
+                  "type":"rule",
+                  "id":"9988bab8-cdef-4012-b456-71701ed68a41",
+                  "properties":{
+                     "operator":"less",
+                     "selectedInputSrcField":"policyInput",
+                     "valueType":[
+                        "number"
+                     ],
+                     "functionSrc":null,
+                     "value":[
+                        2
+                     ],
+                     "valueSrc":[
+                        "value"
+                     ],
+                     "conjunction":"AND",
+                     "field":"LA.Age",
+                     "operatorOptions":null
+                  },
+                  "path":[
+                     "9a99988a-0123-4456-b89a-b1607f326fd8",
+                     "8aa8b898-0123-4456-b89a-b1701ed68a40",
+                     "9988bab8-cdef-4012-b456-71701ed68a41"
+                  ]
+               },
+               "ba9a8aba-cdef-4012-b456-71701ed7ef4e":{
+                  "type":"rule",
+                  "id":"ba9a8aba-cdef-4012-b456-71701ed7ef4e",
+                  "properties":{
+                     "field":"fce529e4-1b56-48fb-9a34-f925ee92b75e",
+                     "selectedInputSrcField":"functionInput",
+                     "functionSrc":{
+                        "parameters":[
+                           "LA.AgeDay",
+                           "LA.Height",
+                           "LA.Weight"
+                        ],
+                        "functionSelected":"CheckBMIJuvenile",
+                        "valueSrc":[
+                           "field",
+                           "field",
+                           "field"
+                        ],
+                        "dataTypes":[
+                           "number",
+                           "number",
+                           "number"
+                        ],
+                        "key":"fce529e4-1b56-48fb-9a34-f925ee92b75e"
+                     },
+                     "operator":"equal",
+                     "value":[
+                        0
+                     ],
+                     "valueSrc":[
+                        "value"
+                     ],
+                     "operatorOptions":null,
+                     "valueType":[
+                        "number"
+                     ]
+                  },
+                  "path":[
+                     "9a99988a-0123-4456-b89a-b1607f326fd8",
+                     "8aa8b898-0123-4456-b89a-b1701ed68a40",
+                     "ba9a8aba-cdef-4012-b456-71701ed7ef4e"
+                  ]
+               }
+            }
+         },
+         "b8989b99-4567-489a-bcde-f1701ed746ba":{
+            "type":"group",
+            "id":"b8989b99-4567-489a-bcde-f1701ed746ba",
+            "properties":{
+               "conjunction":"AND"
+            },
+            "path":[
+               "9a99988a-0123-4456-b89a-b1607f326fd8",
+               "b8989b99-4567-489a-bcde-f1701ed746ba"
             ],
-            "operatorOptions": null,
-            "valueType": [
-              "funtion"
-            ]
-          },
-          "path": [
-            "9a99988a-0123-4456-b89a-b1607f326fd8",
-            "a9a899a9-89ab-4cde-b012-31702e7372c8"
-          ]
-        }
+            "children1":{
+               "b8bb88a9-0123-4456-b89a-b1701ed746bb":{
+                  "type":"rule",
+                  "id":"b8bb88a9-0123-4456-b89a-b1701ed746bb",
+                  "properties":{
+                     "field":"LA.Age",
+                     "selectedInputSrcField":"policyInput",
+                     "functionSrc":null,
+                     "operator":"greater_or_equal",
+                     "value":[
+                        2
+                     ],
+                     "valueSrc":[
+                        "value"
+                     ],
+                     "operatorOptions":null,
+                     "conjunction":"AND",
+                     "valueType":[
+                        "number"
+                     ]
+                  },
+                  "path":[
+                     "9a99988a-0123-4456-b89a-b1607f326fd8",
+                     "b8989b99-4567-489a-bcde-f1701ed746ba",
+                     "b8bb88a9-0123-4456-b89a-b1701ed746bb"
+                  ]
+               },
+               "aa889999-89ab-4cde-b012-31701ed92b6e":{
+                  "type":"rule",
+                  "id":"aa889999-89ab-4cde-b012-31701ed92b6e",
+                  "properties":{
+                     "field":"LA.Age",
+                     "selectedInputSrcField":"policyInput",
+                     "functionSrc":null,
+                     "operator":"less",
+                     "value":[
+                        18
+                     ],
+                     "valueSrc":[
+                        "value"
+                     ],
+                     "operatorOptions":null,
+                     "valueType":[
+                        "number"
+                     ]
+                  },
+                  "path":[
+                     "9a99988a-0123-4456-b89a-b1607f326fd8",
+                     "b8989b99-4567-489a-bcde-f1701ed746ba",
+                     "aa889999-89ab-4cde-b012-31701ed92b6e"
+                  ]
+               },
+               "9aba98b9-4567-489a-bcde-f1701ed9ba40":{
+                  "type":"rule",
+                  "id":"9aba98b9-4567-489a-bcde-f1701ed9ba40",
+                  "properties":{
+                     "field":"fce529e4-1b56-48fb-9a34-f925ee92b75e",
+                     "selectedInputSrcField":"functionInput",
+                     "functionSrc":{
+                        "parameters":[
+                           "LA.Age",
+                           "LA.Height",
+                           "LA.Weight"
+                        ],
+                        "functionSelected":"CheckBMIJuvenile",
+                        "valueSrc":[
+                           "field",
+                           "field",
+                           "field"
+                        ],
+                        "dataTypes":[
+                           "number",
+                           "number",
+                           "number"
+                        ],
+                        "key":"fce529e4-1b56-48fb-9a34-f925ee92b75e"
+                     },
+                     "operator":"equal",
+                     "value":[
+                        0
+                     ],
+                     "valueSrc":[
+                        "value"
+                     ],
+                     "operatorOptions":null,
+                     "valueType":[
+                        "number"
+                     ]
+                  },
+                  "path":[
+                     "9a99988a-0123-4456-b89a-b1607f326fd8",
+                     "b8989b99-4567-489a-bcde-f1701ed746ba",
+                     "9aba98b9-4567-489a-bcde-f1701ed9ba40"
+                  ]
+               }
+            }
+         }
       },
-      "properties": {
-        "conjunction": "AND",
-        "not": false
+      "properties":{
+         "conjunction":"OR",
+         "not":false
       },
-      "path": [
-        "9a99988a-0123-4456-b89a-b1607f326fd8"
+      "path":[
+         "9a99988a-0123-4456-b89a-b1607f326fd8"
       ]
-    }`;
+   }`;
 } else {
   serializeTree = transit.toJSON;
   loadTree = transit.fromJSON;
@@ -166,8 +317,48 @@ const du = `{
 }`;
 
 const dummy = { 
-   "valueDefinitions":[ 
-      { 
+   "valueDefinitions":[
+      {
+         "groupName":"Value Definition",
+         "name":"CreateTestHistory",
+         "code":"CreateTestHistory",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Value Definition",
+         "name":"DinhLT3",
+         "code":"DinhLT3",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Value Definition",
+         "name":"Dinh_A2",
+         "code":"Dinh_A2",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Value Definition",
+         "name":"LA_AgedddddTest22",
+         "code":"LA_AgedddddTest22",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Value Definition",
+         "name":"test3",
+         "code":"test3",
+         "dataType":"date",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
          "groupName":"Value Definition",
          "name":"1",
          "code":"1",
@@ -175,23 +366,23 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"1212",
          "code":"1212",
-         "dataType":"number",
+         "dataType":"text",
          "parameterTypes":null,
          "isList":true
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"a",
          "code":"a",
-         "dataType":"number",
+         "dataType":"text",
          "parameterTypes":null,
-         "isList":true
+         "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"ABC",
          "code":"ABC",
@@ -199,7 +390,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"abc12121",
          "code":"abc12121",
@@ -207,7 +398,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"asdf",
          "code":"asdf",
@@ -215,7 +406,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"Cá nhân",
          "code":"Cá nhân",
@@ -223,7 +414,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"dev-test",
          "code":"dev-test",
@@ -231,7 +422,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"DinhLT3 - test",
          "code":"DinhLT3 - test",
@@ -239,7 +430,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"file",
          "code":"file",
@@ -247,7 +438,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"File5",
          "code":"File5",
@@ -255,7 +446,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"File-đúng",
          "code":"File-đúng",
@@ -263,7 +454,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"LA_Age",
          "code":"LA_Age",
@@ -271,15 +462,15 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"LA_Ageddddd",
          "code":"LA_Ageddddd",
-         "dataType":"String",
+         "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"Mã sản phẩm HIRB",
          "code":"Mã sản phẩm HIRB",
@@ -287,7 +478,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"newTAbs",
          "code":"newTAbs",
@@ -295,7 +486,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"PhucVo",
          "code":"PhucVo",
@@ -303,7 +494,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"PO_Age",
          "code":"PO_Age",
@@ -311,7 +502,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"Quý đây",
          "code":"Quý đây",
@@ -319,7 +510,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"Request ổ cắm điện",
          "code":"Request ổ cắm điện",
@@ -327,7 +518,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"Rule Là Gì",
          "code":"Rule Là Gì",
@@ -335,7 +526,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"test 1",
          "code":"test 1",
@@ -343,7 +534,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"Test113131",
          "code":"Test113131",
@@ -351,7 +542,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":true
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"Test35252",
          "code":"Test35252",
@@ -359,7 +550,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"Test35555",
          "code":"Test35555",
@@ -367,7 +558,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"testAccount13",
          "code":"testAccount13",
@@ -375,7 +566,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"TestDate",
          "code":"TestDate",
@@ -383,7 +574,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"TestForm",
          "code":"TestForm",
@@ -391,15 +582,15 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"Testtstt252352352",
          "code":"Testtstt252352352",
-         "dataType":"Number",
+         "dataType":"number",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"text value 3",
          "code":"text value 2",
@@ -407,7 +598,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"text value",
          "code":"text1",
@@ -415,7 +606,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"thuan value definition",
          "code":"thuan value definition",
@@ -423,7 +614,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Value Definition",
          "name":"TuoiTT",
          "code":"TuoiTT",
@@ -431,33 +622,201 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
+         "groupName":"Value Definition",
+         "name":"value_test111",
+         "code":"value_test111",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
          "groupName":"Value Definition",
          "name":"wwww",
          "code":"wwww",
          "dataType":"number",
          "parameterTypes":null,
          "isList":false
+      },
+      {
+         "groupName":"Value Definition",
+         "name":"Dinh_Test",
+         "code":"Dinh_Test",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Value Definition",
+         "name":"3dd9d10d1da2cf72d34449e353cd9e1449c22907f7fc5f104a1295e2ac46d5ebfa9f87fc549ad9904987061b87ab045ff5dcb7d96f238a39ba17f9cd110bf962253856a06df49375291c3a",
+         "code":"3dd9d10d1da2cf72d34449e353cd9e1449c22907f7fc5f104a1295e2ac46d5ebfa9f87fc549ad9904987061b87ab045ff5dcb7d96f238a39ba17f9cd110bf962253856a06df49375291c3a",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Value Definition",
+         "name":"c99bcdb5f9292c034f8fb5de94824ece00b3b953b2accbd987ee4e8c8aba6b3877685e3abe6c05844ec0b1cbb326b433c40856bcbb7989d71ad2e92164f5356022359bfdc74455ba5ed433",
+         "code":"c99bcdb5f9292c034f8fb5de94824ece00b3b953b2accbd987ee4e8c8aba6b3877685e3abe6c05844ec0b1cbb326b433c40856bcbb7989d71ad2e92164f5356022359bfdc74455ba5ed433",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Value Definition",
+         "name":"DP_A",
+         "code":"DP_A",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Value Definition",
+         "name":"Test",
+         "code":"Test",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Value Definition",
+         "name":"Dinh_A3",
+         "code":"Dinh_A3",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Value Definition",
+         "name":"Dinh_A13",
+         "code":"Dinh_A13",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Value Definition",
+         "name":"NGA_B",
+         "code":"NGA_B",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Value Definition",
+         "name":"Phuc",
+         "code":"Phuc",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Value Definition",
+         "name":"Dinh_A1",
+         "code":"Dinh_A1",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Value Definition",
+         "name":"LA_Ageddddddwadw",
+         "code":"LA_Ageddddddwadw",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Value Definition",
+         "name":"B",
+         "code":"B",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
       }
    ],
-   "functions":[ 
-      { 
+   "functions":[
+      {
+         "groupName":"Function",
+         "name":"CountTextLength",
+         "code":"A016C83ABF49D2FEE053040514AC3ADE",
+         "dataType":"number",
+         "parameterTypes":"text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"DateAdd",
+         "code":"A016C83ABF4AD2FEE053040514AC3ADE",
+         "dataType":"date",
+         "parameterTypes":"text;date;number",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"CheckElementOfArrayInArray",
+         "code":"A016C83ABF4BD2FEE053040514AC3ADE",
+         "dataType":"bool",
+         "parameterTypes":"text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"GetSAPerCase",
+         "code":"A016C83ABF4CD2FEE053040514AC3ADE",
+         "dataType":"number",
+         "parameterTypes":"text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"GetPremiumPerCase",
+         "code":"A0171967BC29F018E053040514ACA1C1",
+         "dataType":"number",
+         "parameterTypes":"text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"CheckDocExists",
+         "code":"A0171967BC2AF018E053040514ACA1C1",
+         "dataType":"number",
+         "parameterTypes":"text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NAME NB 3 length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length",
+         "code":"592064b2-94e5-4659-b953-8eeb98ea0bT2",
+         "dataType":"NGA NGA length check max length check max length check max length check max lengthlength check max length check max length check max length check max lengthlength check max length check max length check max length check max lengthlength check max",
+         "parameterTypes":"BO BO out length check max length check max length check max length check max lengthlength check max length check max length check max length check max lengthlength check max length check max length check max length check max lengthlength check ",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"nga b NAME NAME",
+         "code":"592064b2-94e5-4659-b953-8eeb98ea0bT4",
+         "dataType":"nga bo RETURNDATATYPE",
+         "parameterTypes":"NGA B PARAMETERTYPES",
+         "isList":false
+      },
+      {
          "groupName":"Function",
          "name":"CheckDuplicatePhoneCust",
          "code":"536cb40a-9521-4c72-8eb3-6bc64f17bd77",
          "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
+         "parameterTypes":"text",
          "isList":false
       },
-      { 
+      {
          "groupName":"Function",
          "name":"functionA",
          "code":"5ad62a8d-85ca-4312-9197-ea9fe31f5d5c",
          "dataType":"text",
          "parameterTypes":"number",
-         "isList":true
+         "isList":false
       },
-      { 
+      {
          "groupName":"Function",
          "name":"TextFunction",
          "code":"5f9cd890-bf53-455b-a1cc-fe956b3b37ff",
@@ -465,7 +824,7 @@ const dummy = {
          "parameterTypes":"bool;number",
          "isList":false
       },
-      { 
+      {
          "groupName":"Function",
          "name":"Minus",
          "code":"6bfc5366-8f3e-4512-80f0-bde00b7d1a22",
@@ -473,7 +832,7 @@ const dummy = {
          "parameterTypes":"number",
          "isList":true
       },
-      { 
+      {
          "groupName":"Function",
          "name":"Gender",
          "code":"759bb9ea-fa9a-47b6-a6d3-4b6d94167910",
@@ -481,7 +840,7 @@ const dummy = {
          "parameterTypes":"text;bool;number;date",
          "isList":false
       },
-      { 
+      {
          "groupName":"Function",
          "name":"ReplaceText",
          "code":"88d71c42-55a3-4bb5-a480-a38e04955a8a",
@@ -489,7 +848,7 @@ const dummy = {
          "parameterTypes":"text;number",
          "isList":true
       },
-      { 
+      {
          "groupName":"Function",
          "name":"Subtraction",
          "code":"d201db15-2673-41f0-a56e-81ae9acfa01a",
@@ -497,1081 +856,457 @@ const dummy = {
          "parameterTypes":"number;number",
          "isList":false
       },
-      { 
+      {
          "groupName":"Function",
          "name":"CheckBMIJuvenile",
          "code":"fce529e4-1b56-48fb-9a34-f925ee92b75e",
          "dataType":"number",
+         "parameterTypes":"text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_41 đi học",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2651",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_42 country",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2652",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_43 COUNTRY",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2653",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_44 UUSERNAME",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2654",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_45 subdivision",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2655",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_46 phép nhân chia",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2656",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_47 sunshine",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2657",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_48 DELL",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2658",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_49 plus detail",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2659",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_50 phep an so sanh ",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2660",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_51 phep tinh simple ",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2661",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NAME NB x length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length",
+         "code":"592064b2-94e5-4659-b953-8eeb98ea0bT0",
+         "dataType":"BOOLEAN",
+         "parameterTypes":"DATETIME",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NAME NB 2 length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length",
+         "code":"592064b2-94e5-4659-b953-8eeb98ea0bT1",
+         "dataType":"NGA NGA",
+         "parameterTypes":"BO BO BO",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_22",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a26f2",
+         "dataType":"Boolean",
+         "parameterTypes":"Datetime",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_0",
+         "code":"f7ddcc61-39f1-443f-834f-b9d1369aa211",
+         "dataType":"number",
          "parameterTypes":"number;number;number",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_1",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2611",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_2",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2612",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_3",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2613",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_4",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2614",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_5",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2615",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_6",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2616",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_7",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2617",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_8",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2618",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_9",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2619",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_10",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2620",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_11",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2621",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_12",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2622",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_13",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2623",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_14",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2624",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_15",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2625",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_16",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2626",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_17",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2627",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_18",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2628",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_19",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2629",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_20",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2630",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_21",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2631",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_23",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2633",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_24",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2634",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_25",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2635",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_26",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2636",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_27",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2637",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_28",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2638",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_29",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2639",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_30",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2640",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
+         "isList":false
+      },
+      {
+         "groupName":"Function",
+         "name":"NGA_BO_31",
+         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2642",
+         "dataType":"number",
+         "parameterTypes":"text;text;date;text;text",
          "isList":false
       }
    ],
-   "policyInputs":[ 
-      { 
+   "policyInputs":[
+      {
          "groupName":"Policy Input",
-         "name":"Case_Pre_BasicAnnual",
-         "code":"Case_Pre_BasicAnnual",
+         "name":"LA6.DocType",
+         "code":"LA6.DocType",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA6.Gender",
+         "code":"LA6.Gender",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA6.Height",
+         "code":"LA6.Height",
          "dataType":"number",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"Case_Pre_Require",
-         "code":"Case_Pre_Require",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":true
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"Case_Pre_Submit",
-         "code":"Case_Pre_Submit",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":true
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"Case_ProdList",
-         "code":"Case_ProdList",
+         "name":"LA6.IDNo",
+         "code":"LA6.IDNo",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"Case_SA_HIRB",
-         "code":"Case_SA_HIRB",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"GLA_Contact_MaritalStatus",
-         "code":"GLA_Contact_MaritalStatus",
+         "name":"LA6.Name",
+         "code":"LA6.Name",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"LA_Contact_Age",
-         "code":"LA_Contact_Age",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA_Contact_AgeDay",
-         "code":"LA_Contact_AgeDay",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA_Contact_DOB",
-         "code":"LA_Contact_DOB",
-         "dataType":"date",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA_Contact_DocType",
-         "code":"LA_Contact_DocType",
+         "name":"LA6.Phone1",
+         "code":"LA6.Phone1",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"LA_Contact_Gender",
-         "code":"LA_Contact_Gender",
+         "name":"LA6.RelationshipWithLA",
+         "code":"LA6.RelationshipWithLA",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"LA_Contact_Height",
-         "code":"LA_Contact_Height",
+         "name":"LA6.RelationshipWithPO",
+         "code":"LA6.RelationshipWithPO",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA6.Type",
+         "code":"LA6.Type",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA6.Weight",
+         "code":"LA6.Weight",
          "dataType":"number",
          "parameterTypes":null,
          "isList":false
       },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA_Contact_IDNo",
-         "code":"LA_Contact_IDNo",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA_Contact_Name",
-         "code":"LA_Contact_Name",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA_Contact_Phone1",
-         "code":"LA_Contact_Phone1",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA_Contact_RelationshipWithLA",
-         "code":"LA_Contact_RelationshipWithLA",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA_Contact_RelationshipWithPO",
-         "code":"LA_Contact_RelationshipWithPO",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA_Contact_Type",
-         "code":"LA_Contact_Type",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA_Contact_Weight",
-         "code":"LA_Contact_Weight",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA_Doc_CCCD",
-         "code":"LA_Doc_CCCD",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA_Doc_CMND",
-         "code":"LA_Doc_CMND",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA_Doc_DangKyKetHon",
-         "code":"LA_Doc_DangKyKetHon",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA_Doc_KhaiSinh",
-         "code":"LA_Doc_KhaiSinh",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA_ProdList",
-         "code":"LA_ProdList",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA_SA_HIRB",
-         "code":"LA_SA_HIRB",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA1_Contact_Age",
-         "code":"LA1_Contact_Age",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA1_Contact_AgeDay",
-         "code":"LA1_Contact_AgeDay",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA1_Contact_DOB",
-         "code":"LA1_Contact_DOB",
-         "dataType":"date",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA1_Contact_DocType",
-         "code":"LA1_Contact_DocType",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA1_Contact_Gender",
-         "code":"LA1_Contact_Gender",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA1_Contact_Height",
-         "code":"LA1_Contact_Height",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA1_Contact_IDNo",
-         "code":"LA1_Contact_IDNo",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA1_Contact_Name",
-         "code":"LA1_Contact_Name",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA1_Contact_Phone1",
-         "code":"LA1_Contact_Phone1",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA1_Contact_RelationshipWithLA",
-         "code":"LA1_Contact_RelationshipWithLA",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA1_Contact_RelationshipWithPO",
-         "code":"LA1_Contact_RelationshipWithPO",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA1_Contact_Type",
-         "code":"LA1_Contact_Type",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA1_Contact_Weight",
-         "code":"LA1_Contact_Weight",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA1_Doc_CCCD",
-         "code":"LA1_Doc_CCCD",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA1_Doc_CMND",
-         "code":"LA1_Doc_CMND",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA1_Doc_DangKyKetHon",
-         "code":"LA1_Doc_DangKyKetHon",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA1_Doc_KhaiSinh",
-         "code":"LA1_Doc_KhaiSinh",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA1_ProdList",
-         "code":"LA1_ProdList",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA1_SA_HIRB",
-         "code":"LA1_SA_HIRB",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA2_Contact_Age",
-         "code":"LA2_Contact_Age",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA2_Contact_AgeDay",
-         "code":"LA2_Contact_AgeDay",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA2_Contact_DOB",
-         "code":"LA2_Contact_DOB",
-         "dataType":"date",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA2_Contact_DocType",
-         "code":"LA2_Contact_DocType",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA2_Contact_Gender",
-         "code":"LA2_Contact_Gender",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA2_Contact_Height",
-         "code":"LA2_Contact_Height",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA2_Contact_IDNo",
-         "code":"LA2_Contact_IDNo",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA2_Contact_Name",
-         "code":"LA2_Contact_Name",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA2_Contact_Phone1",
-         "code":"LA2_Contact_Phone1",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA2_Contact_RelationshipWithLA",
-         "code":"LA2_Contact_RelationshipWithLA",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA2_Contact_RelationshipWithPO",
-         "code":"LA2_Contact_RelationshipWithPO",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA2_Contact_Type",
-         "code":"LA2_Contact_Type",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA2_Contact_Weight",
-         "code":"LA2_Contact_Weight",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA2_Doc_CCCD",
-         "code":"LA2_Doc_CCCD",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA2_Doc_CMND",
-         "code":"LA2_Doc_CMND",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA2_Doc_DangKyKetHon",
-         "code":"LA2_Doc_DangKyKetHon",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA2_Doc_KhaiSinh",
-         "code":"LA2_Doc_KhaiSinh",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA2_ProdList",
-         "code":"LA2_ProdList",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA2_SA_HIRB",
-         "code":"LA2_SA_HIRB",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA3_Contact_Age",
-         "code":"LA3_Contact_Age",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA3_Contact_AgeDay",
-         "code":"LA3_Contact_AgeDay",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA3_Contact_DOB",
-         "code":"LA3_Contact_DOB",
-         "dataType":"date",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA3_Contact_DocType",
-         "code":"LA3_Contact_DocType",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA3_Contact_Gender",
-         "code":"LA3_Contact_Gender",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA3_Contact_Height",
-         "code":"LA3_Contact_Height",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA3_Contact_IDNo",
-         "code":"LA3_Contact_IDNo",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA3_Contact_Name",
-         "code":"LA3_Contact_Name",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA3_Contact_Phone1",
-         "code":"LA3_Contact_Phone1",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA3_Contact_RelationshipWithLA",
-         "code":"LA3_Contact_RelationshipWithLA",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA3_Contact_RelationshipWithPO",
-         "code":"LA3_Contact_RelationshipWithPO",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA3_Contact_Type",
-         "code":"LA3_Contact_Type",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA3_Contact_Weight",
-         "code":"LA3_Contact_Weight",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA3_Doc_CCCD",
-         "code":"LA3_Doc_CCCD",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA3_Doc_CMND",
-         "code":"LA3_Doc_CMND",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA3_Doc_DangKyKetHon",
-         "code":"LA3_Doc_DangKyKetHon",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA3_Doc_KhaiSinh",
-         "code":"LA3_Doc_KhaiSinh",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA3_ProdList",
-         "code":"LA3_ProdList",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA3_SA_HIRB",
-         "code":"LA3_SA_HIRB",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA4_Contact_Age",
-         "code":"LA4_Contact_Age",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA4_Contact_AgeDay",
-         "code":"LA4_Contact_AgeDay",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA4_Contact_DOB",
-         "code":"LA4_Contact_DOB",
-         "dataType":"date",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA4_Contact_DocType",
-         "code":"LA4_Contact_DocType",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA4_Contact_Gender",
-         "code":"LA4_Contact_Gender",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA4_Contact_Height",
-         "code":"LA4_Contact_Height",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA4_Contact_IDNo",
-         "code":"LA4_Contact_IDNo",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA4_Contact_Name",
-         "code":"LA4_Contact_Name",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA4_Contact_Phone1",
-         "code":"LA4_Contact_Phone1",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA4_Contact_RelationshipWithLA",
-         "code":"LA4_Contact_RelationshipWithLA",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA4_Contact_RelationshipWithPO",
-         "code":"LA4_Contact_RelationshipWithPO",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA4_Contact_Type",
-         "code":"LA4_Contact_Type",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA4_Contact_Weight",
-         "code":"LA4_Contact_Weight",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA4_Doc_CCCD",
-         "code":"LA4_Doc_CCCD",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA4_Doc_CMND",
-         "code":"LA4_Doc_CMND",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA4_Doc_DangKyKetHon",
-         "code":"LA4_Doc_DangKyKetHon",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA4_Doc_KhaiSinh",
-         "code":"LA4_Doc_KhaiSinh",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA4_ProdList",
-         "code":"LA4_ProdList",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA4_SA_HIRB",
-         "code":"LA4_SA_HIRB",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA5_Contact_Age",
-         "code":"LA5_Contact_Age",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA5_Contact_AgeDay",
-         "code":"LA5_Contact_AgeDay",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA5_Contact_DOB",
-         "code":"LA5_Contact_DOB",
-         "dataType":"date",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA5_Contact_DocType",
-         "code":"LA5_Contact_DocType",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA5_Contact_Gender",
-         "code":"LA5_Contact_Gender",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA5_Contact_Height",
-         "code":"LA5_Contact_Height",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA5_Contact_IDNo",
-         "code":"LA5_Contact_IDNo",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA5_Contact_Name",
-         "code":"LA5_Contact_Name",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA5_Contact_Phone1",
-         "code":"LA5_Contact_Phone1",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA5_Contact_RelationshipWithLA",
-         "code":"LA5_Contact_RelationshipWithLA",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA5_Contact_RelationshipWithPO",
-         "code":"LA5_Contact_RelationshipWithPO",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA5_Contact_Type",
-         "code":"LA5_Contact_Type",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA5_Contact_Weight",
-         "code":"LA5_Contact_Weight",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA5_Doc_CCCD",
-         "code":"LA5_Doc_CCCD",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA5_Doc_CMND",
-         "code":"LA5_Doc_CMND",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA5_Doc_DangKyKetHon",
-         "code":"LA5_Doc_DangKyKetHon",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA5_Doc_KhaiSinh",
-         "code":"LA5_Doc_KhaiSinh",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA5_ProdList",
-         "code":"LA5_ProdList",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA5_SA_HIRB",
-         "code":"LA5_SA_HIRB",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA6_Contact_Age",
-         "code":"LA6_Contact_Age",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA6_Contact_AgeDay",
-         "code":"LA6_Contact_AgeDay",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA6_Contact_DOB",
-         "code":"LA6_Contact_DOB",
-         "dataType":"date",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA6_Contact_DocType",
-         "code":"LA6_Contact_DocType",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA6_Contact_Gender",
-         "code":"LA6_Contact_Gender",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA6_Contact_Height",
-         "code":"LA6_Contact_Height",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA6_Contact_IDNo",
-         "code":"LA6_Contact_IDNo",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA6_Contact_Name",
-         "code":"LA6_Contact_Name",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA6_Contact_Phone1",
-         "code":"LA6_Contact_Phone1",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA6_Contact_RelationshipWithLA",
-         "code":"LA6_Contact_RelationshipWithLA",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA6_Contact_RelationshipWithPO",
-         "code":"LA6_Contact_RelationshipWithPO",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA6_Contact_Type",
-         "code":"LA6_Contact_Type",
-         "dataType":"text",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
-         "groupName":"Policy Input",
-         "name":"LA6_Contact_Weight",
-         "code":"LA6_Contact_Weight",
-         "dataType":"number",
-         "parameterTypes":null,
-         "isList":false
-      },
-      { 
+      {
          "groupName":"Policy Input",
          "name":"LA6_Doc_CCCD",
          "code":"LA6_Doc_CCCD",
@@ -1579,7 +1314,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
          "name":"LA6_Doc_CMND",
          "code":"LA6_Doc_CMND",
@@ -1587,7 +1322,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
          "name":"LA6_Doc_DangKyKetHon",
          "code":"LA6_Doc_DangKyKetHon",
@@ -1595,7 +1330,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
          "name":"LA6_Doc_KhaiSinh",
          "code":"LA6_Doc_KhaiSinh",
@@ -1603,7 +1338,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
          "name":"LA6_ProdList",
          "code":"LA6_ProdList",
@@ -1611,7 +1346,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
          "name":"LA6_SA_HIRB",
          "code":"LA6_SA_HIRB",
@@ -1619,111 +1354,111 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"LA7_Contact_Age",
-         "code":"LA7_Contact_Age",
+         "name":"LA7.Age",
+         "code":"LA7.Age",
          "dataType":"number",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"LA7_Contact_AgeDay",
-         "code":"LA7_Contact_AgeDay",
+         "name":"LA7.AgeDay",
+         "code":"LA7.AgeDay",
          "dataType":"number",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"LA7_Contact_DOB",
-         "code":"LA7_Contact_DOB",
+         "name":"LA7.DOB",
+         "code":"LA7.DOB",
          "dataType":"date",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"LA7_Contact_DocType",
-         "code":"LA7_Contact_DocType",
+         "name":"LA7.DocType",
+         "code":"LA7.DocType",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"LA7_Contact_Gender",
-         "code":"LA7_Contact_Gender",
+         "name":"LA7.Gender",
+         "code":"LA7.Gender",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"LA7_Contact_Height",
-         "code":"LA7_Contact_Height",
+         "name":"LA7.Height",
+         "code":"LA7.Height",
          "dataType":"number",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"LA7_Contact_IDNo",
-         "code":"LA7_Contact_IDNo",
+         "name":"LA7.IDNo",
+         "code":"LA7.IDNo",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"LA7_Contact_Name",
-         "code":"LA7_Contact_Name",
+         "name":"LA7.Name",
+         "code":"LA7.Name",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"LA7_Contact_Phone1",
-         "code":"LA7_Contact_Phone1",
+         "name":"LA7.Phone1",
+         "code":"LA7.Phone1",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"LA7_Contact_RelationshipWithLA",
-         "code":"LA7_Contact_RelationshipWithLA",
+         "name":"LA7.RelationshipWithLA",
+         "code":"LA7.RelationshipWithLA",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"LA7_Contact_RelationshipWithPO",
-         "code":"LA7_Contact_RelationshipWithPO",
+         "name":"LA7.RelationshipWithPO",
+         "code":"LA7.RelationshipWithPO",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"LA7_Contact_Type",
-         "code":"LA7_Contact_Type",
+         "name":"LA7.Type",
+         "code":"LA7.Type",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"LA7_Contact_Weight",
-         "code":"LA7_Contact_Weight",
+         "name":"LA7.Weight",
+         "code":"LA7.Weight",
          "dataType":"number",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
          "name":"LA7_Doc_CCCD",
          "code":"LA7_Doc_CCCD",
@@ -1731,7 +1466,991 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
+         "groupName":"Policy Input",
+         "name":"Case.BasicAnnual",
+         "code":"Case.BasicAnnual",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"Case.ModePremium",
+         "code":"Case.ModePremium",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"Case.SubmitPremium",
+         "code":"Case.SubmitPremium",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"Case_ProdList",
+         "code":"Case_ProdList",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"Case_SA_HIRB",
+         "code":"Case_SA_HIRB",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"GLA.MaritalStatus",
+         "code":"GLA.MaritalStatus",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA.Age",
+         "code":"LA.Age",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA.AgeDay",
+         "code":"LA.AgeDay",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA.DOB",
+         "code":"LA.DOB",
+         "dataType":"date",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA.DocType",
+         "code":"LA.DocType",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA.Gender",
+         "code":"LA.Gender",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA.Height",
+         "code":"LA.Height",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA.IDNo",
+         "code":"LA.IDNo",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA.Name",
+         "code":"LA.Name",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA.Phone1",
+         "code":"LA.Phone1",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA.RelationshipWithLA",
+         "code":"LA.RelationshipWithLA",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA.RelationshipWithPO",
+         "code":"LA.RelationshipWithPO",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA.Type",
+         "code":"LA.Type",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA.Weight",
+         "code":"LA.Weight",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA_Doc_CCCD",
+         "code":"LA_Doc_CCCD",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA_Doc_CMND",
+         "code":"LA_Doc_CMND",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA_Doc_DangKyKetHon",
+         "code":"LA_Doc_DangKyKetHon",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA_Doc_KhaiSinh",
+         "code":"LA_Doc_KhaiSinh",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA_ProdList",
+         "code":"LA_ProdList",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA_SA_HIRB",
+         "code":"LA_SA_HIRB",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA1.Age",
+         "code":"LA1.Age",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA1.AgeDay",
+         "code":"LA1.AgeDay",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA1.DOB",
+         "code":"LA1.DOB",
+         "dataType":"date",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA1.DocType",
+         "code":"LA1.DocType",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA1.Gender",
+         "code":"LA1.Gender",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA1.Height",
+         "code":"LA1.Height",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA1.IDNo",
+         "code":"LA1.IDNo",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA1.Name",
+         "code":"LA1.Name",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA1.Phone1",
+         "code":"LA1.Phone1",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA1.RelationshipWithLA",
+         "code":"LA1.RelationshipWithLA",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA1.RelationshipWithPO",
+         "code":"LA1.RelationshipWithPO",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA1.Type",
+         "code":"LA1.Type",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA1.Weight",
+         "code":"LA1.Weight",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA1_Doc_CCCD",
+         "code":"LA1_Doc_CCCD",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA1_Doc_CMND",
+         "code":"LA1_Doc_CMND",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA1_Doc_DangKyKetHon",
+         "code":"LA1_Doc_DangKyKetHon",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA1_Doc_KhaiSinh",
+         "code":"LA1_Doc_KhaiSinh",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA1_ProdList",
+         "code":"LA1_ProdList",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA1_SA_HIRB",
+         "code":"LA1_SA_HIRB",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA2.Age",
+         "code":"LA2.Age",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA2.AgeDay",
+         "code":"LA2.AgeDay",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA2.DOB",
+         "code":"LA2.DOB",
+         "dataType":"date",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA2.DocType",
+         "code":"LA2.DocType",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA2.Gender",
+         "code":"LA2.Gender",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA2.Height",
+         "code":"LA2.Height",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA2.IDNo",
+         "code":"LA2.IDNo",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA2.Name",
+         "code":"LA2.Name",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA2.Phone1",
+         "code":"LA2.Phone1",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA2.RelationshipWithLA",
+         "code":"LA2.RelationshipWithLA",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA2.RelationshipWithPO",
+         "code":"LA2.RelationshipWithPO",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA2.Type",
+         "code":"LA2.Type",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA2.Weight",
+         "code":"LA2.Weight",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA2_Doc_CCCD",
+         "code":"LA2_Doc_CCCD",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA2_Doc_CMND",
+         "code":"LA2_Doc_CMND",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA2_Doc_DangKyKetHon",
+         "code":"LA2_Doc_DangKyKetHon",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA2_Doc_KhaiSinh",
+         "code":"LA2_Doc_KhaiSinh",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA2_ProdList",
+         "code":"LA2_ProdList",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA2_SA_HIRB",
+         "code":"LA2_SA_HIRB",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA3.Age",
+         "code":"LA3.Age",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA3.AgeDay",
+         "code":"LA3.AgeDay",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA3.DOB",
+         "code":"LA3.DOB",
+         "dataType":"date",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA3.DocType",
+         "code":"LA3.DocType",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA3.Gender",
+         "code":"LA3.Gender",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA3.Height",
+         "code":"LA3.Height",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA3.IDNo",
+         "code":"LA3.IDNo",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA3.Name",
+         "code":"LA3.Name",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA3.Phone1",
+         "code":"LA3.Phone1",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA3.RelationshipWithLA",
+         "code":"LA3.RelationshipWithLA",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA3.RelationshipWithPO",
+         "code":"LA3.RelationshipWithPO",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA3.Type",
+         "code":"LA3.Type",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA3.Weight",
+         "code":"LA3.Weight",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA3_Doc_CCCD",
+         "code":"LA3_Doc_CCCD",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA3_Doc_CMND",
+         "code":"LA3_Doc_CMND",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA3_Doc_DangKyKetHon",
+         "code":"LA3_Doc_DangKyKetHon",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA3_Doc_KhaiSinh",
+         "code":"LA3_Doc_KhaiSinh",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA3_ProdList",
+         "code":"LA3_ProdList",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA3_SA_HIRB",
+         "code":"LA3_SA_HIRB",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA4.Age",
+         "code":"LA4.Age",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA4.AgeDay",
+         "code":"LA4.AgeDay",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA4.DOB",
+         "code":"LA4.DOB",
+         "dataType":"date",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA4.DocType",
+         "code":"LA4.DocType",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA4.Gender",
+         "code":"LA4.Gender",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA4.Height",
+         "code":"LA4.Height",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA4.IDNo",
+         "code":"LA4.IDNo",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA4.Name",
+         "code":"LA4.Name",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA4.Phone1",
+         "code":"LA4.Phone1",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA4.RelationshipWithLA",
+         "code":"LA4.RelationshipWithLA",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA4.RelationshipWithPO",
+         "code":"LA4.RelationshipWithPO",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA4.Type",
+         "code":"LA4.Type",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA4.Weight",
+         "code":"LA4.Weight",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA4_Doc_CCCD",
+         "code":"LA4_Doc_CCCD",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA4_Doc_CMND",
+         "code":"LA4_Doc_CMND",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA4_Doc_DangKyKetHon",
+         "code":"LA4_Doc_DangKyKetHon",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA4_Doc_KhaiSinh",
+         "code":"LA4_Doc_KhaiSinh",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA4_ProdList",
+         "code":"LA4_ProdList",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA4_SA_HIRB",
+         "code":"LA4_SA_HIRB",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA5.Age",
+         "code":"LA5.Age",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA5.AgeDay",
+         "code":"LA5.AgeDay",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA5.DOB",
+         "code":"LA5.DOB",
+         "dataType":"date",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA5.DocType",
+         "code":"LA5.DocType",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA5.Gender",
+         "code":"LA5.Gender",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA5.Height",
+         "code":"LA5.Height",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA5.IDNo",
+         "code":"LA5.IDNo",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA5.Name",
+         "code":"LA5.Name",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA5.Phone1",
+         "code":"LA5.Phone1",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA5.RelationshipWithLA",
+         "code":"LA5.RelationshipWithLA",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA5.RelationshipWithPO",
+         "code":"LA5.RelationshipWithPO",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA5.Type",
+         "code":"LA5.Type",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA5.Weight",
+         "code":"LA5.Weight",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA5_Doc_CCCD",
+         "code":"LA5_Doc_CCCD",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA5_Doc_CMND",
+         "code":"LA5_Doc_CMND",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA5_Doc_DangKyKetHon",
+         "code":"LA5_Doc_DangKyKetHon",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA5_Doc_KhaiSinh",
+         "code":"LA5_Doc_KhaiSinh",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA5_ProdList",
+         "code":"LA5_ProdList",
+         "dataType":"text",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA5_SA_HIRB",
+         "code":"LA5_SA_HIRB",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA6.Age",
+         "code":"LA6.Age",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA6.AgeDay",
+         "code":"LA6.AgeDay",
+         "dataType":"number",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
+         "groupName":"Policy Input",
+         "name":"LA6.DOB",
+         "code":"LA6.DOB",
+         "dataType":"date",
+         "parameterTypes":null,
+         "isList":false
+      },
+      {
          "groupName":"Policy Input",
          "name":"LA7_Doc_CMND",
          "code":"LA7_Doc_CMND",
@@ -1739,7 +2458,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
          "name":"LA7_Doc_DangKyKetHon",
          "code":"LA7_Doc_DangKyKetHon",
@@ -1747,7 +2466,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
          "name":"LA7_Doc_KhaiSinh",
          "code":"LA7_Doc_KhaiSinh",
@@ -1755,7 +2474,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
          "name":"LA7_ProdList",
          "code":"LA7_ProdList",
@@ -1763,7 +2482,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
          "name":"LA7_SA_HIRB",
          "code":"LA7_SA_HIRB",
@@ -1771,111 +2490,111 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"PO_Contact_Age",
-         "code":"PO_Contact_Age",
+         "name":"PO.Age",
+         "code":"PO.Age",
          "dataType":"number",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"PO_Contact_AgeDay",
-         "code":"PO_Contact_AgeDay",
+         "name":"PO.AgeDay",
+         "code":"PO.AgeDay",
          "dataType":"number",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"PO_Contact_DOB",
-         "code":"PO_Contact_DOB",
+         "name":"PO.DOB",
+         "code":"PO.DOB",
          "dataType":"date",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"PO_Contact_DocType",
-         "code":"PO_Contact_DocType",
+         "name":"PO.DocType",
+         "code":"PO.DocType",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"PO_Contact_Gender",
-         "code":"PO_Contact_Gender",
+         "name":"PO.Gender",
+         "code":"PO.Gender",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"PO_Contact_Height",
-         "code":"PO_Contact_Height",
+         "name":"PO.Height",
+         "code":"PO.Height",
          "dataType":"number",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"PO_Contact_IDNo",
-         "code":"PO_Contact_IDNo",
+         "name":"PO.IDNo",
+         "code":"PO.IDNo",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"PO_Contact_Name",
-         "code":"PO_Contact_Name",
+         "name":"PO.Name",
+         "code":"PO.Name",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"PO_Contact_Phone1",
-         "code":"PO_Contact_Phone1",
+         "name":"PO.Phone1",
+         "code":"PO.Phone1",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"PO_Contact_RelationshipWithLA",
-         "code":"PO_Contact_RelationshipWithLA",
+         "name":"PO.RelationshipWithLA",
+         "code":"PO.RelationshipWithLA",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"PO_Contact_RelationshipWithPO",
-         "code":"PO_Contact_RelationshipWithPO",
+         "name":"PO.RelationshipWithPO",
+         "code":"PO.RelationshipWithPO",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"PO_Contact_Type",
-         "code":"PO_Contact_Type",
+         "name":"PO.Type",
+         "code":"PO.Type",
          "dataType":"text",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
-         "name":"PO_Contact_Weight",
-         "code":"PO_Contact_Weight",
+         "name":"PO.Weight",
+         "code":"PO.Weight",
          "dataType":"number",
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
          "name":"PO_Doc_CCCD",
          "code":"PO_Doc_CCCD",
@@ -1883,7 +2602,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
          "name":"PO_Doc_CMND",
          "code":"PO_Doc_CMND",
@@ -1891,7 +2610,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
          "name":"PO_Doc_DangKyKetHon",
          "code":"PO_Doc_DangKyKetHon",
@@ -1899,7 +2618,7 @@ const dummy = {
          "parameterTypes":null,
          "isList":false
       },
-      { 
+      {
          "groupName":"Policy Input",
          "name":"PO_Doc_KhaiSinh",
          "code":"PO_Doc_KhaiSinh",
@@ -1930,14 +2649,22 @@ export default class DemoQueryBuilder extends Component {
     constant: []
   };
 
+  
+
   getChildren(props) {
     const jsonStyle = {
       backgroundColor: "darkgrey",
       margin: "10px",
       padding: "10px"
     };
+    const validate = function (tree) {
+      const data = validationQuery(tree);
+      console.log(data);
+      
+     }
     return (
       <div style={{ padding: "10px" }}>
+          <button onClick={() => validate(props.tree.toJS())} >aaaaaaaa</button>
         <div className="query-builder">
           <Builder {...props} />
         </div>
@@ -2003,6 +2730,7 @@ export default class DemoQueryBuilder extends Component {
           get_children={this.getChildren}
           {...configData}
         />
+       
       </div>
     );
   }

@@ -82,6 +82,7 @@ class ConnectedQuery extends Component {
   render() {
     const { config, tree, get_children, dispatch, ...props } = this.props;
     const validatedTree = this.validatedTree;
+
     return (
       <div>
         {get_children({
