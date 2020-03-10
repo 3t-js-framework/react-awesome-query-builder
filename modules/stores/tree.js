@@ -433,8 +433,18 @@ const setField = (state, path, newField, config) => {
  */
 const setInputSrcField = (state, path, inputSrcField, config) => {
     // return state.setIn(expandTreePath(path, 'properties', 'selectedInputSrcField', name), value);
+    
     return state.updateIn(expandTreePath(path, 'properties'), (map) => map.withMutations((current) => {
-        return current.set('selectedInputSrcField', inputSrcField);
+        const newImuList = new Immutable.List();
+        return  current
+                    .set('selectedInputSrcField', inputSrcField)
+                    .set('functionSrc', null)
+                    .set('field', null)
+                    .set('operator', null)
+                    .set('operatorOptions', null)
+                    .set('value', newImuList)
+                    .set('valueSrc', newImuList)
+                    .set('valueType', newImuList)
     }))
 };
 

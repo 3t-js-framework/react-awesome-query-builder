@@ -81,7 +81,7 @@ export const queryBuilderFormat = (item, config, rootQuery = null) => {
 
         return resultQuery;
     } else if (type === 'rule') {
-            const operator = properties.get('operator');
+        const operator = properties.get('operator');
         const options = properties.get('operatorOptions');
         let field = properties.get('field');
         let value = properties.get('value');
@@ -123,7 +123,7 @@ export const queryBuilderFormat = (item, config, rootQuery = null) => {
         if (selectedInputSrcField === INPUT_SRC_FIELD.POLICY_INPUT){
             rootQuery.usedFieldConfigs.push(field);
             rootQuery.usedFieldConfigs = [...new Set(rootQuery.usedFieldConfigs)];
-        }else if( selectedInputSrcField === INPUT_SRC_FIELD.FUNCTION_INPUT){
+        }else if( selectedInputSrcField === INPUT_SRC_FIELD.FUNCTION_INPUT && functionSrc){
             const valueFunc = functionSrc.valueSrc;
             const parmFunc = functionSrc.parameters;
             for(let j = 0; j < valueFunc.length; j++){

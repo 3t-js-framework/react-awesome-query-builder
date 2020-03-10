@@ -14,7 +14,6 @@ const Immutable = require("immutable");
 const transit = require("transit-immutable-js");
 import { fromJS } from "immutable";
 import validationQuery from './validation'
-
 // https://github.com/ukrbublik/react-awesome-query-builder/issues/69
 var seriazlieAsImmutable = false;
 
@@ -43,207 +42,42 @@ if (!seriazlieAsImmutable) {
   };
   initValue =
     `{
-      "type":"group",
-      "id":"9a99988a-0123-4456-b89a-b1607f326fd8",
-      "children1":{
-         "8aa8b898-0123-4456-b89a-b1701ed68a40":{
-            "type":"group",
-            "id":"8aa8b898-0123-4456-b89a-b1701ed68a40",
-            "properties":{
-               "conjunction":"AND"
-            },
-            "path":[
-               "9a99988a-0123-4456-b89a-b1607f326fd8",
-               "8aa8b898-0123-4456-b89a-b1701ed68a40"
+      "type": "group",
+      "id": "9a99988a-0123-4456-b89a-b1607f326fd8",
+      "children1": {
+        "9aa9ab89-cdef-4012-b456-7170c2634d7a": {
+          "type": "rule",
+          "id": "9aa9ab89-cdef-4012-b456-7170c2634d7a",
+          "properties": {
+            "field": "LA6.DocType",
+            "selectedInputSrcField": "policyInput",
+            "functionSrc": null,
+            "operator": "equal",
+            "value": [
+              "LA6.IDNo"
             ],
-            "children1":{
-               "9988bab8-cdef-4012-b456-71701ed68a41":{
-                  "type":"rule",
-                  "id":"9988bab8-cdef-4012-b456-71701ed68a41",
-                  "properties":{
-                     "operator":"less",
-                     "selectedInputSrcField":"policyInput",
-                     "valueType":[
-                        "number"
-                     ],
-                     "functionSrc":null,
-                     "value":[
-                        2
-                     ],
-                     "valueSrc":[
-                        "value"
-                     ],
-                     "conjunction":"AND",
-                     "field":"LA.Age",
-                     "operatorOptions":null
-                  },
-                  "path":[
-                     "9a99988a-0123-4456-b89a-b1607f326fd8",
-                     "8aa8b898-0123-4456-b89a-b1701ed68a40",
-                     "9988bab8-cdef-4012-b456-71701ed68a41"
-                  ]
-               },
-               "ba9a8aba-cdef-4012-b456-71701ed7ef4e":{
-                  "type":"rule",
-                  "id":"ba9a8aba-cdef-4012-b456-71701ed7ef4e",
-                  "properties":{
-                     "field":"fce529e4-1b56-48fb-9a34-f925ee92b75e",
-                     "selectedInputSrcField":"functionInput",
-                     "functionSrc":{
-                        "parameters":[
-                           "LA.AgeDay",
-                           "LA.Height",
-                           "LA.Weight"
-                        ],
-                        "functionSelected":"CheckBMIJuvenile",
-                        "valueSrc":[
-                           "field",
-                           "field",
-                           "field"
-                        ],
-                        "dataTypes":[
-                           "number",
-                           "number",
-                           "number"
-                        ],
-                        "key":"fce529e4-1b56-48fb-9a34-f925ee92b75e"
-                     },
-                     "operator":"equal",
-                     "value":[
-                        0
-                     ],
-                     "valueSrc":[
-                        "value"
-                     ],
-                     "operatorOptions":null,
-                     "valueType":[
-                        "number"
-                     ]
-                  },
-                  "path":[
-                     "9a99988a-0123-4456-b89a-b1607f326fd8",
-                     "8aa8b898-0123-4456-b89a-b1701ed68a40",
-                     "ba9a8aba-cdef-4012-b456-71701ed7ef4e"
-                  ]
-               }
-            }
-         },
-         "b8989b99-4567-489a-bcde-f1701ed746ba":{
-            "type":"group",
-            "id":"b8989b99-4567-489a-bcde-f1701ed746ba",
-            "properties":{
-               "conjunction":"AND"
-            },
-            "path":[
-               "9a99988a-0123-4456-b89a-b1607f326fd8",
-               "b8989b99-4567-489a-bcde-f1701ed746ba"
+            "valueSrc": [
+              "field"
             ],
-            "children1":{
-               "b8bb88a9-0123-4456-b89a-b1701ed746bb":{
-                  "type":"rule",
-                  "id":"b8bb88a9-0123-4456-b89a-b1701ed746bb",
-                  "properties":{
-                     "field":"LA.Age",
-                     "selectedInputSrcField":"policyInput",
-                     "functionSrc":null,
-                     "operator":"greater_or_equal",
-                     "value":[
-                        2
-                     ],
-                     "valueSrc":[
-                        "value"
-                     ],
-                     "operatorOptions":null,
-                     "conjunction":"AND",
-                     "valueType":[
-                        "number"
-                     ]
-                  },
-                  "path":[
-                     "9a99988a-0123-4456-b89a-b1607f326fd8",
-                     "b8989b99-4567-489a-bcde-f1701ed746ba",
-                     "b8bb88a9-0123-4456-b89a-b1701ed746bb"
-                  ]
-               },
-               "aa889999-89ab-4cde-b012-31701ed92b6e":{
-                  "type":"rule",
-                  "id":"aa889999-89ab-4cde-b012-31701ed92b6e",
-                  "properties":{
-                     "field":"LA.Age",
-                     "selectedInputSrcField":"policyInput",
-                     "functionSrc":null,
-                     "operator":"less",
-                     "value":[
-                        18
-                     ],
-                     "valueSrc":[
-                        "value"
-                     ],
-                     "operatorOptions":null,
-                     "valueType":[
-                        "number"
-                     ]
-                  },
-                  "path":[
-                     "9a99988a-0123-4456-b89a-b1607f326fd8",
-                     "b8989b99-4567-489a-bcde-f1701ed746ba",
-                     "aa889999-89ab-4cde-b012-31701ed92b6e"
-                  ]
-               },
-               "9aba98b9-4567-489a-bcde-f1701ed9ba40":{
-                  "type":"rule",
-                  "id":"9aba98b9-4567-489a-bcde-f1701ed9ba40",
-                  "properties":{
-                     "field":"fce529e4-1b56-48fb-9a34-f925ee92b75e",
-                     "selectedInputSrcField":"functionInput",
-                     "functionSrc":{
-                        "parameters":[
-                           "LA.Age",
-                           "LA.Height",
-                           "LA.Weight"
-                        ],
-                        "functionSelected":"CheckBMIJuvenile",
-                        "valueSrc":[
-                           "field",
-                           "field",
-                           "field"
-                        ],
-                        "dataTypes":[
-                           "number",
-                           "number",
-                           "number"
-                        ],
-                        "key":"fce529e4-1b56-48fb-9a34-f925ee92b75e"
-                     },
-                     "operator":"equal",
-                     "value":[
-                        0
-                     ],
-                     "valueSrc":[
-                        "value"
-                     ],
-                     "operatorOptions":null,
-                     "valueType":[
-                        "number"
-                     ]
-                  },
-                  "path":[
-                     "9a99988a-0123-4456-b89a-b1607f326fd8",
-                     "b8989b99-4567-489a-bcde-f1701ed746ba",
-                     "9aba98b9-4567-489a-bcde-f1701ed9ba40"
-                  ]
-               }
-            }
-         }
+            "operatorOptions": null,
+            "valueType": [
+              "text"
+            ]
+          },
+          "path": [
+            "9a99988a-0123-4456-b89a-b1607f326fd8",
+            "9aa9ab89-cdef-4012-b456-7170c2634d7a"
+          ]
+        }
       },
-      "properties":{
-         "conjunction":"OR",
-         "not":false
+      "properties": {
+        "conjunction": "OR",
+        "not": false
       },
-      "path":[
-         "9a99988a-0123-4456-b89a-b1607f326fd8"
+      "path": [
+        "9a99988a-0123-4456-b89a-b1607f326fd8"
       ]
-   }`;
+    }`;
 } else {
   serializeTree = transit.toJSON;
   loadTree = transit.fromJSON;

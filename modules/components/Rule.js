@@ -198,14 +198,22 @@ class Rule extends Component {
                                     {this.renderValueSorces(delta, valueSources, valueSrc)}
                                 </div> */}
 
-                {!this.props.selectedInputSrcField && (
+                {/* {!this.props.selectedInputSrcField && (
                   <PopoverValueSrc
                     className="padding-right-8"
                     placement="left"
                     selectedSrcField={this.props.selectedInputSrcField}
                     onChangeSelectedInputSrcField={this.onChangeSelectedInputSrcField}
                     popoverContent={popoverInputSrcContent}/>
-                )}
+                )} */}
+
+                <PopoverValueSrc
+                  className="padding-right-8"
+                  placement="left"
+                  selectedSrcField={this.props.selectedInputSrcField}
+                  onChangeSelectedInputSrcField={this.onChangeSelectedInputSrcField}
+                  popoverContent={popoverInputSrcContent}
+                />
 
                 <Field
                   key="field"
