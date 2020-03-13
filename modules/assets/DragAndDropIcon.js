@@ -1,4 +1,6 @@
 
+import React from 'react';
+
 const DragAndDropIcon = () => (
     <svg width="8px" height="22px" viewBox="0 0 8 22" version="1.1" xmlns="http://www.w3.org/2000/svg" style={{position: 'relative', top: '4px'}}>
         <g id="Move" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

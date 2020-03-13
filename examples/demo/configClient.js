@@ -667,7 +667,7 @@ export default {
       }
     },
     function: {
-      type: "funtion",
+      type: "function",
       valueSrc: "function",
       defaultValueSrcParams: "value",
       valueSourceParams: [],
