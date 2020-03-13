@@ -1064,7 +1064,7 @@ const dummy = {
          "groupName":"Policy Input",
          "name":"LA6.DocType",
          "code":"LA6.DocType",
-         "dataType":"text",
+         "dataType":"bool",
          "parameterTypes":null,
          "isList":false
       },

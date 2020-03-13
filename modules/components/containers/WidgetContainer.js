@@ -9,7 +9,8 @@ import {
     getWidgetForFieldOp, getFieldWidgetConfig, getWidgetsForFieldOp, parseLabelPopover
 } from "../../utils/configUtils";
 import {defaultValue} from "../../utils/stuff";
-import { Icon, Popover, Button, Radio, Row, Col } from 'antd';
+import { EllipsisOutlined } from '@ant-design/icons';
+import { Popover, Button, Radio, Row, Col } from 'antd';
 import PopoverValueSrc from '../PopoverValueSrc';
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
@@ -188,7 +189,7 @@ export default (Widget) => {
             return (
                 <span>
                     <Popover content={visible && content} onVisibleChange={this.onVisibleChange} visible={visible}>
-                        <Icon type="ellipsis" />
+                        <EllipsisOutlined />
                     </Popover>
                     {/* <PopoverValueSrc
                         selectedSrcField={valueSrc || "value"}

@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
-import { Row, Col, Icon, Button, Radio, Popover } from "antd";
+import { EllipsisOutlined } from '@ant-design/icons';
+import { Row, Col, Button, Radio, Popover } from "antd";
 import { INPUT_SRC_FIELD } from "../constants";
 
 const RadioButton = Radio.Button;
@@ -87,7 +88,7 @@ export default class PopoverValueSrc extends Component {
           )
         }
       >
-        <Icon type="ellipsis" />
+        <EllipsisOutlined />
       </Popover>
     );
   }

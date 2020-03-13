@@ -5,7 +5,8 @@ import {
   getFieldConfig, getFieldPath, getFieldPathLabels, getValueSourcesForFieldOp, getWidgetForFieldOp
 } from "../../utils/configUtils";
 import {calcTextWidth, truncateString, BUILT_IN_PLACEMENTS} from "../../utils/stuff";
-import { Menu, Dropdown, Icon, Tooltip, Button, Select } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import { Menu, Dropdown, Tooltip, Button, Select } from 'antd';
 const { Option, OptGroup } = Select;
 const SubMenu = Menu.SubMenu;
 const MenuItem = Menu.Item;
@@ -153,7 +154,7 @@ export default class ValueField extends Component {
           <Button
               size={this.props.config.settings.renderSize || "small"}
           >
-              {customLabel ? customLabel : label} <Icon type="down" />
+              {customLabel ? customLabel : label} <DownOutlined />
           </Button>;
 
       if (fullLabel && fullLabel != label) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import { Switch, Icon } from 'antd';
+import { Switch } from 'antd';
 import shallowCompare from 'react-addons-shallow-compare';
 
 export default class BooleanWidget extends Component {

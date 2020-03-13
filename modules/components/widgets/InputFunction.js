@@ -1,15 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Select,
-  InputNumber,
-  Input,
-  Radio,
-  Popover,
-  Icon,
-  Switch,
-  DatePicker
-} from 'antd';
+import { Select, InputNumber, Input, Radio, Popover, Switch, DatePicker } from 'antd';
 import last from 'lodash/last';
 import keys from 'lodash/keys';
 import _cloneDeep from 'lodash/cloneDeep';

@@ -4,7 +4,8 @@ import shallowCompare from 'react-addons-shallow-compare';
 import map from 'lodash/map';
 import startsWith from 'lodash/startsWith'
 import GroupContainer from './containers/GroupContainer';
-import { Row, Col, Icon, Button, Radio, Modal } from 'antd';
+import Icon, { CloseOutlined, PlusSquareOutlined } from '@ant-design/icons';
+import { Row, Col, Button, Radio, Modal } from 'antd';
 const { confirm } = Modal;
 const ButtonGroup = Button.Group;
 const RadioButton = Radio.Button;
@@ -153,7 +154,7 @@ class Group extends Component {
           size={this.props.config.settings.renderSize || "small"}
         >{!this.props.config.settings.readonlyMode &&
           <Button
-            icon="plus-square"
+            icon={<PlusSquareOutlined />}
             className="action action--ADD-RULE"
             onClick={this.props.addRule}
           >{this.props.config.settings.addRuleLabel || "Add rule"}</Button>
@@ -161,21 +162,21 @@ class Group extends Component {
           {!this.props.config.settings.readonlyMode && this.props.allowFurtherNesting ? (
             <Button
               className="action action--ADD-GROUP"
-              icon="plus-square"
+              icon={<PlusSquareOutlined />}
               onClick={this.props.addGroup}
             >{this.props.config.settings.addGroupLabel || "Add group"}</Button>
           ) : null}
           {!this.props.config.settings.readonlyMode && !this.props.isRoot ? (
             <Button
               type="default"
-              icon="close"
+              icon={<CloseOutlined />}
               className="action action--ADD-DELETE"
               onClick={this.removeSelf}
             >{this.props.config.settings.delGroupLabel !== undefined ? this.props.config.settings.delGroupLabel : "Delete"}</Button>
           ) : null}
         </ButtonGroup>
       </div>
-    )
+    );
   }
 
   renderChildren = () => {

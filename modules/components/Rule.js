@@ -7,7 +7,8 @@ import Field from './Field';
 import Operator from './Operator';
 import Widget from './Widget';
 import OperatorOptions from './OperatorOptions';
-import { Row, Col, Menu, Dropdown, Icon, Tooltip, Button, Modal, Radio, Popover } from 'antd';
+import Icon, { CloseOutlined } from '@ant-design/icons';
+import { Row, Col, Menu, Dropdown, Tooltip, Button, Modal, Radio, Popover } from 'antd';
 const { confirm } = Modal;
 const SubMenu = Menu.SubMenu;
 const MenuItem = Menu.Item;
@@ -164,7 +165,7 @@ class Rule extends Component {
               {!this.props.config.settings.readonlyMode && (
                 <Button
                   type="default"
-                  icon="close"
+                  icon={<CloseOutlined />}
                   onClick={this.removeSelf}
                   size={this.props.config.settings.renderSize || "small"}
                 >
