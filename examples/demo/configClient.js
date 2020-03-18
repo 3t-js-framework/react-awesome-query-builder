@@ -409,7 +409,7 @@ export default {
     },
     is_not_empty: {
       isUnary: true,
-      label: "Is not empty",
+      label: "Is Not Empty",
       labelForFormat: "IS NOT EMPTY",
       cardinality: 0,
       reversedOp: "is_empty",
