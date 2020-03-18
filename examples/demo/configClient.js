@@ -446,7 +446,7 @@ export default {
       reversedOp: "select_equals"
     },
     select_any_in: {
-      label: "Any in",
+      label: "In",
       labelForFormat: "IN",
       formatOp: (field, _op, values, valueSrc) => {
         if (valueSrc === "value") return `${field} IN (${values.join(", ")})`;
