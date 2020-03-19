@@ -167,12 +167,14 @@ export const queryBuilderFormat = (item, config, rootQuery = null) => {
         let operatorOptions = options ? options.toJS() : null;
         if (operatorOptions && !Object.keys(operatorOptions).length)
             operatorOptions = null;
+
+        const parseSelectedInput = selectedInputSrcField === INPUT_SRC_FIELD.POLICY_INPUT ? 'field' : (selectedInputSrcField === INPUT_SRC_FIELD.FUNCTION_INPUT ? 'function': 'constant')
         var ruleQuery = {
             id,
             field,
             type: fieldType,
             input: typeConfig.mainWidget,
-            selectedInputSrcField,
+            selectedInputSrcField: parseSelectedInput,
             functionSrc,
             operator
         };
