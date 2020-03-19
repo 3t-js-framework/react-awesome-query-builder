@@ -92,7 +92,7 @@ function convertCombination(combination) {
 
   // get policy input
 
-  policyInputs.forEach(function(item) {
+  policyInputs.sort((a,b) => String(a.name).localeCompare(String(b.name))).forEach(function(item) {
     const dataType = convertDataType(item.dataType);
     const listConstants = getListConstants(dataType, valueDefinitions);
     const operators = getListOperators(dataType, item.isList);
@@ -107,7 +107,7 @@ function convertCombination(combination) {
     };
   });
 
-  functions.forEach(function(item) {
+  functions.sort((a,b) => String(a.name).localeCompare(String(b.name))).forEach(function(item) {
     const dataType = convertDataType(item.dataType);
     const listConstants = valueDefinitions; // set all constants for functionInput
     const operators = getListOperators(dataType, item.isList);
@@ -124,7 +124,7 @@ function convertCombination(combination) {
     };
   });
 
-  valueDefinitions.forEach(function(item) {
+  valueDefinitions.sort((a,b) => String(a.name).localeCompare(String(b.name))).forEach(function(item) {
     const dataType = convertDataType(item.dataType);
     const listConstants = getListConstants(dataType, valueDefinitions); // set all constants for functionInput
     const operators = getListOperators(dataType, item.isList);
