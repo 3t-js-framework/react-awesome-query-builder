@@ -61,6 +61,7 @@ export default class ConstantWidget extends Component {
 
     return (
       <Select
+        showSearch
         style={{ width: this.props.value ? null : placeholderWidth + 48 }}
         key={"widget-select"}
         dropdownMatchSelectWidth={false}
