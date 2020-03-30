@@ -232,6 +232,7 @@ class ValueFunction extends Component {
             onChange={(value) => this.handleChange(value, index, dataType)}
             style={{ marginLeft: '8px', width: '134px' }}
             placeholder="Input value"
+            maxLength={150}
           />
         );
       case DATA_TYPE.NUMBER:
@@ -271,6 +272,7 @@ class ValueFunction extends Component {
             onChange={(value) => this.handleChange(value, index, dataType)}
             style={{ marginLeft: '8px', width: '134px' }}
             placeholder="Input value"
+            maxLength={150}
           />
         );
     }
