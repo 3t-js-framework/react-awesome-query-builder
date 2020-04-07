@@ -264,16 +264,17 @@ display: inline-block;
 }
 */
 .rule--field,
-.rule--operator,
-.rule--operator-options,
-.rule--widget,
-.widget--valuesrc,
-.widget--sep,
-.operator--options--sep {
+.widget--valuesrc {
   display: inline;
 }
 
-.rule--value,.widget--widget {
+.rule--value, 
+.widget--widget,
+.rule--operator,
+.rule--operator-options,
+.widget--sep,
+.rule--widget,
+.operator--options--sep {
   display: inline-block;
 }
 
@@ -281,7 +282,7 @@ display: inline-block;
 .widget--widget,
 .widget--valuesrc,
 .widget--sep {
-  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .operator--options--sep {
@@ -300,7 +301,7 @@ div.tooltip-inner {
 }
 
 .rule--operator {
-  margin-top: 8px;
+  margin: 8px;
 }
 /******************************************************************************/
 /** CONJUNCTION ***************************************************************/
