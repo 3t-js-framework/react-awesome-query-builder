@@ -243,7 +243,7 @@ export default class Field extends Component {
              <Select
                 dropdownAlign={dropdownPlacement ? BUILT_IN_PLACEMENTS[dropdownPlacement] : undefined}
                 dropdownMatchSelectWidth={false}
-                style={{ width: isFieldSelected && !customProps.showSearch ? null : selectWidth + 48 }}
+                style={{ width: isFieldSelected && !customProps.showSearch ? null : selectWidth + 48, paddingRight: '8px', marginBottom: '8px' }}
                 ref="field"
                 placeholder={placeholder}
                 size={this.props.config.settings.renderSize || "small"}

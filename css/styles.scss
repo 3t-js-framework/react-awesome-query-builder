@@ -265,13 +265,15 @@ display: inline-block;
 */
 .rule--field,
 .rule--operator,
-.rule--value,
 .rule--operator-options,
 .rule--widget,
-.widget--widget,
 .widget--valuesrc,
 .widget--sep,
 .operator--options--sep {
+  display: inline;
+}
+
+.rule--value,.widget--widget {
   display: inline-block;
 }
 
@@ -297,8 +299,12 @@ div.tooltip-inner {
   font-weight: bold;
 }
 
-.rule--field{
-  margin-bottom: 8px;
+// .rule--field{
+//   margin-bottom: 8px;
+// }
+
+.rule--operator {
+  margin-top: 8px;
 }
 /******************************************************************************/
 /** CONJUNCTION ***************************************************************/
@@ -362,11 +368,11 @@ div.tooltip-inner {
   margin-left: 8px;
 }
 
-.widget-input-function{
+.widget-input-function {
   display: inline-flex;
   vertical-align: middle;
-  padding-left: 8px;
-  margin-top: -2px;
+  padding-right: 8px;
+  // margin-top: -2px;
 }
 .widget-input-function > i {
   align-self: center;
