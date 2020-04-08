@@ -50,7 +50,7 @@ export default class FieldConstantValueSrc extends Component {
             <div className="valuesrc--function">
                 <Select
                     showSearch
-                    style={{ width: 200 }}
+                    style={{ width: 150 }}
                     key={"widget-select"}
                     dropdownMatchSelectWidth={false}
                     ref="val"

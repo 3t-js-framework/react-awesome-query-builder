@@ -186,17 +186,9 @@ export default (Widget) => {
             );
 
             return (
-                <span>
                     <Popover content={visible && content} onVisibleChange={this.onVisibleChange} visible={visible}>
                         <Icon type="ellipsis" />
                     </Popover>
-                    {/* <PopoverValueSrc
-                        selectedSrcField={valueSrc || "value"}
-                        onChangeSelectedInputSrcField={this._getSetValueSrcHandler(delta)}
-                        popoverContent={popoverContent}
-                        isWidget
-                    /> */}
-                </span>
             );
         }
 
@@ -249,21 +241,21 @@ export default (Widget) => {
 
                         if (valueSources.length > 1)
                             parts.push((
-                                <div key={"valuesrc-"+this.props.field+"-"+delta} className="widget--valuesrc">
+                                <Fragment>
                                     {settings.showLabels ?
                                         <label>&nbsp;</label>
                                         : null}
                                     {this.renderValueSorces(delta, valueSources, valueSrc)}
-                                </div>
+                                </Fragment>
                             ));
 
                         parts.push((
-                            <div key={"widget-"+this.props.field+"-"+delta} className="widget--widget">
+                            <Fragment>
                                 {settings.showLabels ?
                                     <label>{valueLabel.label}</label>
                                     : null}
                                 {this.renderWidget(isTrueSpecialRange, delta, valueSrc, widget, operatorDefinition)}
-                            </div>
+                            </Fragment>
                         ));
 
                         return parts;

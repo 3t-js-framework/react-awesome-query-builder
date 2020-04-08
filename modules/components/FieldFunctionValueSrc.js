@@ -100,7 +100,7 @@ const FieldFunctionValueSrc = (props) => {
             <Select
                 showSearch
                 value={valueSelected || undefined}
-                style={{ width: 200 }}
+                style={{ width: 150 }}
                 placeholder={placeholder}
                 size={config.settings.renderSize || "small"}
                 onChange={handleChangeValue}

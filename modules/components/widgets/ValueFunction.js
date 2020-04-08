@@ -230,7 +230,7 @@ class ValueFunction extends Component {
             value={this.props.value && this.props.value.parameters[index] || ''}
             size={this.props.config.settings.renderSize || 'small'}
             onChange={(value) => this.handleChange(value, index, dataType)}
-            style={{ marginLeft: '8px', width: '134px' }}
+            style={{ marginLeft: '8px', width: '150px' }}
             placeholder="Input value"
             maxLength={150}
           />
@@ -242,7 +242,6 @@ class ValueFunction extends Component {
             value={this.props.value && this.props.value.parameters[index] || 0}
             size={this.props.config.settings.renderSize || 'small'}
             onChange={(value) => this.handleChange(value, index, dataType)}
-            style={{ marginLeft: '8px' }}
             placeholder="Input value"
           />
         );
@@ -258,7 +257,7 @@ class ValueFunction extends Component {
       case DATA_TYPE.DATE:
         return (
           <DatePicker
-            style={{ marginLeft: '8px' }}
+            style={{ marginLeft: '8px', width: '128px' }}
             value={this.props.value && moment(this.props.value.parameters[index]) || undefined}
             onChange={(value) => this.handleChange(value, index, dataType)}
             allowClear={true}
@@ -270,7 +269,7 @@ class ValueFunction extends Component {
             value={this.props.value && this.props.value.parameters[index] || ''}
             size={this.props.config.settings.renderSize || 'small'}
             onChange={(value) => this.handleChange(value, index, dataType)}
-            style={{ marginLeft: '8px', width: '134px' }}
+            style={{ marginLeft: '8px', width: '150px' }}
             placeholder="Input value"
             maxLength={150}
           />
@@ -360,10 +359,11 @@ class ValueFunction extends Component {
     const initParamsInput = this.props.value && this.getFunctionInit(value, config);
 
     return (
-      <div className="widget--valuesrc--function">
+      <Fragment>
         <Select
           value={value && value.key || undefined}
-          style={{ width: '200px' }}
+          dropdownMatchSelectWidth={false}
+          style={{ width: '150px' }}
           ref="function"
           placeholder={placeholder}
           size={this.props.config.settings.renderSize || 'small'}
@@ -374,7 +374,7 @@ class ValueFunction extends Component {
           {buildOptionItems}
         </Select>
         {initParamsInput}
-      </div>
+      </Fragment>
     );
   }
 

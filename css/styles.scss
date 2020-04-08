@@ -264,16 +264,17 @@ display: inline-block;
 }
 */
 .rule--field,
+.rule--value, 
+.rule--widget,
 .widget--valuesrc {
   display: inline;
 }
 
-.rule--value, 
+
 .widget--widget,
 .rule--operator,
 .rule--operator-options,
 .widget--sep,
-.rule--widget,
 .operator--options--sep {
   display: inline-block;
 }
@@ -301,8 +302,19 @@ div.tooltip-inner {
 }
 
 .rule--operator {
-  margin: 8px;
+  margin-bottom: 8px;
 }
+
+.rule--widget > i {
+  align-self: center;
+  padding-right: 8px;
+}
+
+.rule--widget > div:first-of-type {
+  display: inline-block;
+  margin-right: 8px;
+}
+
 /******************************************************************************/
 /** CONJUNCTION ***************************************************************/
 /******************************************************************************/
@@ -365,23 +377,23 @@ div.tooltip-inner {
   margin-left: 8px;
 }
 
-.widget-input-function {
+.widget-input-function, .widget--function {
   display: inline-flex;
   vertical-align: middle;
   padding-right: 8px;
 }
 
-.widget-input-function > i {
+.widget-input-function > i, .widget--function > i {
   align-self: center;
   padding-right: 8px;
 }
-.widget-input-function > button {
+.widget-input-function > button, .widget--function > button {
   margin-left: 0 !important;
 }
-.widget-input-function > input {
+.widget-input-function > input, .widget--function > input {
   margin-left: 0 !important;
 }
-.widget-input-function > span {
+.widget-input-function > span, .widget--function > span {
   margin-left: 0 !important;
 }
 .padding-right-8{

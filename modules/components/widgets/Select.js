@@ -39,7 +39,7 @@ export default class SelectWidget extends Component {
 
     return (
         <Select
-            style={{ width: this.props.value ? null : placeholderWidth + 48 }}
+            style={{ width: this.props.value ? null : placeholderWidth + 56 }}
             key={"widget-select"}
             dropdownMatchSelectWidth={false}
             ref="val"

@@ -231,7 +231,7 @@ class InputFunction extends Component {
             value={this.props.functionSrc && this.props.functionSrc.parameters[index] || ''}
             size={this.props.config.settings.renderSize || 'small'}
             onChange={(value) => this.handleChange(value, index, dataType)}
-            style={{ marginLeft: '8px', width: '134px' }}
+            style={{ marginLeft: '8px', width: '150px' }}
             placeholder="Input value"
             maxLength={150}
           />
@@ -243,7 +243,6 @@ class InputFunction extends Component {
             value={this.props.functionSrc && this.props.functionSrc.parameters[index] || 0}
             size={this.props.config.settings.renderSize || 'small'}
             onChange={(value) => this.handleChange(value, index, dataType)}
-            style={{ marginLeft: '8px' }}
             placeholder="Input value"
           />
         );
@@ -259,7 +258,7 @@ class InputFunction extends Component {
       case DATA_TYPE.DATE:
         return (
           <DatePicker
-            style={{ marginLeft: '8px' }}
+            style={{ marginLeft: '8px', width: '128px' }}
             value={this.props.functionSrc && moment(this.props.functionSrc.parameters[index]) || undefined}
             onChange={(value) => this.handleChange(value, index, dataType)}
             allowClear={true}
@@ -271,7 +270,7 @@ class InputFunction extends Component {
             value={this.props.value && this.props.value.params[index] || ''}
             size={this.props.config.settings.renderSize || 'small'}
             onChange={(value) => this.handleChange(value, index, dataType)}
-            style={{ marginLeft: '8px', width: '134px' }}
+            style={{ marginLeft: '8px', width: '150px' }}
             placeholder="Input value"
             maxLength={150}
           />

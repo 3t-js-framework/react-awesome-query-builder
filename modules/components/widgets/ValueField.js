@@ -190,7 +190,7 @@ export default class ValueField extends Component {
           <Select
               dropdownAlign={dropdownPlacement ? BUILT_IN_PLACEMENTS[dropdownPlacement] : undefined}
               dropdownMatchSelectWidth={false}
-              style={{ width: this.props.value ? null : placeholderWidth + 48 }}
+              style={{ width: this.props.value ? null : placeholderWidth + 56 }}
               ref="field"
               placeholder={placeholder}
               size={this.props.config.settings.renderSize || "small"}
