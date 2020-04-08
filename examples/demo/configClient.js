@@ -677,9 +677,10 @@ export default {
       formatValue: (val, fieldDef, wgtDef, isForDisplay) => {
         if (!val) return '';
         const { functionSelected, parameters } = val;
+        const params = parameters ? parameters : [];
         const result = isForDisplay
-          ? `${functionSelected}(${parameters.concat()})`
-          : JSON.stringify(`${functionSelected}(${parameters.concat()})`);
+          ? `${functionSelected}(${params.concat()})`
+          : JSON.stringify(`${functionSelected}(${params.concat()})`);
         return result;
       },
       customProps: {

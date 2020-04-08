@@ -116,7 +116,7 @@ function convertCombination(combination) {
       key: item.code,
       inputSrc: 'functionInput',
       functionName: item.name || "",
-      params: item.parameterTypes.split(";") || [],
+      params: item.parameterTypes ? item.parameterTypes.split(";") || [] : [],
       type: dataType || "",
       isList: item.isList || false,
       listConstants,

@@ -45,28 +45,40 @@ if (!seriazlieAsImmutable) {
       "type": "group",
       "id": "9a99988a-0123-4456-b89a-b1607f326fd8",
       "children1": {
-        "9aa9ab89-cdef-4012-b456-7170c2634d7a": {
+        "9b9a8988-0123-4456-b89a-b171589db2e2": {
           "type": "rule",
-          "id": "9aa9ab89-cdef-4012-b456-7170c2634d7a",
+          "id": "9b9a8988-0123-4456-b89a-b171589db2e2",
           "properties": {
-            "field": "LA6.DocType",
-            "selectedInputSrcField": "policyInput",
-            "functionSrc": null,
+            "field": "A2B8E8ABACF84755E053040514AC72DA",
+            "selectedInputSrcField": "functionInput",
+            "functionSrc": {
+              "parameters": [],
+              "functionSelected": "TotalPercentageBE",
+              "valueSrc": [],
+              "dataTypes": [],
+              "key": "A2B8E8ABACF84755E053040514AC72DA"
+            },
             "operator": "equal",
             "value": [
-              "LA6.IDNo"
+              {
+                "parameters": null,
+                "functionSelected": "TotalPercentageEDUBE",
+                "valueSrc": [],
+                "dataTypes": [],
+                "key": "A2B8E8ABACF94755E053040514AC72DA"
+              }
             ],
             "valueSrc": [
-              "field"
+              "function"
             ],
             "operatorOptions": null,
             "valueType": [
-              "text"
+              "function"
             ]
           },
           "path": [
             "9a99988a-0123-4456-b89a-b1607f326fd8",
-            "9aa9ab89-cdef-4012-b456-7170c2634d7a"
+            "9b9a8988-0123-4456-b89a-b171589db2e2"
           ]
         }
       },
@@ -588,476 +600,29 @@ const dummy = {
       },
       {
          "groupName":"Function",
-         "name":"CheckElementOfArrayInArray",
-         "code":"A016C83ABF4BD2FEE053040514AC3ADE",
+         "name":"CheckDocSubmitted",
+         "code":"A21F3A2D6A40D5A8E053040514ACDFE4",
          "dataType":"bool",
          "parameterTypes":"text;text",
          "isList":false
       },
       {
          "groupName":"Function",
-         "name":"GetSAPerCase",
-         "code":"A016C83ABF4CD2FEE053040514AC3ADE",
+         "name":"TotalPercentageBE",
+         "code":"A2B8E8ABACF84755E053040514AC72DA",
          "dataType":"number",
-         "parameterTypes":"text;text",
+         "parameterTypes":null,
          "isList":false
       },
       {
          "groupName":"Function",
-         "name":"GetPremiumPerCase",
-         "code":"A0171967BC29F018E053040514ACA1C1",
+         "name":"TotalPercentageEDUBE",
+         "code":"A2B8E8ABACF94755E053040514AC72DA",
          "dataType":"number",
-         "parameterTypes":"text;text",
+         "parameterTypes":null,
          "isList":false
       },
-      {
-         "groupName":"Function",
-         "name":"CheckDocExists",
-         "code":"A0171967BC2AF018E053040514ACA1C1",
-         "dataType":"number",
-         "parameterTypes":"text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NAME NB 3 length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length",
-         "code":"592064b2-94e5-4659-b953-8eeb98ea0bT2",
-         "dataType":"NGA NGA length check max length check max length check max length check max lengthlength check max length check max length check max length check max lengthlength check max length check max length check max length check max lengthlength check max",
-         "parameterTypes":"BO BO out length check max length check max length check max length check max lengthlength check max length check max length check max length check max lengthlength check max length check max length check max length check max lengthlength check ",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"nga b NAME NAME",
-         "code":"592064b2-94e5-4659-b953-8eeb98ea0bT4",
-         "dataType":"nga bo RETURNDATATYPE",
-         "parameterTypes":"NGA B PARAMETERTYPES",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"CheckDuplicatePhoneCust",
-         "code":"536cb40a-9521-4c72-8eb3-6bc64f17bd77",
-         "dataType":"number",
-         "parameterTypes":"text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"functionA",
-         "code":"5ad62a8d-85ca-4312-9197-ea9fe31f5d5c",
-         "dataType":"text",
-         "parameterTypes":"number",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"TextFunction",
-         "code":"5f9cd890-bf53-455b-a1cc-fe956b3b37ff",
-         "dataType":"text",
-         "parameterTypes":"bool;number",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"Minus",
-         "code":"6bfc5366-8f3e-4512-80f0-bde00b7d1a22",
-         "dataType":"number",
-         "parameterTypes":"number",
-         "isList":true
-      },
-      {
-         "groupName":"Function",
-         "name":"Gender",
-         "code":"759bb9ea-fa9a-47b6-a6d3-4b6d94167910",
-         "dataType":"bool",
-         "parameterTypes":"text;bool;number;date",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"ReplaceText",
-         "code":"88d71c42-55a3-4bb5-a480-a38e04955a8a",
-         "dataType":"bool",
-         "parameterTypes":"text;number",
-         "isList":true
-      },
-      {
-         "groupName":"Function",
-         "name":"Subtraction",
-         "code":"d201db15-2673-41f0-a56e-81ae9acfa01a",
-         "dataType":"number",
-         "parameterTypes":"number;number",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"CheckBMIJuvenile",
-         "code":"fce529e4-1b56-48fb-9a34-f925ee92b75e",
-         "dataType":"number",
-         "parameterTypes":"text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_41 đi học",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2651",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_42 country",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2652",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_43 COUNTRY",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2653",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_44 UUSERNAME",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2654",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_45 subdivision",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2655",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_46 phép nhân chia",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2656",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_47 sunshine",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2657",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_48 DELL",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2658",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_49 plus detail",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2659",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_50 phep an so sanh ",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2660",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_51 phep tinh simple ",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2661",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NAME NB x length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length",
-         "code":"592064b2-94e5-4659-b953-8eeb98ea0bT0",
-         "dataType":"BOOLEAN",
-         "parameterTypes":"DATETIME",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NAME NB 2 length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length check max length",
-         "code":"592064b2-94e5-4659-b953-8eeb98ea0bT1",
-         "dataType":"NGA NGA",
-         "parameterTypes":"BO BO BO",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_22",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a26f2",
-         "dataType":"Boolean",
-         "parameterTypes":"Datetime",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_0",
-         "code":"f7ddcc61-39f1-443f-834f-b9d1369aa211",
-         "dataType":"number",
-         "parameterTypes":"number;number;number",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_1",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2611",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_2",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2612",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_3",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2613",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_4",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2614",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_5",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2615",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_6",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2616",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_7",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2617",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_8",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2618",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_9",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2619",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_10",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2620",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_11",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2621",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_12",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2622",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_13",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2623",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_14",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2624",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_15",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2625",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_16",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2626",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_17",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2627",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_18",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2628",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_19",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2629",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_20",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2630",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_21",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2631",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_23",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2633",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_24",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2634",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_25",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2635",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_26",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2636",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_27",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2637",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_28",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2638",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_29",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2639",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_30",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2640",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      },
-      {
-         "groupName":"Function",
-         "name":"NGA_BO_31",
-         "code":"33b9537b-aaf8-4419-bb1f-8309a19a2642",
-         "dataType":"number",
-         "parameterTypes":"text;text;date;text;text",
-         "isList":false
-      }
+      
    ],
    "policyInputs":[
       {
@@ -2470,7 +2035,7 @@ const generatorConfigFunctionInput = dataCombination => {
     functions[item.code] = {
       key: item.code,
       functionName: item.name || "",
-      params: item.parameterTypes.split(";") || [],
+      params: item.parameterTypes ? item.parameterTypes.split(";") || [] : [],
       type: item.dataType || "",
       isList: item.isList || false
     };

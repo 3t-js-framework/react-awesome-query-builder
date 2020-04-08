@@ -8,7 +8,8 @@ import {
     getFieldPath, getFieldPathLabels, fieldWidgetDefinition
 } from './configUtils';
 import omit from 'lodash/omit';
-import pick from 'lodash/pick';
+import isEmpty from 'lodash/isEmpty';
+import _cloneDeep from 'lodash/cloneDeep';
 import {INPUT_SRC_FIELD} from '../constants';
 import { func } from 'prop-types';
 
@@ -161,6 +162,9 @@ export const queryBuilderFormat = (item, config, rootQuery = null) => {
                         // rootQuery.usedFieldConfigs = [...new Set(rootQuery.usedFieldConfigs)];
                     }
                 }
+                if(isEmpty(functionParameters)){
+                    value[i].parameters = null;
+                }
             }
         }
         rootQuery.usedFieldConfigs = [...new Set(rootQuery.usedFieldConfigs)];
@@ -169,13 +173,16 @@ export const queryBuilderFormat = (item, config, rootQuery = null) => {
             operatorOptions = null;
 
         const parseSelectedInput = selectedInputSrcField === INPUT_SRC_FIELD.POLICY_INPUT ? 'field' : (selectedInputSrcField === INPUT_SRC_FIELD.FUNCTION_INPUT ? 'function': 'constant')
+        const clonefunctionSrc = _cloneDeep(functionSrc);
+        const parseFunctionSrc = clonefunctionSrc ? Object.assign(clonefunctionSrc, {parameters: isEmpty(clonefunctionSrc.parameters) ? null : clonefunctionSrc.parameters }) : null
+     
         var ruleQuery = {
             id,
             field,
             type: fieldType,
             input: typeConfig.mainWidget,
             selectedInputSrcField: parseSelectedInput,
-            functionSrc,
+            functionSrc: parseFunctionSrc,
             operator
         };
         if (operatorOptions)
