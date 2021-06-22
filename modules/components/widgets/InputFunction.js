@@ -143,7 +143,7 @@ class InputFunction extends Component {
     const valueSourcesPopover = value.valueSources;
     let valueSrc = (functionSrc && functionSrc.valueSrc && functionSrc.valueSrc[index]) || null;
     if (!valueSourcesPopover) { return null; }
-    const popoverContent = valueSourcesPopover.filter((valueSource) => valueSource !== 'function').map(srcKey => ({key: `${srcKey + index}`, value: srcKey, label: parseLabelPopover(valueSourcesInfo[srcKey].label) }));
+    const popoverContent = valueSourcesPopover.filter((valueSource) => valueSource !== 'function' && valueSource !== 'expression').map(srcKey => ({key: `${srcKey + index}`, value: srcKey, label: parseLabelPopover(valueSourcesInfo[srcKey].label) }));
     // let content = (
     //   <RadioGroup
     //     key={valueSrc + '--' + index}

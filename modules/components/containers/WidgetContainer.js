@@ -149,7 +149,6 @@ export default (Widget) => {
 
             if (!valueSources || Object.keys(valueSources).length == 1)
                 return null;
-            const popoverContent = valueSources.map(srcKey => ({key: srcKey, value: srcKey, label: parseLabelPopover(valueSourcesInfo[srcKey].label) }));
             let content = (
                 <Fragment>
                     <RadioGroup

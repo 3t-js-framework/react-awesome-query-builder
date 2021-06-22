@@ -362,7 +362,10 @@ export const parseLabelPopover = (label = '') => {
         case LABEL_VALUE_SRC_POPOVER.FUNCTION:
             result = "Function input";
             break;
-        default:
+        case LABEL_VALUE_SRC_POPOVER.EXPRESSION:
+            result = "Expression";
+            break;
+    default:
             result = "Free text";
             break;
     }

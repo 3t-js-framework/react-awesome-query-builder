@@ -53,7 +53,8 @@ export const LABEL_VALUE_SRC_POPOVER = {
     FIELD: 'field',
     CONSTANT: 'constant',
     VALUE: 'value',
-    FUNCTION: 'function'
+    FUNCTION: 'function',
+    EXPRESSION: 'expression'
 };
 
 
