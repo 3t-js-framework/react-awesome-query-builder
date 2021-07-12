@@ -15,7 +15,8 @@ const {
   BooleanWidget,
   TimeWidget,
   DateTimeWidget,
-  ValueFieldWidget
+  ValueFieldWidget,
+  ExpressionWidget 
 } = Widgets;
 
 const { ProximityOperator } = Operators;
@@ -108,7 +109,6 @@ export default {
     },
     number: {
       mainWidget: "number",
-      valueSources: ["value", "field", "function", "constant"],
       defaultOperator: "equal",
       widgets: {
         number: {
@@ -268,6 +268,19 @@ export default {
         },
         field: {
           operators: ["equal", "not_equal"]
+        }
+      }
+    },
+    expression: {
+      mainWidget: 'expression',
+      widgets: {
+        expression: {
+          widgetProps: {
+            formatValue: val => JSON.stringify(val),
+            valueLabel: "Text Expression",
+            valuePlaceholder: "Enter text expression"
+          }
+         
         }
       }
     }
@@ -697,7 +710,21 @@ export default {
           ? valsLabels.map(v => `"${v}"`)
           : vals.map(v => JSON.stringify(v));
       }
-    }
+    },
+    expression: {
+      type: "expression",
+      valueSrc: "expression",
+      label: 'Expression',
+      valueLabel: "Expression",
+      valuePlaceholder: "Expression",
+      factory: props => <ExpressionWidget {...props} />,
+      formatValue: (val, fieldDef, wgtDef, isForDisplay) => {
+        return isForDisplay ? `"${val}"` : JSON.stringify(val);
+      },
+      validateValue: val => {
+        return val !== "test";
+      }
+    },
   },
   settings: {
     locale: {
@@ -777,6 +804,9 @@ export default {
       },
       function: {
         label: "Function"
+      },
+      expression: {
+        label: 'Expression'
       }
     },
     valueSourcesPopupTitle: "Select value source",

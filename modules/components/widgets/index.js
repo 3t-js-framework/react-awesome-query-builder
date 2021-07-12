@@ -11,3 +11,4 @@ export { default as MultiSelectWidget } from "./MultiSelect";
 export { default as ValueFieldWidget } from "./ValueField";
 export { default as ValueFunctionWidget } from "./ValueFunction";
 export { default as ConstantWidget } from "./Constant";
+export { default as ExpressionWidget } from "./Expression";

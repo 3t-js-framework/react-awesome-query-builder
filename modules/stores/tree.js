@@ -290,6 +290,7 @@ const _validateValue = (config, field, operator, value, valueType, valueSrc) => 
         vType = valueType,
         vSrc = valueSrc;
     const fieldConfig = getFieldConfig(field, config);
+
     let w = getWidgetForFieldOp(config, field, operator, vSrc);
     let wConfig = config.widgets[w];
     let wType = wConfig.type;
@@ -518,7 +519,7 @@ const setValue = (state, path, delta, value, valueType, config) => {
  */
 const setValueSrc = (state, path, delta, srcKey) => {
     state = state.setIn(expandTreePath(path, 'properties', 'value', delta + ''), undefined);
-    state = state.setIn(expandTreePath(path, 'properties', 'valueType', delta + ''), null);
+    state = state.setIn(expandTreePath(path, 'properties', 'valueType', delta + ''), srcKey);
 
     if (typeof srcKey === "undefined") {
         state = state.setIn(expandTreePath(path, 'properties', 'valueSrc', delta + ''), null);
@@ -605,6 +606,7 @@ export default (config) => {
                 return Object.assign({}, state, {tree: setValue(state.tree, action.path, action.delta, action.value, action.valueType, action.config)});
 
             case constants.SET_VALUE_SRC:
+
                 return Object.assign({}, state, {tree: setValueSrc(state.tree, action.path, action.delta, action.srcKey)});
 
             case constants.SET_OPERATOR_OPTION:
