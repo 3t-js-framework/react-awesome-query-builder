@@ -458,10 +458,10 @@ border-color: #d43f3a;
 
 
 .expression-wrapper {
-  max-width: 300px!important;
+  max-width: 300px !important;
   .ant-input {
     &.expression {
-      min-height: 32px!important; // fix text-arae auto height 100% ( old antd )
+      min-height: 32px !important; /* fix text-arae auto height 100% ( old antd ) */
       display: inline-block;
       vertical-align: middle;
       width: 300px;
